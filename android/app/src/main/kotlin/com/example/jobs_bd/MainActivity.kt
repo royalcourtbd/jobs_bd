@@ -1,4 +1,4 @@
-package com.example.jobs_bd
+package com.royalcourtbd.jobs_bd
 
 import io.flutter.embedding.android.FlutterActivity
 
