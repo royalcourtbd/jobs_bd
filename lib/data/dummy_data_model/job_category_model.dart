@@ -29,7 +29,7 @@ List<JobCategoryModel> jobCategoryList = [
   ),
   JobCategoryModel(
     id: '3',
-    jobTitle: 'Other Private Jobs',
+    jobTitle: 'Private Jobs',
     imgPath: SvgPath.icPrivateJobLogo,
     totalJobs: 453,
   ),

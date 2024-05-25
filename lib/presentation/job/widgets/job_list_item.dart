@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:jobs_bd/core/config/jobs_screen.dart';
 import 'package:jobs_bd/core/static/ui_const.dart';
-import 'package:jobs_bd/data/dummy_data_model/job_list_model.dart';
+
+import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 
 class JobListItem extends StatelessWidget {
   const JobListItem({
     super.key,
     required this.theme,
     required this.index,
+    required this.jobList,
     this.onTap,
   });
 
   final ThemeData theme;
   final int index;
   final VoidCallback? onTap;
+  final List<JobModel> jobList;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class JobListItem extends StatelessWidget {
           child: Row(
             children: [
               Image.asset(
-                jobList[index].imageUrl,
+                jobList[index].imgUrl,
                 height: JobsScreen.width * 0.17,
                 width: JobsScreen.width * 0.17,
               ),
@@ -55,7 +58,7 @@ class JobListItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Total Views ${jobList[index].viewPost}',
+                    'Total Views ${jobList[index].totalView}',
                     style: theme.textTheme.bodyMedium!.copyWith(
                       fontSize: elevenPx,
                       fontWeight: FontWeight.w400,

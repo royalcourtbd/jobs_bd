@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jobs_bd/core/config/jobs_screen.dart';
 import 'package:jobs_bd/core/static/ui_const.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_count_model.dart';
+import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
 
 class JobCountItem extends StatelessWidget {
-  const JobCountItem({
+  JobCountItem({
     super.key,
     required this.theme,
     required this.index,
@@ -14,6 +16,7 @@ class JobCountItem extends StatelessWidget {
   final ThemeData theme;
   final int index;
   final VoidCallback? onTap;
+  final HomePresenter homePresenter = Get.put(HomePresenter());
 
   @override
   Widget build(BuildContext context) {

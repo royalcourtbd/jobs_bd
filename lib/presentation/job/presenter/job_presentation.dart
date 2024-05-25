@@ -4,18 +4,16 @@ import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 
 class JobPresentation extends GetxController {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  final allJobsList = RxList<JobModel>([]);
+  final RxList<JobModel> allJobsList = RxList<JobModel>([]);
+  final RxList<JobModel> getJobByCategoryName = RxList<JobModel>([]);
   int get jobLength => allJobsList.length;
 
-  @override
-  onInit() {
-    super.onInit();
-    allJobsList.bindStream(getAllJObs());
-  }
+  // @override
+  // onInit() {
+  //   super.onInit();
+  //   // allJobsList.bindStream(getAllJObs());
+  // }
 
-  Stream<List<JobModel>> getAllJObs() =>
-      firestore.collection('all_jobs').snapshots().map((snapshot) =>
-          snapshot.docs.map((doc) => JobModel.fromJson(doc.data())).toList());
   Future<int> _getNextJobId() async {
     final docRef = firestore.collection('counters').doc('jobIdCounter');
     final doc = await docRef.get();
@@ -39,12 +37,12 @@ class JobPresentation extends GetxController {
 
     JobModel newJob = JobModel(
       documentId: id,
-      category: 'Government Job',
+      category: 'Government Jobs',
       companyName: 'Passport Office',
       deadLine: '2021-10-20',
       description: 'grg r erg er',
       imgUrl:
-          'https://www.cdn.justshowbiz.net/wp-content/uploads/2015/04/Sunny-Leone.jpg?strip=all&lossy=1&ssl=1',
+          'https://cdn-images-1.medium.com/max/1200/1*5-aoK8IBmXve5whBQM90GA.png',
       jobId: jobId.toString(),
       jobTitle: 'Software Engineer',
       link: 'https://www.google.com/careers',
@@ -59,5 +57,6 @@ class JobPresentation extends GetxController {
 
   deleteJob(String id) async {
     await firestore.collection('all_jobs').doc(id).delete();
+    print('Job Deleted Successfully $id');
   }
 }

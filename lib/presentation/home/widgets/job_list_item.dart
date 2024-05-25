@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:jobs_bd/core/config/jobs_screen.dart';
 import 'package:jobs_bd/core/static/ui_const.dart';
-import 'package:jobs_bd/data/dummy_data_model/job_list_model.dart';
-import 'package:jobs_bd/presentation/job/presenter/job_presentation.dart';
+
+import '../../../data/dummy_data_model/job_model.dart';
 
 class JobListItem extends StatelessWidget {
-  JobListItem({
+  const JobListItem({
     super.key,
     required this.theme,
     required this.index,
+    required this.jobList,
+    this.onLongPress,
     this.onTap,
   });
 
   final ThemeData theme;
   final int index;
   final VoidCallback? onTap;
-  final JobPresentation jobPresentation = Get.put(JobPresentation());
+  final List<JobModel> jobList;
+  final void Function()? onLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class JobListItem extends StatelessWidget {
       padding: EdgeInsets.only(bottom: tenPx),
       child: InkWell(
         onTap: onTap,
+        onLongPress: onLongPress,
         child: Container(
           padding: padding10,
           width: JobsScreen.width,
@@ -36,7 +39,8 @@ class JobListItem extends StatelessWidget {
               ClipRRect(
                 borderRadius: radius10,
                 child: Image.network(
-                  jobPresentation.allJobsList[index].imgUrl,
+                  jobList[index].imgUrl,
+                  fit: BoxFit.cover,
                   height: JobsScreen.width * 0.17,
                   width: JobsScreen.width * 0.17,
                 ),
@@ -49,7 +53,7 @@ class JobListItem extends StatelessWidget {
                   LimitedBox(
                     maxWidth: JobsScreen.width * 0.6,
                     child: Text(
-                      jobPresentation.allJobsList[index].jobTitle,
+                      jobList[index].jobTitle,
                       softWrap: true,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -61,14 +65,14 @@ class JobListItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    jobPresentation.allJobsList[index].companyName,
+                    jobList[index].companyName,
                     style: theme.textTheme.bodyMedium!.copyWith(
                       fontSize: fourteenPx,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   Text(
-                    'Total Views ${jobPresentation.allJobsList[index].totalView}',
+                    'Total Views ${jobList[index].totalView}',
                     style: theme.textTheme.bodyMedium!.copyWith(
                       fontSize: elevenPx,
                       fontWeight: FontWeight.w400,

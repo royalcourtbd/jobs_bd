@@ -6,13 +6,14 @@ import 'package:jobs_bd/core/utility/utility.dart';
 import 'package:jobs_bd/presentation/home/widgets/job_list_item.dart';
 import 'package:jobs_bd/presentation/job/presenter/job_presentation.dart';
 import 'package:jobs_bd/presentation/job/ui/job_view_page.dart';
+import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
 
 class JobListPage extends StatelessWidget {
-  JobListPage({super.key, this.title, this.jobLength = 0});
-  final JobPresentation jobPresentation = Get.put(JobPresentation());
+  final HomePresenter homePresenter = Get.put(HomePresenter());
+
+  JobListPage({super.key, this.title});
 
   final String? title;
-  final int jobLength;
 
   @override
   Widget build(BuildContext context) {
@@ -27,38 +28,49 @@ class JobListPage extends StatelessWidget {
       ),
       body: Padding(
         padding: padding20,
-        child: ListView.builder(
-          itemCount: jobPresentation.jobLength,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                JobListItem(
-                  theme: theme,
-                  index: index,
-                  onTap: () => context.navigatorPush(
-                    JobViewPage(index: index, jobPresentation: jobPresentation),
-                  ),
-                ),
-                if ((index + 1) % 5 == 0) ...[
-                  Container(
-                    height: 50,
-                    width: JobsScreen.width,
-                    color: Colors.redAccent,
-                  ),
-                  gapH10,
-                ],
-                ElevatedButton(
-                    onPressed: () {
-                      jobPresentation.job();
-                      print(jobPresentation.jobLength);
-                    },
-                    child: const Text('Apply Now'))
-              ],
+        child: Obx(() {
+          if (homePresenter.currentUiState.isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          },
-        ),
+          }
+
+          final jobList = homePresenter.currentUiState.jobListByCategory;
+
+          if (jobList.isEmpty) {
+            return const Center(
+              child: Text('No jobs available'),
+            );
+          }
+
+          return ListView.builder(
+            itemCount: jobList.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  JobListItem(
+                    theme: theme,
+                    index: index,
+                    jobList: jobList,
+                    onTap: () => context.navigatorPush(
+                      JobViewPage(index: index, jobList: jobList),
+                    ),
+                  ),
+                  if ((index + 1) % 5 == 0) ...[
+                    Container(
+                      height: 50,
+                      width: JobsScreen.width,
+                      color: Colors.redAccent,
+                    ),
+                    gapH10,
+                  ],
+                ],
+              );
+            },
+          );
+        }),
       ),
     );
   }

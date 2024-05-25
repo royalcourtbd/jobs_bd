@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html/flutter_html.dart' as html;
 import 'package:intl/intl.dart';
 import 'package:jobs_bd/core/config/jobs_screen.dart';
 import 'package:jobs_bd/core/static/ui_const.dart';
-import 'package:jobs_bd/data/dummy_data_model/job_list_model.dart';
-import 'package:jobs_bd/presentation/job/presenter/job_presentation.dart';
+import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 import 'package:jobs_bd/presentation/job/widgets/text_with_opacity.dart';
 
 class JobViewPage extends StatelessWidget {
   const JobViewPage({
     super.key,
     required this.index,
-    required this.jobPresentation,
+    required this.jobList,
   });
 
   final int index;
-  final JobPresentation jobPresentation;
+  final List<JobModel> jobList;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class JobViewPage extends StatelessWidget {
         DateTime(now.year, now.month, now.day); // Set only the date part
     final DateTime tomorrow = today.add(const Duration(days: 1));
     final DateTime applicationEndDate =
-        DateFormat('yyyy-MM-dd').parse(jobList[index].applicationEnd);
+        DateFormat('yyyy-MM-dd').parse(jobList[index].posted);
 
     final bool isEndingSoon = applicationEndDate.isAtSameMomentAs(today) ||
         applicationEndDate.isAtSameMomentAs(tomorrow);
@@ -33,7 +32,7 @@ class JobViewPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
-        title: Text(jobPresentation.allJobsList[index].jobTitle),
+        title: Text(jobList[index].jobTitle),
       ),
       body: Padding(
         padding: padding20,
@@ -55,14 +54,15 @@ class JobViewPage extends StatelessWidget {
                     ClipRRect(
                       borderRadius: radius10,
                       child: Image.network(
-                        jobPresentation.allJobsList[index].imgUrl,
+                        jobList[index].imgUrl,
+                        fit: BoxFit.cover,
                         height: JobsScreen.width * 0.4,
                         width: JobsScreen.width * 0.4,
                       ),
                     ),
                     gapH10,
                     Text(
-                      jobPresentation.allJobsList[index].jobTitle,
+                      jobList[index].jobTitle,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
@@ -73,24 +73,25 @@ class JobViewPage extends StatelessWidget {
                     ),
                     TextWithOpacity(
                         title: jobList[index].companyName, theme: theme),
-                    if (jobList[index].vacancies != null)
-                      TextWithOpacity(
-                          title: '${jobList[index].vacancies} Vacancies',
-                          theme: theme),
+                    // if (jobList[index].jobId != null)
+                    //   TextWithOpacity(
+                    //       title: '${jobList[index].vacancies} Vacancies',
+                    //       theme: theme),
                     TextWithOpacity(
-                      title:
-                          'Total ${jobPresentation.allJobsList[index].totalView} Views',
+                      title: 'Total ${jobList[index].totalView} Views',
                       theme: theme,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextWithOpacity(
-                          title: jobPresentation.allJobsList[index].posted,
+                          title: DateTime.parse(jobList[index].posted)
+                              .toString()
+                              .substring(0, 10),
                           theme: theme,
                         ),
                         TextWithOpacity(
-                          title: jobList[index].applicationEnd,
+                          title: jobList[index].deadLine,
                           theme: theme,
                           textColor: isEndingSoon
                               ? Colors.red
@@ -102,7 +103,7 @@ class JobViewPage extends StatelessWidget {
                 ),
               ),
               gapH10,
-              Html(
+              html.Html(
                 data: htmlData,
                 style: const {
                   // "body": Style(
