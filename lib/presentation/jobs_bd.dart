@@ -17,7 +17,7 @@ class JobsBd extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: TutorTheme.lightTheme,
       title: 'Jobs BD',
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }

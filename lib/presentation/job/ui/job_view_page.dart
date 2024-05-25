@@ -4,12 +4,18 @@ import 'package:intl/intl.dart';
 import 'package:jobs_bd/core/config/jobs_screen.dart';
 import 'package:jobs_bd/core/static/ui_const.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_list_model.dart';
+import 'package:jobs_bd/presentation/job/presenter/job_presentation.dart';
 import 'package:jobs_bd/presentation/job/widgets/text_with_opacity.dart';
 
 class JobViewPage extends StatelessWidget {
-  const JobViewPage({super.key, required this.index});
+  const JobViewPage({
+    super.key,
+    required this.index,
+    required this.jobPresentation,
+  });
 
   final int index;
+  final JobPresentation jobPresentation;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +33,7 @@ class JobViewPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
-        title: Text(jobList[index].jobTitle),
+        title: Text(jobPresentation.allJobsList[index].jobTitle),
       ),
       body: Padding(
         padding: padding20,
@@ -48,15 +54,15 @@ class JobViewPage extends StatelessWidget {
                   children: [
                     ClipRRect(
                       borderRadius: radius10,
-                      child: Image.asset(
-                        jobList[index].imageUrl,
+                      child: Image.network(
+                        jobPresentation.allJobsList[index].imgUrl,
                         height: JobsScreen.width * 0.4,
                         width: JobsScreen.width * 0.4,
                       ),
                     ),
                     gapH10,
                     Text(
-                      jobList[index].jobTitle,
+                      jobPresentation.allJobsList[index].jobTitle,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
@@ -72,14 +78,15 @@ class JobViewPage extends StatelessWidget {
                           title: '${jobList[index].vacancies} Vacancies',
                           theme: theme),
                     TextWithOpacity(
-                      title: 'Total ${jobList[index].viewPost} Views',
+                      title:
+                          'Total ${jobPresentation.allJobsList[index].totalView} Views',
                       theme: theme,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextWithOpacity(
-                          title: jobList[index].applicationStart,
+                          title: jobPresentation.allJobsList[index].posted,
                           theme: theme,
                         ),
                         TextWithOpacity(

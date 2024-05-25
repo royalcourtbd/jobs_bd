@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jobs_bd/core/config/jobs_screen.dart';
 import 'package:jobs_bd/core/static/ui_const.dart';
 import 'package:jobs_bd/core/utility/utility.dart';
-import 'package:jobs_bd/data/dummy_data_model/job_list_model.dart';
 import 'package:jobs_bd/presentation/home/widgets/job_list_item.dart';
+import 'package:jobs_bd/presentation/job/presenter/job_presentation.dart';
 import 'package:jobs_bd/presentation/job/ui/job_view_page.dart';
 
 class JobListPage extends StatelessWidget {
-  const JobListPage({super.key, this.title});
+  JobListPage({super.key, this.title, this.jobLength = 0});
+  final JobPresentation jobPresentation = Get.put(JobPresentation());
 
   final String? title;
+  final int jobLength;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,8 @@ class JobListPage extends StatelessWidget {
       body: Padding(
         padding: padding20,
         child: ListView.builder(
-          itemCount: jobList.length,
+          itemCount: jobPresentation.jobLength,
+          shrinkWrap: true,
           itemBuilder: (context, index) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +38,7 @@ class JobListPage extends StatelessWidget {
                   theme: theme,
                   index: index,
                   onTap: () => context.navigatorPush(
-                    JobViewPage(index: index),
+                    JobViewPage(index: index, jobPresentation: jobPresentation),
                   ),
                 ),
                 if ((index + 1) % 5 == 0) ...[
@@ -44,7 +48,13 @@ class JobListPage extends StatelessWidget {
                     color: Colors.redAccent,
                   ),
                   gapH10,
-                ]
+                ],
+                ElevatedButton(
+                    onPressed: () {
+                      jobPresentation.job();
+                      print(jobPresentation.jobLength);
+                    },
+                    child: const Text('Apply Now'))
               ],
             );
           },
