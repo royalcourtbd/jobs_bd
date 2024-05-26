@@ -24,10 +24,12 @@ class JobViewPage extends StatelessWidget {
         DateTime(now.year, now.month, now.day); // Set only the date part
     final DateTime tomorrow = today.add(const Duration(days: 1));
     final DateTime applicationEndDate =
-        DateFormat('yyyy-MM-dd').parse(jobList[index].posted ?? '');
+        DateFormat('yyyy-MM-dd').parse(jobList[index].jobDeadLine!);
 
     final bool isEndingSoon = applicationEndDate.isAtSameMomentAs(today) ||
-        applicationEndDate.isAtSameMomentAs(tomorrow);
+        applicationEndDate.isAtSameMomentAs(tomorrow) ||
+        applicationEndDate.isBefore(today);
+    print('Is Ending Soon: $isEndingSoon');
 
     return Scaffold(
       appBar: AppBar(
@@ -81,21 +83,42 @@ class JobViewPage extends StatelessWidget {
                       title: 'Total ${jobList[index].totalView} Views',
                       theme: theme,
                     ),
+                    gapH15,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextWithOpacity(
-                          title: DateTime.parse(jobList[index].posted ?? '')
-                              .toString()
-                              .substring(0, 10),
-                          theme: theme,
+                        Column(
+                          children: [
+                            Text(
+                              'Start Date',
+                              style: theme.textTheme.bodyMedium!.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextWithOpacity(
+                              title: DateTime.parse(jobList[index].posted ?? '')
+                                  .toString()
+                                  .substring(0, 10),
+                              theme: theme,
+                            ),
+                          ],
                         ),
-                        TextWithOpacity(
-                          title: jobList[index].jobDeadLine ?? '',
-                          theme: theme,
-                          textColor: isEndingSoon
-                              ? Colors.red
-                              : Colors.green, // Conditionally apply color,
+                        Column(
+                          children: [
+                            Text(
+                              'End Date',
+                              style: theme.textTheme.bodyMedium!.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextWithOpacity(
+                              title: jobList[index].jobDeadLine ?? '',
+                              theme: theme,
+                              textColor: isEndingSoon
+                                  ? Colors.red
+                                  : Colors.green, // Conditionally apply color,
+                            ),
+                          ],
                         ),
                       ],
                     ),

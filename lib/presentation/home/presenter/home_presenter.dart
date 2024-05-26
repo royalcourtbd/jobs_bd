@@ -35,45 +35,10 @@ class HomePresenter extends BasePresenter<HomeUiState> {
 
   void fetchJobListByCategory(String category) {
     toggleLoading(loading: true);
-
-    if (category.isEmpty) {
-      // No category selected, show all jobs
-      if (_cacheManager.cachedAllJobList.isNotEmpty) {
-        uiState.value = currentUiState.copyWith(
-          jobListByCategory: _cacheManager.cachedAllJobList,
-        );
-      } else {
-        GetAllJobsRepository().getAllJobs().listen((jobList) {
-          _cacheManager.cacheAllJobList(jobList);
-          uiState.value = currentUiState.copyWith(
-            jobListByCategory: jobList,
-          );
-          toggleLoading(loading: false);
-        });
-      }
-    } else {
-      // Category selected, filter jobs by category
-      if (_cacheManager.cachedJobListByCategory.isNotEmpty) {
-        uiState.value = currentUiState.copyWith(
-          jobListByCategory: _cacheManager.cachedJobListByCategory
-              .where(
-                (job) => job.category == category,
-              )
-              .toList(),
-        );
-        toggleLoading(loading: false);
-      } else {
-        GetJobsByCategoryRepository()
-            .getJobsByCategory(category)
-            .listen((jobList) {
-          _cacheManager.cacheJobListByCategory(jobList);
-          uiState.value = currentUiState.copyWith(
-            jobListByCategory: jobList,
-          );
-          toggleLoading(loading: false);
-        });
-      }
-    }
+    GetJobsByCategoryRepository().getJobsByCategory(category).listen((jobList) {
+      uiState.value = currentUiState.copyWith(jobListByCategory: jobList);
+      toggleLoading(loading: false); // Ensure loading is set to false here
+    });
   }
 
   void incrementViews(JobModel id) {
