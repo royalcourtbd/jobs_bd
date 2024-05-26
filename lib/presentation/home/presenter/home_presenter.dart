@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:jobs_bd/core/base/base_presenter.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 import 'package:jobs_bd/data/repository/get_all_jobs_repository.dart';
@@ -8,7 +7,7 @@ import 'package:jobs_bd/data/service/cache_manager.dart';
 import 'package:jobs_bd/presentation/home/presenter/home_ui_state.dart';
 
 class HomePresenter extends BasePresenter<HomeUiState> {
-  final Rx<HomeUiState> uiState = Rx(HomeUiState.empty());
+  final Obs<HomeUiState> uiState = Obs(HomeUiState.empty());
   final CacheManager _cacheManager = CacheManager();
 
   HomeUiState get currentUiState => uiState.value;
