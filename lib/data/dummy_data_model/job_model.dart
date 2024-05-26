@@ -1,32 +1,42 @@
 class JobModel {
-  final String documentId;
-  final String category;
-  final String companyName;
-  final String deadLine;
-  final String description;
-  final String imgUrl;
-  final String jobId;
-  final String jobTitle;
-  final String link;
-  final String location;
-  final String posted;
-  final String status;
-  final int totalView;
+  final String? documentId;
+  final String? category;
+  final String? companyName;
+  final String? jobDeadLine;
+  final String? jobDescription;
+  final String? imgUrl;
+  final String? jobId;
+  final String? jobTitle;
+  final String? link;
+  final String? location;
+  final String? posted;
+  final String? status;
+  final int? totalView;
+  final String? salaryRange;
+  final int? vacancy;
+  final String? experience;
+  final String? officeTime;
+  final String? weekend;
 
   JobModel({
-    required this.documentId,
-    required this.category,
-    required this.companyName,
-    required this.deadLine,
-    required this.description,
-    required this.imgUrl,
-    required this.jobId,
-    required this.jobTitle,
-    required this.link,
-    required this.location,
-    required this.posted,
-    required this.status,
-    required this.totalView,
+    this.documentId,
+    this.category,
+    this.companyName,
+    this.jobDeadLine,
+    this.jobDescription,
+    this.imgUrl,
+    this.jobId,
+    this.jobTitle,
+    this.link,
+    this.location,
+    this.posted,
+    this.status,
+    this.totalView,
+    this.salaryRange,
+    this.vacancy,
+    this.experience,
+    this.officeTime,
+    this.weekend,
   });
 
   factory JobModel.fromJson(Map<String, dynamic> json) {
@@ -34,8 +44,8 @@ class JobModel {
       documentId: json['documentId'],
       category: json['category'],
       companyName: json['companyName'],
-      deadLine: json['deadLine'],
-      description: json['description'],
+      jobDeadLine: json['jobDeadLine'],
+      jobDescription: json['jobDescription'],
       imgUrl: json['imgUrl'],
       jobId: json['jobId'],
       jobTitle: json['jobTitle'],
@@ -44,6 +54,11 @@ class JobModel {
       posted: json['posted'],
       status: json['status'],
       totalView: json['totalView'],
+      salaryRange: json['salaryRange'],
+      vacancy: json['vacancy'],
+      experience: json['experience'],
+      officeTime: json['officeTime'],
+      weekend: json['weekend'],
     );
   }
 
@@ -52,8 +67,8 @@ class JobModel {
       'documentId': documentId,
       'category': category,
       'companyName': companyName,
-      'deadLine': deadLine,
-      'description': description,
+      'jobDeadLine': jobDeadLine,
+      'jobDescription': jobDescription,
       'imgUrl': imgUrl,
       'jobId': jobId,
       'jobTitle': jobTitle,
@@ -62,6 +77,11 @@ class JobModel {
       'posted': posted,
       'status': status,
       'totalView': totalView,
+      'salaryRange': salaryRange,
+      'vacancy': vacancy,
+      'experience': experience,
+      'officeTime': officeTime,
+      'weekend': weekend,
     };
   }
 }

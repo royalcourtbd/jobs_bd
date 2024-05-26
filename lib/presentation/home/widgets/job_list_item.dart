@@ -39,7 +39,7 @@ class JobListItem extends StatelessWidget {
               ClipRRect(
                 borderRadius: radius10,
                 child: Image.network(
-                  jobList[index].imgUrl,
+                  jobList[index].imgUrl!,
                   fit: BoxFit.cover,
                   height: JobsScreen.width * 0.17,
                   width: JobsScreen.width * 0.17,
@@ -53,7 +53,7 @@ class JobListItem extends StatelessWidget {
                   LimitedBox(
                     maxWidth: JobsScreen.width * 0.6,
                     child: Text(
-                      jobList[index].jobTitle,
+                      jobList[index].jobTitle!,
                       softWrap: true,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -65,7 +65,7 @@ class JobListItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    jobList[index].companyName,
+                    jobList[index].companyName!,
                     style: theme.textTheme.bodyMedium!.copyWith(
                       fontSize: fourteenPx,
                       fontWeight: FontWeight.w500,

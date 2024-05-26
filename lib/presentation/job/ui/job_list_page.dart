@@ -4,7 +4,6 @@ import 'package:jobs_bd/core/config/jobs_screen.dart';
 import 'package:jobs_bd/core/static/ui_const.dart';
 import 'package:jobs_bd/core/utility/utility.dart';
 import 'package:jobs_bd/presentation/home/widgets/job_list_item.dart';
-import 'package:jobs_bd/presentation/job/presenter/job_presentation.dart';
 import 'package:jobs_bd/presentation/job/ui/job_view_page.dart';
 import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
 
@@ -54,9 +53,12 @@ class JobListPage extends StatelessWidget {
                     theme: theme,
                     index: index,
                     jobList: jobList,
-                    onTap: () => context.navigatorPush(
-                      JobViewPage(index: index, jobList: jobList),
-                    ),
+                    onTap: () {
+                      homePresenter.incrementViews(jobList[index]);
+                      context.navigatorPush(
+                        JobViewPage(index: index, jobList: jobList),
+                      );
+                    },
                   ),
                   if ((index + 1) % 5 == 0) ...[
                     Container(

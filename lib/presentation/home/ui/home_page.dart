@@ -88,6 +88,18 @@ class HomePage extends StatelessWidget {
                         );
                       },
                     ),
+                    gapH15,
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Latest Jobs',
+                        style: theme.textTheme.bodyMedium!.copyWith(
+                          color: theme.primaryColor,
+                          fontSize: twentyFourPx,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                     gapH10,
                     ListView.builder(
                       itemCount:
@@ -105,7 +117,7 @@ class HomePage extends StatelessWidget {
                               index: index,
                               onLongPress: () => jobPresentation.deleteJob(
                                   homePresenter.currentUiState.allJobList[index]
-                                      .documentId),
+                                      .documentId!),
                               jobList: homePresenter.currentUiState.allJobList,
                               onTap: () => context.navigatorPush(
                                 JobViewPage(

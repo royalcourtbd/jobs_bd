@@ -4,15 +4,6 @@ import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 
 class JobPresentation extends GetxController {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  final RxList<JobModel> allJobsList = RxList<JobModel>([]);
-  final RxList<JobModel> getJobByCategoryName = RxList<JobModel>([]);
-  int get jobLength => allJobsList.length;
-
-  // @override
-  // onInit() {
-  //   super.onInit();
-  //   // allJobsList.bindStream(getAllJObs());
-  // }
 
   Future<int> _getNextJobId() async {
     final docRef = firestore.collection('counters').doc('jobIdCounter');
@@ -39,8 +30,8 @@ class JobPresentation extends GetxController {
       documentId: id,
       category: 'Government Jobs',
       companyName: 'Passport Office',
-      deadLine: '2021-10-20',
-      description: 'grg r erg er',
+      jobDeadLine: '2021-10-20',
+      jobDescription: 'grg r erg er',
       imgUrl:
           'https://cdn-images-1.medium.com/max/1200/1*5-aoK8IBmXve5whBQM90GA.png',
       jobId: jobId.toString(),

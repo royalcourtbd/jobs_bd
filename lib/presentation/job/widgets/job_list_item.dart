@@ -34,7 +34,7 @@ class JobListItem extends StatelessWidget {
           child: Row(
             children: [
               Image.asset(
-                jobList[index].imgUrl,
+                jobList[index].imgUrl!,
                 height: JobsScreen.width * 0.17,
                 width: JobsScreen.width * 0.17,
               ),
@@ -44,14 +44,14 @@ class JobListItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    jobList[index].jobTitle,
+                    jobList[index].jobTitle!,
                     style: theme.textTheme.bodyMedium!.copyWith(
                       fontSize: fifteenPx,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    jobList[index].companyName,
+                    jobList[index].companyName!,
                     style: theme.textTheme.bodyMedium!.copyWith(
                       fontSize: fourteenPx,
                       fontWeight: FontWeight.w500,

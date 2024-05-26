@@ -24,7 +24,7 @@ class JobViewPage extends StatelessWidget {
         DateTime(now.year, now.month, now.day); // Set only the date part
     final DateTime tomorrow = today.add(const Duration(days: 1));
     final DateTime applicationEndDate =
-        DateFormat('yyyy-MM-dd').parse(jobList[index].posted);
+        DateFormat('yyyy-MM-dd').parse(jobList[index].posted ?? '');
 
     final bool isEndingSoon = applicationEndDate.isAtSameMomentAs(today) ||
         applicationEndDate.isAtSameMomentAs(tomorrow);
@@ -32,7 +32,7 @@ class JobViewPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
-        title: Text(jobList[index].jobTitle),
+        title: Text(jobList[index].jobTitle ?? ''),
       ),
       body: Padding(
         padding: padding20,
@@ -54,7 +54,7 @@ class JobViewPage extends StatelessWidget {
                     ClipRRect(
                       borderRadius: radius10,
                       child: Image.network(
-                        jobList[index].imgUrl,
+                        jobList[index].imgUrl ?? '',
                         fit: BoxFit.cover,
                         height: JobsScreen.width * 0.4,
                         width: JobsScreen.width * 0.4,
@@ -62,7 +62,7 @@ class JobViewPage extends StatelessWidget {
                     ),
                     gapH10,
                     Text(
-                      jobList[index].jobTitle,
+                      jobList[index].jobTitle ?? '',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
@@ -72,7 +72,7 @@ class JobViewPage extends StatelessWidget {
                       ),
                     ),
                     TextWithOpacity(
-                        title: jobList[index].companyName, theme: theme),
+                        title: jobList[index].companyName ?? '', theme: theme),
                     // if (jobList[index].jobId != null)
                     //   TextWithOpacity(
                     //       title: '${jobList[index].vacancies} Vacancies',
@@ -85,13 +85,13 @@ class JobViewPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextWithOpacity(
-                          title: DateTime.parse(jobList[index].posted)
+                          title: DateTime.parse(jobList[index].posted ?? '')
                               .toString()
                               .substring(0, 10),
                           theme: theme,
                         ),
                         TextWithOpacity(
-                          title: jobList[index].deadLine,
+                          title: jobList[index].jobDeadLine ?? '',
                           theme: theme,
                           textColor: isEndingSoon
                               ? Colors.red
@@ -104,7 +104,7 @@ class JobViewPage extends StatelessWidget {
               ),
               gapH10,
               html.Html(
-                data: htmlData,
+                data: jobList[index].jobDescription ?? '',
                 style: const {
                   // "body": Style(
                   //   margin: EdgeInsets.zero,
@@ -123,62 +123,3 @@ class JobViewPage extends StatelessWidget {
     );
   }
 }
-
-const htmlData = r"""
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        .bold {
-            font-weight: bold;
-        }
-        .italic {
-            font-style: italic;
-        }
-        .highlight {
-            background-color: yellow;
-        }
-    </style>
-</head>
-<body>
-    <h1><strong>Z-Eight Tech is Looking for Experienced Flutter Developer</strong></h1>
-    <h2><strong>Requirements:</strong></h2>
-    <ul>
-        <li>Development of Android/iOS applications and have deployed them on Google Play/App Store.</li>
-        <li>Knowledge of mobile app development.</li>
-        <li>Understanding front-end languages like HTML, CSS3, and JavaScript is a plus.</li>
-        <li>Knowledge of Python is a plus.</li>
-        <li>In-depth understanding of Object-Oriented programming languages like Java and C++.</li>
-        <li>Familiarity with version control tools like Git, Subversion, and IDEs like Android Studio, VS Code, etc.</li>
-        <li>Understanding of RDMS, SQL, MySQL.</li>
-        <li>Understanding of the Agile Software Development Life Cycle and being exposed to Scrum projects.</li>
-        <li>Knowledge of Dart programming language, Rest APIs, and integration of various APIs from third parties.</li>
-        <li>Comfortable using test cases for debugging code, enhancing performance and reliability.</li>
-    </ul>
-    <h2><strong>Additional Requirements:</strong></h2>
-    <ul>
-        <li>Age 18 to 28 years.</li>
-        <li>Salary: Negotiable.</li>
-    </ul>
-    <h2><strong>Facilities:</strong></h2>
-    <ul>
-        <li><strong>Competitive Salary & regular appraisal.</strong></li>
-        <li><strong>Training and learning materials to improve skills.</strong></li>
-        <li><strong>You will learn international marketplace standard coding.</strong></li>
-        <li><strong>Festival Bonus: 2 (Yearly)</strong></li>
-        <li><strong>Salary Review: Negotiable.</strong></li>
-        <li><strong>Lunch: Partially Subsidized.</strong></li>
-        <li><strong>Breakfast: From Office.</strong></li>
-        <li><strong>2 Times Tea</strong></li>
-        <li><strong>Deadline: 30.05.2024</strong></li>
-    </ul>
-    <p><strong>Office Time:</strong> 10:00am to 06:00pm. (Saturday to Thursday).</p>
-    <p><strong>Job Location:</strong> 1332/B, Jahan Mansion, O.R Nizam Road, G.E.C, Chattogram.</p>
-    <p>If you are interested, send your CV to <a href="mailto:z8techh@gmail.com">z8techh@gmail.com</a></p>
-    <p><strong>Subject line:</strong> Flutter Developer</p>
-    <p><strong>Office Location:</strong> 1332/B, Jahan Mansion, O.R Nizam Road, G.E.C, Chattogram, Bangladesh</p>
-    <p><strong>Note:</strong> Remote job isn't allowed.</p>
-</body>
-</html>
-
-""";
