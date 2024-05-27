@@ -5,7 +5,6 @@ import 'package:jobs_bd/core/external_libs/presentable_widget_builder.dart';
 import 'package:jobs_bd/core/static/ui_const.dart';
 import 'package:jobs_bd/core/utility/utility.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
-import 'package:jobs_bd/data/dummy_data_model/job_count_model.dart';
 import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
 import 'package:jobs_bd/presentation/home/widgets/job_list_item.dart';
 import 'package:jobs_bd/presentation/job/presenter/job_presentation.dart';
@@ -71,7 +70,7 @@ class HomePage extends StatelessWidget {
                       },
                     ),
                     GridView.builder(
-                      itemCount: jobCountList.length,
+                      itemCount: homePresenter.currentUiState.jobCounts.length,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -85,7 +84,12 @@ class HomePage extends StatelessWidget {
                           theme: theme,
                           index: index,
                           onTap: () {
-                            jobPresentation.job();
+                            context.navigatorPush(
+                              JobListPage(
+                                title: homePresenter
+                                    .currentUiState.jobCounts[index].jobTitle,
+                              ),
+                            );
                           },
                         );
                       },

@@ -10,6 +10,7 @@ class CacheManager {
   CacheManager._internal();
 
   List<JobModel> _cachedAllJobList = [];
+
   List<JobModel> _cachedJobListByCategory = [];
 
   List<JobModel> get cachedAllJobList => _cachedAllJobList;

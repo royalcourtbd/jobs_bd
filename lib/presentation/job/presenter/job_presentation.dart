@@ -30,7 +30,7 @@ class JobPresentation extends GetxController {
       documentId: id,
       category: 'Government Jobs',
       companyName: 'Passport Office',
-      jobDeadLine: '2021-10-20',
+      jobDeadLine: DateTime.now().toString(),
       jobDescription: 'grg r erg er',
       imgUrl:
           'https://cdn-images-1.medium.com/max/1200/1*5-aoK8IBmXve5whBQM90GA.png',

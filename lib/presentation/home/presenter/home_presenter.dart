@@ -1,5 +1,6 @@
 import 'package:jobs_bd/core/base/base_presenter.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
+import 'package:jobs_bd/data/dummy_data_model/job_count_model.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 import 'package:jobs_bd/data/repository/get_all_jobs_repository.dart';
 import 'package:jobs_bd/data/repository/get_jobs_by_category_repository.dart';
@@ -27,15 +28,94 @@ class HomePresenter extends BasePresenter<HomeUiState> {
       uiState.value =
           currentUiState.copyWith(allJobList: _cacheManager.cachedAllJobList);
       toggleLoading(loading: false);
+      fetchJobCounts();
     } else {
       // Fetch from Firebase and cache the data
       GetAllJobsRepository().getAllJobs().listen((jobList) {
         _cacheManager.cacheAllJobList(jobList);
         uiState.value = currentUiState.copyWith(allJobList: jobList);
         fetchCategoryCount();
+        fetchJobCounts();
+
         toggleLoading(loading: false);
       });
     }
+  }
+
+  void fetchJobCounts() {
+    fetchTodayPostsCount();
+    fetchTodayDeadlinesCount();
+    fetchTomorrowDeadlinesCount();
+  }
+
+  void fetchTodayPostsCount() {
+    final today = DateTime.now();
+    int count = currentUiState.allJobList.where((job) {
+      // Parse the DateTime string from Firebase
+      DateTime jobPosted = DateTime.parse(job.posted!);
+      // Compare if the posted date is on the same day as today
+      return jobPosted.year == today.year &&
+          jobPosted.month == today.month &&
+          jobPosted.day == today.day;
+    }).length;
+    print('today post count: $count');
+    // uiState.value = currentUiState.copyWith(jobCounts: count);
+    // uiState.value = currentUiState.copyWith(todayPostsCount: count);
+    updateJobCountList(JobCountModel(jobTitle: 'Today Posts', jobCount: count));
+  }
+
+  void fetchTodayDeadlinesCount() {
+    final today = DateTime.now();
+
+    int count = currentUiState.allJobList.where((job) {
+      if (job.jobDeadLine == null) return false;
+      try {
+        DateTime deadline = DateTime.parse(job.jobDeadLine!);
+        return deadline.year == today.year &&
+            deadline.month == today.month &&
+            deadline.day == today.day;
+      } catch (e) {
+        // Handle parsing errors, e.g., invalid date format
+        print('Error parsing deadline for job ${job.jobId}: $e');
+        return false;
+      }
+    }).length;
+
+    print('today deadline count: $count');
+    // uiState.value = currentUiState.copyWith(todayDeadlinesCount: count);
+    updateJobCountList(
+        JobCountModel(jobTitle: 'Today Deadlines', jobCount: count));
+  }
+
+  void fetchTomorrowDeadlinesCount() {
+    final tomorrow = DateTime.now().add(const Duration(days: 1));
+
+    int count = currentUiState.allJobList.where((job) {
+      if (job.jobDeadLine == null) return false;
+      try {
+        DateTime deadline = DateTime.parse(job.jobDeadLine!);
+        return deadline.year == tomorrow.year &&
+            deadline.month == tomorrow.month &&
+            deadline.day == tomorrow.day;
+      } catch (e) {
+        // Handle parsing errors, e.g., invalid date format
+        print('Error parsing deadline for job ${job.jobId}: $e');
+        return false;
+      }
+    }).length;
+
+    print('tomorrow deadline count: $count');
+    // uiState.value = currentUiState.copyWith(tomorrowDeadlinesCount: count);
+    updateJobCountList(
+        JobCountModel(jobTitle: 'Tomorrow Deadlines', jobCount: count));
+  }
+
+  void updateJobCountList(JobCountModel jobCountModel) {
+    // Update the job counts list in the UI state
+    List<JobCountModel> updatedJobCounts = List.from(currentUiState.jobCounts);
+    updatedJobCounts.add(jobCountModel);
+    print('updated job counts: ${updatedJobCounts.length}');
+    uiState.value = currentUiState.copyWith(jobCounts: updatedJobCounts);
   }
 
   void fetchJobListByCategory(String category) {
