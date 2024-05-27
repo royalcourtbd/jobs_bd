@@ -29,7 +29,6 @@ class JobViewPage extends StatelessWidget {
     final bool isEndingSoon = applicationEndDate.isAtSameMomentAs(today) ||
         applicationEndDate.isAtSameMomentAs(tomorrow) ||
         applicationEndDate.isBefore(today);
-    print('Is Ending Soon: $isEndingSoon');
 
     return Scaffold(
       appBar: AppBar(

@@ -9,11 +9,13 @@ class JobCategoryItem extends StatelessWidget {
     required this.theme,
     required this.index,
     this.onTap,
+    required this.totalJobs,
   });
 
   final ThemeData theme;
   final int index;
   final VoidCallback? onTap;
+  final int totalJobs;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class JobCategoryItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '${jobCategoryList[index].totalJobs} Jobs',
+                    '$totalJobs Jobs',
                     style: theme.textTheme.bodyMedium!.copyWith(
                       fontSize: twentyPx,
                       fontWeight: FontWeight.bold,

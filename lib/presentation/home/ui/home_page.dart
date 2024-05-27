@@ -59,14 +59,14 @@ class HomePage extends StatelessWidget {
                           onTap: () async {
                             homePresenter.fetchJobListByCategory(
                                 jobCategoryList[index].jobTitle);
-                            print(
-                                'jobCategoryList[index].jobTitle: ${jobCategoryList[index].jobTitle}');
+
                             context.navigatorPush(
                               JobListPage(
                                 title: jobCategoryList[index].jobTitle,
                               ),
                             );
                           },
+                          totalJobs: jobCategoryList[index].totalJobs,
                         );
                       },
                     ),

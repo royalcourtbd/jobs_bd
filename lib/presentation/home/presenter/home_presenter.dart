@@ -1,4 +1,5 @@
 import 'package:jobs_bd/core/base/base_presenter.dart';
+import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 import 'package:jobs_bd/data/repository/get_all_jobs_repository.dart';
 import 'package:jobs_bd/data/repository/get_jobs_by_category_repository.dart';
@@ -11,15 +12,18 @@ class HomePresenter extends BasePresenter<HomeUiState> {
   final CacheManager _cacheManager = CacheManager();
 
   HomeUiState get currentUiState => uiState.value;
+  final List<JobCategoryModel> _categoryList = jobCategoryList;
 
-  HomePresenter() {
+  @override
+  onInit() {
+    super.onInit();
     _fetchAllJobs();
+    fetchCategoryCount();
   }
 
   void _fetchAllJobs() {
     toggleLoading(loading: true);
     if (_cacheManager.cachedAllJobList.isNotEmpty) {
-      // Use cached data
       uiState.value =
           currentUiState.copyWith(allJobList: _cacheManager.cachedAllJobList);
       toggleLoading(loading: false);
@@ -28,6 +32,7 @@ class HomePresenter extends BasePresenter<HomeUiState> {
       GetAllJobsRepository().getAllJobs().listen((jobList) {
         _cacheManager.cacheAllJobList(jobList);
         uiState.value = currentUiState.copyWith(allJobList: jobList);
+        fetchCategoryCount();
         toggleLoading(loading: false);
       });
     }
@@ -39,6 +44,21 @@ class HomePresenter extends BasePresenter<HomeUiState> {
       uiState.value = currentUiState.copyWith(jobListByCategory: jobList);
       toggleLoading(loading: false); // Ensure loading is set to false here
     });
+  }
+
+  void fetchCategoryCount() {
+    for (var category in _categoryList) {
+      int categoryCount = _getCategoryCount(category.jobTitle);
+      category.totalJobs = categoryCount;
+    }
+    uiState.value = currentUiState.copyWith(categoryList: _categoryList);
+  }
+
+  int _getCategoryCount(String categoryName) {
+    return _cacheManager.cachedAllJobList
+        .where((job) => job.category == categoryName)
+        .toList()
+        .length;
   }
 
   void incrementViews(JobModel id) {

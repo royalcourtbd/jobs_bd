@@ -4,7 +4,7 @@ class JobCategoryModel {
   final String id;
   final String jobTitle;
   final String imgPath;
-  final int totalJobs;
+  int totalJobs;
 
   JobCategoryModel({
     required this.id,
@@ -12,6 +12,20 @@ class JobCategoryModel {
     required this.imgPath,
     required this.totalJobs,
   });
+
+  JobCategoryModel copyWith({
+    String? id,
+    String? jobTitle,
+    String? imgPath,
+    int? totalJobs,
+  }) {
+    return JobCategoryModel(
+      id: id ?? this.id,
+      jobTitle: jobTitle ?? this.jobTitle,
+      imgPath: imgPath ?? this.imgPath,
+      totalJobs: totalJobs ?? this.totalJobs,
+    );
+  }
 }
 
 List<JobCategoryModel> jobCategoryList = [
@@ -19,18 +33,21 @@ List<JobCategoryModel> jobCategoryList = [
     id: '1',
     jobTitle: 'Government Jobs',
     imgPath: SvgPath.icGovtLogo,
-    totalJobs: 318,
+    totalJobs:
+        0, // Initially set to 0, will be updated when the app initializes
   ),
   JobCategoryModel(
     id: '2',
     jobTitle: 'IT Sector Jobs',
     imgPath: SvgPath.icItJobLogo,
-    totalJobs: 548,
+    totalJobs:
+        0, // Initially set to 0, will be updated when the app initializes
   ),
   JobCategoryModel(
     id: '3',
     jobTitle: 'Private Jobs',
     imgPath: SvgPath.icPrivateJobLogo,
-    totalJobs: 453,
+    totalJobs:
+        0, // Initially set to 0, will be updated when the app initializes
   ),
 ];
