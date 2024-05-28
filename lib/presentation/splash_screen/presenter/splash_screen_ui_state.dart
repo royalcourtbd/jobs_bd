@@ -4,35 +4,35 @@ class SplashScreenUiState extends BaseUiState {
   const SplashScreenUiState({
     required super.isLoading,
     required super.userMessage,
-    required this.isConnected,
+    required this.isInternetConnected,
   });
 
   factory SplashScreenUiState.empty() {
     return const SplashScreenUiState(
       isLoading: false,
       userMessage: '',
-      isConnected: false,
+      isInternetConnected: false,
     );
   }
 
-  final bool isConnected;
+  final bool isInternetConnected;
 
   @override
   List<Object?> get props => [
         isLoading,
         userMessage,
-        isConnected,
+        isInternetConnected,
       ];
 
   SplashScreenUiState copyWith({
     bool? isLoading,
     String? message,
-    bool? isConnected,
+    bool? isInternetConnected,
   }) {
     return SplashScreenUiState(
       isLoading: isLoading ?? super.isLoading,
       userMessage: message ?? super.userMessage,
-      isConnected: isConnected ?? this.isConnected,
+      isInternetConnected: isInternetConnected ?? this.isInternetConnected,
     );
   }
 }

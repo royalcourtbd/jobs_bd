@@ -10,7 +10,10 @@ import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
 class JobListPage extends StatelessWidget {
   final HomePresenter homePresenter = Get.put(HomePresenter());
 
-  JobListPage({super.key, this.title});
+  JobListPage({
+    super.key,
+    this.title,
+  });
 
   final String? title;
 

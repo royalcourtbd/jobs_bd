@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs_bd/core/bindings/allbindings.dart';
 import 'package:jobs_bd/core/config/themes.dart';
-import 'package:jobs_bd/presentation/home/ui/home_page.dart';
+import 'package:jobs_bd/presentation/splash_screen/ui/splash_screen.dart';
 
 class JobsBd extends StatelessWidget {
   const JobsBd({super.key});
@@ -17,7 +17,7 @@ class JobsBd extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: TutorTheme.lightTheme,
       title: 'Jobs BD',
-      home: HomePage(),
+      home: SplashScreen(),
     );
   }
 }

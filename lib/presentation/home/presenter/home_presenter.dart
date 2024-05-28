@@ -1,6 +1,5 @@
 import 'package:jobs_bd/core/base/base_presenter.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
-import 'package:jobs_bd/data/dummy_data_model/job_count_model.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 import 'package:jobs_bd/data/repository/get_all_jobs_repository.dart';
 import 'package:jobs_bd/data/repository/get_jobs_by_category_repository.dart';
@@ -58,10 +57,8 @@ class HomePresenter extends BasePresenter<HomeUiState> {
           jobPosted.month == today.month &&
           jobPosted.day == today.day;
     }).length;
-    print('today post count: $count');
-    // uiState.value = currentUiState.copyWith(jobCounts: count);
-    // uiState.value = currentUiState.copyWith(todayPostsCount: count);
-    updateJobCountList(JobCountModel(jobTitle: 'Today Posts', jobCount: count));
+
+    uiState.value = currentUiState.copyWith(todayPostsCount: count);
   }
 
   void fetchTodayDeadlinesCount() {
@@ -76,15 +73,12 @@ class HomePresenter extends BasePresenter<HomeUiState> {
             deadline.day == today.day;
       } catch (e) {
         // Handle parsing errors, e.g., invalid date format
-        print('Error parsing deadline for job ${job.jobId}: $e');
+
         return false;
       }
     }).length;
 
-    print('today deadline count: $count');
-    // uiState.value = currentUiState.copyWith(todayDeadlinesCount: count);
-    updateJobCountList(
-        JobCountModel(jobTitle: 'Today Deadlines', jobCount: count));
+    uiState.value = currentUiState.copyWith(todayDeadlinesCount: count);
   }
 
   void fetchTomorrowDeadlinesCount() {
@@ -99,23 +93,12 @@ class HomePresenter extends BasePresenter<HomeUiState> {
             deadline.day == tomorrow.day;
       } catch (e) {
         // Handle parsing errors, e.g., invalid date format
-        print('Error parsing deadline for job ${job.jobId}: $e');
+
         return false;
       }
     }).length;
 
-    print('tomorrow deadline count: $count');
-    // uiState.value = currentUiState.copyWith(tomorrowDeadlinesCount: count);
-    updateJobCountList(
-        JobCountModel(jobTitle: 'Tomorrow Deadlines', jobCount: count));
-  }
-
-  void updateJobCountList(JobCountModel jobCountModel) {
-    // Update the job counts list in the UI state
-    List<JobCountModel> updatedJobCounts = List.from(currentUiState.jobCounts);
-    updatedJobCounts.add(jobCountModel);
-    print('updated job counts: ${updatedJobCounts.length}');
-    uiState.value = currentUiState.copyWith(jobCounts: updatedJobCounts);
+    uiState.value = currentUiState.copyWith(tomorrowDeadlinesCount: count);
   }
 
   void fetchJobListByCategory(String category) {

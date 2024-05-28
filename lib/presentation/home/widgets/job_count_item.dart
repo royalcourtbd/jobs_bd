@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:jobs_bd/core/config/jobs_screen.dart';
 import 'package:jobs_bd/core/static/ui_const.dart';
-import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
 
 class JobCountItem extends StatelessWidget {
-  JobCountItem({
+  const JobCountItem({
     super.key,
     required this.theme,
-    required this.index,
+    required this.jobCount,
+    required this.title,
     this.onTap,
   });
 
   final ThemeData theme;
-  final int index;
+  final int jobCount;
   final VoidCallback? onTap;
-  final HomePresenter homePresenter = Get.put(HomePresenter());
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +34,16 @@ class JobCountItem extends StatelessWidget {
           children: [
             ConstrainedBox(
               constraints: BoxConstraints(
-                maxWidth: JobsScreen.width * 0.2,
+                maxWidth: JobsScreen.width * 0.22,
               ),
               child: Text(
-                homePresenter.currentUiState.jobCounts[index].jobTitle,
+                title,
+                textAlign: TextAlign.start,
                 style: theme.textTheme.bodyMedium!.copyWith(),
               ),
             ),
             Text(
-              '${homePresenter.currentUiState.jobCounts[index].jobCount}',
+              jobCount.toString(),
               style: theme.textTheme.bodyMedium!.copyWith(
                 fontSize: twentyPx,
                 fontWeight: FontWeight.bold,
