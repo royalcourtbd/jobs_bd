@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:jobs_bd/core/config/jobs_screen.dart';
 import 'package:jobs_bd/core/external_libs/presentable_widget_builder.dart';
@@ -23,109 +24,140 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return PresentableWidgetBuilder(
-        presenter: homePresenter,
-        builder: () {
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text(
-                'Jobs BD',
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Get.find<JobPresentation>().job();
-                  },
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                )
-              ],
+      presenter: homePresenter,
+      builder: () {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text(
+              'Jobs BD',
             ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: padding20,
-                child: Column(
-                  children: [
-                    ListView.builder(
-                      itemCount: jobCategoryList.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return JobCategoryItem(
-                          theme: theme,
-                          index: index,
-                          onTap: () {
-                            homePresenter.fetchJobListByCategory(
-                                jobCategoryList[index].jobTitle);
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Get.find<JobPresentation>().job();
+                },
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+              )
+            ],
+          ),
+          body: Column(
+            children: [
+              Expanded(
+                child: NestedScrollView(
+                  headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: padding20,
+                        child: Column(
+                          children: [
+                            ListView.builder(
+                              itemCount: jobCategoryList.length,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return JobCategoryItem(
+                                  theme: theme,
+                                  index: index,
+                                  onTap: () {
+                                    homePresenter.fetchJobListByCategory(
+                                        jobCategoryList[index].jobTitle);
 
-                            context.navigatorPush(
-                              JobListPage(
-                                title: jobCategoryList[index].jobTitle,
-                              ),
-                            );
-                          },
-                          totalJobs: jobCategoryList[index].totalJobs,
-                        );
-                      },
-                    ),
-                    JobCountSecion(theme: theme, homePresenter: homePresenter),
-                    gapH15,
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Latest Jobs',
-                        style: theme.textTheme.bodyMedium!.copyWith(
-                          color: theme.primaryColor,
-                          fontSize: twentyFourPx,
-                          fontWeight: FontWeight.bold,
+                                    context.navigatorPush(
+                                      JobListPage(
+                                        title: jobCategoryList[index].jobTitle,
+                                      ),
+                                    );
+                                  },
+                                  totalJobs: jobCategoryList[index].totalJobs,
+                                );
+                              },
+                            ),
+                            JobCountSecion(
+                                theme: theme, homePresenter: homePresenter),
+                          ],
                         ),
                       ),
-                    ),
-                    gapH10,
-                    ListView.builder(
-                      itemCount:
-                          homePresenter.currentUiState.allJobList.length >= 10
-                              ? 10
-                              : homePresenter.currentUiState.allJobList.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            JobListItem(
-                              theme: theme,
-                              index: index,
-                              onLongPress: () => jobPresentation.deleteJob(
-                                  homePresenter.currentUiState.allJobList[index]
-                                      .documentId!),
-                              jobList: homePresenter.currentUiState.allJobList,
-                              onTap: () => context.navigatorPush(
-                                JobViewPage(
-                                  index: index,
-                                  jobList:
-                                      homePresenter.currentUiState.allJobList,
-                                ),
-                              ),
-                            ),
-                            if ((index + 1) % 5 == 0) ...[
-                              Container(
-                                height: 50,
-                                width: JobsScreen.width,
-                                color: Colors.redAccent,
-                              ),
-                              gapH10,
-                            ],
-                          ],
-                        );
-                      },
-                    ),
+                    )
                   ],
+                  body: Padding(
+                    padding: EdgeInsets.only(
+                      left: twentyPx,
+                      right: twentyPx,
+                      top: tenPx,
+                      bottom: tenPx,
+                    ),
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Latest Jobs',
+                            style: theme.textTheme.bodyMedium!.copyWith(
+                              color: theme.primaryColor,
+                              fontSize: twentyFourPx,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        gapH10,
+                        Expanded(
+                          child: ListView.builder(
+                            padding: EdgeInsets.zero,
+                            itemCount: homePresenter
+                                        .currentUiState.allJobList.length >=
+                                    10
+                                ? 10
+                                : homePresenter
+                                    .currentUiState.allJobList.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  JobListItem(
+                                    theme: theme,
+                                    index: index,
+                                    onLongPress: () =>
+                                        jobPresentation.deleteJob(homePresenter
+                                            .currentUiState
+                                            .allJobList[index]
+                                            .documentId!),
+                                    jobList:
+                                        homePresenter.currentUiState.allJobList,
+                                    onTap: () => context.navigatorPush(
+                                      JobViewPage(
+                                        index: index,
+                                        jobList: homePresenter
+                                            .currentUiState.allJobList,
+                                      ),
+                                    ),
+                                  ),
+                                  if ((index + 1) % 5 == 0) ...[
+                                    Container(
+                                      height: 50,
+                                      width: JobsScreen.width,
+                                      color: Colors.redAccent,
+                                    ),
+                                    gapH10,
+                                  ],
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ),
-          );
-        });
+            ],
+          ),
+        );
+      },
+    );
   }
 }
