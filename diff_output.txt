@@ -1,1649 +1,1785 @@
-diff --git a/android/app/src/main/res/drawable-v21/launch_background.xml b/android/app/src/main/res/drawable-v21/launch_background.xml
-index f74085f..3cc4948 100644
---- a/android/app/src/main/res/drawable-v21/launch_background.xml
-+++ b/android/app/src/main/res/drawable-v21/launch_background.xml
-@@ -1,12 +1,9 @@
- <?xml version="1.0" encoding="utf-8"?>
--<!-- Modify this file to customize your launch splash screen -->
- <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
--    <item android:drawable="?android:colorBackground" />
--
--    <!-- You can insert your own image assets here -->
--    <!-- <item>
--        <bitmap
--            android:gravity="center"
--            android:src="@mipmap/launch_image" />
--    </item> -->
-+    <item>
-+        <bitmap android:gravity="fill" android:src="@drawable/background"/>
-+    </item>
-+    <item>
-+        <bitmap android:gravity="center" android:src="@drawable/splash"/>
-+    </item>
- </layer-list>
-diff --git a/android/app/src/main/res/drawable/launch_background.xml b/android/app/src/main/res/drawable/launch_background.xml
-index 304732f..3cc4948 100644
---- a/android/app/src/main/res/drawable/launch_background.xml
-+++ b/android/app/src/main/res/drawable/launch_background.xml
-@@ -1,12 +1,9 @@
- <?xml version="1.0" encoding="utf-8"?>
--<!-- Modify this file to customize your launch splash screen -->
- <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
--    <item android:drawable="@android:color/white" />
--
--    <!-- You can insert your own image assets here -->
--    <!-- <item>
--        <bitmap
--            android:gravity="center"
--            android:src="@mipmap/launch_image" />
--    </item> -->
-+    <item>
-+        <bitmap android:gravity="fill" android:src="@drawable/background"/>
-+    </item>
-+    <item>
-+        <bitmap android:gravity="center" android:src="@drawable/splash"/>
-+    </item>
- </layer-list>
-diff --git a/android/app/src/main/res/values-night/styles.xml b/android/app/src/main/res/values-night/styles.xml
-index 06952be..dbc9ea9 100644
---- a/android/app/src/main/res/values-night/styles.xml
-+++ b/android/app/src/main/res/values-night/styles.xml
-@@ -5,6 +5,10 @@
-         <!-- Show a splash screen on the activity. Automatically removed when
-              the Flutter engine draws its first frame -->
-         <item name="android:windowBackground">@drawable/launch_background</item>
-+        <item name="android:forceDarkAllowed">false</item>
-+        <item name="android:windowFullscreen">false</item>
-+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
-+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
-     </style>
-     <!-- Theme applied to the Android Window as soon as the process has started.
-          This theme determines the color of the Android Window while your
-diff --git a/android/app/src/main/res/values/styles.xml b/android/app/src/main/res/values/styles.xml
-index cb1ef88..0d1fa8f 100644
---- a/android/app/src/main/res/values/styles.xml
-+++ b/android/app/src/main/res/values/styles.xml
-@@ -5,6 +5,10 @@
-         <!-- Show a splash screen on the activity. Automatically removed when
-              the Flutter engine draws its first frame -->
-         <item name="android:windowBackground">@drawable/launch_background</item>
-+        <item name="android:forceDarkAllowed">false</item>
-+        <item name="android:windowFullscreen">false</item>
-+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
-+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
-     </style>
-     <!-- Theme applied to the Android Window as soon as the process has started.
-          This theme determines the color of the Android Window while your
+diff --git a/android/app/src/main/res/drawable-hdpi/android12splash.png b/android/app/src/main/res/drawable-hdpi/android12splash.png
+index cc3eb2d..7531708 100644
+Binary files a/android/app/src/main/res/drawable-hdpi/android12splash.png and b/android/app/src/main/res/drawable-hdpi/android12splash.png differ
+diff --git a/android/app/src/main/res/drawable-hdpi/splash.png b/android/app/src/main/res/drawable-hdpi/splash.png
+index cc3eb2d..7531708 100644
+Binary files a/android/app/src/main/res/drawable-hdpi/splash.png and b/android/app/src/main/res/drawable-hdpi/splash.png differ
+diff --git a/android/app/src/main/res/drawable-mdpi/android12splash.png b/android/app/src/main/res/drawable-mdpi/android12splash.png
+index 68c22bf..bc4c05c 100644
+Binary files a/android/app/src/main/res/drawable-mdpi/android12splash.png and b/android/app/src/main/res/drawable-mdpi/android12splash.png differ
+diff --git a/android/app/src/main/res/drawable-mdpi/splash.png b/android/app/src/main/res/drawable-mdpi/splash.png
+index 68c22bf..bc4c05c 100644
+Binary files a/android/app/src/main/res/drawable-mdpi/splash.png and b/android/app/src/main/res/drawable-mdpi/splash.png differ
+diff --git a/android/app/src/main/res/drawable-night-hdpi/android12splash.png b/android/app/src/main/res/drawable-night-hdpi/android12splash.png
+index cc3eb2d..7531708 100644
+Binary files a/android/app/src/main/res/drawable-night-hdpi/android12splash.png and b/android/app/src/main/res/drawable-night-hdpi/android12splash.png differ
+diff --git a/android/app/src/main/res/drawable-night-mdpi/android12splash.png b/android/app/src/main/res/drawable-night-mdpi/android12splash.png
+index 68c22bf..bc4c05c 100644
+Binary files a/android/app/src/main/res/drawable-night-mdpi/android12splash.png and b/android/app/src/main/res/drawable-night-mdpi/android12splash.png differ
+diff --git a/android/app/src/main/res/drawable-night-xhdpi/android12splash.png b/android/app/src/main/res/drawable-night-xhdpi/android12splash.png
+index a8e6da8..7ae06b5 100644
+Binary files a/android/app/src/main/res/drawable-night-xhdpi/android12splash.png and b/android/app/src/main/res/drawable-night-xhdpi/android12splash.png differ
+diff --git a/android/app/src/main/res/drawable-night-xxhdpi/android12splash.png b/android/app/src/main/res/drawable-night-xxhdpi/android12splash.png
+index 6ff6844..26f4e25 100644
+Binary files a/android/app/src/main/res/drawable-night-xxhdpi/android12splash.png and b/android/app/src/main/res/drawable-night-xxhdpi/android12splash.png differ
+diff --git a/android/app/src/main/res/drawable-night-xxxhdpi/android12splash.png b/android/app/src/main/res/drawable-night-xxxhdpi/android12splash.png
+index 8860b7c..e0281a1 100644
+Binary files a/android/app/src/main/res/drawable-night-xxxhdpi/android12splash.png and b/android/app/src/main/res/drawable-night-xxxhdpi/android12splash.png differ
+diff --git a/android/app/src/main/res/drawable-xhdpi/android12splash.png b/android/app/src/main/res/drawable-xhdpi/android12splash.png
+index a8e6da8..7ae06b5 100644
+Binary files a/android/app/src/main/res/drawable-xhdpi/android12splash.png and b/android/app/src/main/res/drawable-xhdpi/android12splash.png differ
+diff --git a/android/app/src/main/res/drawable-xhdpi/splash.png b/android/app/src/main/res/drawable-xhdpi/splash.png
+index a8e6da8..7ae06b5 100644
+Binary files a/android/app/src/main/res/drawable-xhdpi/splash.png and b/android/app/src/main/res/drawable-xhdpi/splash.png differ
+diff --git a/android/app/src/main/res/drawable-xxhdpi/android12splash.png b/android/app/src/main/res/drawable-xxhdpi/android12splash.png
+index 6ff6844..26f4e25 100644
+Binary files a/android/app/src/main/res/drawable-xxhdpi/android12splash.png and b/android/app/src/main/res/drawable-xxhdpi/android12splash.png differ
+diff --git a/android/app/src/main/res/drawable-xxhdpi/splash.png b/android/app/src/main/res/drawable-xxhdpi/splash.png
+index 6ff6844..26f4e25 100644
+Binary files a/android/app/src/main/res/drawable-xxhdpi/splash.png and b/android/app/src/main/res/drawable-xxhdpi/splash.png differ
+diff --git a/android/app/src/main/res/drawable-xxxhdpi/android12splash.png b/android/app/src/main/res/drawable-xxxhdpi/android12splash.png
+index 8860b7c..e0281a1 100644
+Binary files a/android/app/src/main/res/drawable-xxxhdpi/android12splash.png and b/android/app/src/main/res/drawable-xxxhdpi/android12splash.png differ
+diff --git a/android/app/src/main/res/drawable-xxxhdpi/splash.png b/android/app/src/main/res/drawable-xxxhdpi/splash.png
+index 8860b7c..e0281a1 100644
+Binary files a/android/app/src/main/res/drawable-xxxhdpi/splash.png and b/android/app/src/main/res/drawable-xxxhdpi/splash.png differ
+diff --git a/assets/images/png/app_logo(1).png b/assets/images/png/app_logo(1).png
+deleted file mode 100644
+index 0d996ac..0000000
+Binary files a/assets/images/png/app_logo(1).png and /dev/null differ
+diff --git a/assets/images/png/app_logo.png b/assets/images/png/app_logo.png
+index e8a0755..ee1061d 100644
+Binary files a/assets/images/png/app_logo.png and b/assets/images/png/app_logo.png differ
 diff --git a/diff_output.txt b/diff_output.txt
-index 79685dc..e69de29 100644
+index 08564fd..b885f74 100644
 --- a/diff_output.txt
 +++ b/diff_output.txt
-@@ -1,623 +0,0 @@
--diff --git a/android/app/src/main/res/mipmap-hdpi/ic_launcher.png b/android/app/src/main/res/mipmap-hdpi/ic_launcher.png
--index db77bb4..14588c5 100644
--Binary files a/android/app/src/main/res/mipmap-hdpi/ic_launcher.png and b/android/app/src/main/res/mipmap-hdpi/ic_launcher.png differ
--diff --git a/android/app/src/main/res/mipmap-mdpi/ic_launcher.png b/android/app/src/main/res/mipmap-mdpi/ic_launcher.png
--index 17987b7..42f05e1 100644
--Binary files a/android/app/src/main/res/mipmap-mdpi/ic_launcher.png and b/android/app/src/main/res/mipmap-mdpi/ic_launcher.png differ
--diff --git a/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png b/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
--index 09d4391..0ac0d09 100644
--Binary files a/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png and b/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png differ
--diff --git a/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png b/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
--index d5f1c8d..ae2320a 100644
--Binary files a/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png and b/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png differ
--diff --git a/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png b/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
--index 4d6372e..3bbaba4 100644
--Binary files a/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png and b/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png
--deleted file mode 100644
--index dc9ada4..0000000
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png and /dev/null differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png
--index 7353c41..121faf7 100644
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png
--index 797d452..c6e6d5a 100644
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png
--index 6ed2d93..0e37c2f 100644
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png
--index 4cd7b00..9898f78 100644
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png
--index fe73094..d913f65 100644
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png
--index 321773c..f299d2c 100644
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png
--index 797d452..c6e6d5a 100644
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png
--index 502f463..9f84fd1 100644
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png
--index 0ec3034..3441ade 100644
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png
--index 0ec3034..3441ade 100644
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png
--index e9f5fea..f43b59d 100644
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png
--index 84ac32a..8165776 100644
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png
--index 8953cba..00d0bf9 100644
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png differ
--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png
--index 0467bf1..130b123 100644
--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png differ
--diff --git a/lib/data/dummy_data_model/job_model.dart b/lib/data/dummy_data_model/job_model.dart
--index 47bc867..7d5bd2a 100644
----- a/lib/data/dummy_data_model/job_model.dart
--+++ b/lib/data/dummy_data_model/job_model.dart
--@@ -1,32 +1,42 @@
-- class JobModel {
---  final String documentId;
---  final String category;
---  final String companyName;
---  final String deadLine;
---  final String description;
---  final String imgUrl;
---  final String jobId;
---  final String jobTitle;
---  final String link;
---  final String location;
---  final String posted;
---  final String status;
---  final int totalView;
--+  final String? documentId;
--+  final String? category;
--+  final String? companyName;
--+  final String? jobDeadLine;
--+  final String? jobDescription;
--+  final String? imgUrl;
--+  final String? jobId;
--+  final String? jobTitle;
--+  final String? link;
--+  final String? location;
--+  final String? posted;
--+  final String? status;
--+  final int? totalView;
--+  final String? salaryRange;
--+  final int? vacancy;
--+  final String? experience;
--+  final String? officeTime;
--+  final String? weekend;
-- 
--   JobModel({
---    required this.documentId,
---    required this.category,
---    required this.companyName,
---    required this.deadLine,
---    required this.description,
---    required this.imgUrl,
---    required this.jobId,
---    required this.jobTitle,
---    required this.link,
---    required this.location,
---    required this.posted,
---    required this.status,
---    required this.totalView,
--+    this.documentId,
--+    this.category,
--+    this.companyName,
--+    this.jobDeadLine,
--+    this.jobDescription,
--+    this.imgUrl,
--+    this.jobId,
--+    this.jobTitle,
--+    this.link,
--+    this.location,
--+    this.posted,
--+    this.status,
--+    this.totalView,
--+    this.salaryRange,
--+    this.vacancy,
--+    this.experience,
--+    this.officeTime,
--+    this.weekend,
--   });
-- 
--   factory JobModel.fromJson(Map<String, dynamic> json) {
--@@ -34,8 +44,8 @@ class JobModel {
--       documentId: json['documentId'],
--       category: json['category'],
--       companyName: json['companyName'],
---      deadLine: json['deadLine'],
---      description: json['description'],
--+      jobDeadLine: json['jobDeadLine'],
--+      jobDescription: json['jobDescription'],
--       imgUrl: json['imgUrl'],
--       jobId: json['jobId'],
--       jobTitle: json['jobTitle'],
--@@ -44,6 +54,11 @@ class JobModel {
--       posted: json['posted'],
--       status: json['status'],
--       totalView: json['totalView'],
--+      salaryRange: json['salaryRange'],
--+      vacancy: json['vacancy'],
--+      experience: json['experience'],
--+      officeTime: json['officeTime'],
--+      weekend: json['weekend'],
--     );
--   }
-- 
--@@ -52,8 +67,8 @@ class JobModel {
--       'documentId': documentId,
--       'category': category,
--       'companyName': companyName,
---      'deadLine': deadLine,
---      'description': description,
--+      'jobDeadLine': jobDeadLine,
--+      'jobDescription': jobDescription,
--       'imgUrl': imgUrl,
--       'jobId': jobId,
--       'jobTitle': jobTitle,
--@@ -62,6 +77,11 @@ class JobModel {
--       'posted': posted,
--       'status': status,
--       'totalView': totalView,
--+      'salaryRange': salaryRange,
--+      'vacancy': vacancy,
--+      'experience': experience,
--+      'officeTime': officeTime,
--+      'weekend': weekend,
--     };
+@@ -1,1650 +0,0 @@
+-diff --git a/android/app/src/main/res/drawable-v21/launch_background.xml b/android/app/src/main/res/drawable-v21/launch_background.xml
+-index f74085f..3cc4948 100644
+---- a/android/app/src/main/res/drawable-v21/launch_background.xml
+-+++ b/android/app/src/main/res/drawable-v21/launch_background.xml
+-@@ -1,12 +1,9 @@
+- <?xml version="1.0" encoding="utf-8"?>
+--<!-- Modify this file to customize your launch splash screen -->
+- <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+--    <item android:drawable="?android:colorBackground" />
+--
+--    <!-- You can insert your own image assets here -->
+--    <!-- <item>
+--        <bitmap
+--            android:gravity="center"
+--            android:src="@mipmap/launch_image" />
+--    </item> -->
+-+    <item>
+-+        <bitmap android:gravity="fill" android:src="@drawable/background"/>
+-+    </item>
+-+    <item>
+-+        <bitmap android:gravity="center" android:src="@drawable/splash"/>
+-+    </item>
+- </layer-list>
+-diff --git a/android/app/src/main/res/drawable/launch_background.xml b/android/app/src/main/res/drawable/launch_background.xml
+-index 304732f..3cc4948 100644
+---- a/android/app/src/main/res/drawable/launch_background.xml
+-+++ b/android/app/src/main/res/drawable/launch_background.xml
+-@@ -1,12 +1,9 @@
+- <?xml version="1.0" encoding="utf-8"?>
+--<!-- Modify this file to customize your launch splash screen -->
+- <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+--    <item android:drawable="@android:color/white" />
+--
+--    <!-- You can insert your own image assets here -->
+--    <!-- <item>
+--        <bitmap
+--            android:gravity="center"
+--            android:src="@mipmap/launch_image" />
+--    </item> -->
+-+    <item>
+-+        <bitmap android:gravity="fill" android:src="@drawable/background"/>
+-+    </item>
+-+    <item>
+-+        <bitmap android:gravity="center" android:src="@drawable/splash"/>
+-+    </item>
+- </layer-list>
+-diff --git a/android/app/src/main/res/values-night/styles.xml b/android/app/src/main/res/values-night/styles.xml
+-index 06952be..dbc9ea9 100644
+---- a/android/app/src/main/res/values-night/styles.xml
+-+++ b/android/app/src/main/res/values-night/styles.xml
+-@@ -5,6 +5,10 @@
+-         <!-- Show a splash screen on the activity. Automatically removed when
+-              the Flutter engine draws its first frame -->
+-         <item name="android:windowBackground">@drawable/launch_background</item>
+-+        <item name="android:forceDarkAllowed">false</item>
+-+        <item name="android:windowFullscreen">false</item>
+-+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+-+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+-     </style>
+-     <!-- Theme applied to the Android Window as soon as the process has started.
+-          This theme determines the color of the Android Window while your
+-diff --git a/android/app/src/main/res/values/styles.xml b/android/app/src/main/res/values/styles.xml
+-index cb1ef88..0d1fa8f 100644
+---- a/android/app/src/main/res/values/styles.xml
+-+++ b/android/app/src/main/res/values/styles.xml
+-@@ -5,6 +5,10 @@
+-         <!-- Show a splash screen on the activity. Automatically removed when
+-              the Flutter engine draws its first frame -->
+-         <item name="android:windowBackground">@drawable/launch_background</item>
+-+        <item name="android:forceDarkAllowed">false</item>
+-+        <item name="android:windowFullscreen">false</item>
+-+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+-+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+-     </style>
+-     <!-- Theme applied to the Android Window as soon as the process has started.
+-          This theme determines the color of the Android Window while your
+-diff --git a/diff_output.txt b/diff_output.txt
+-index 79685dc..e69de29 100644
+---- a/diff_output.txt
+-+++ b/diff_output.txt
+-@@ -1,623 +0,0 @@
+--diff --git a/android/app/src/main/res/mipmap-hdpi/ic_launcher.png b/android/app/src/main/res/mipmap-hdpi/ic_launcher.png
+--index db77bb4..14588c5 100644
+--Binary files a/android/app/src/main/res/mipmap-hdpi/ic_launcher.png and b/android/app/src/main/res/mipmap-hdpi/ic_launcher.png differ
+--diff --git a/android/app/src/main/res/mipmap-mdpi/ic_launcher.png b/android/app/src/main/res/mipmap-mdpi/ic_launcher.png
+--index 17987b7..42f05e1 100644
+--Binary files a/android/app/src/main/res/mipmap-mdpi/ic_launcher.png and b/android/app/src/main/res/mipmap-mdpi/ic_launcher.png differ
+--diff --git a/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png b/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+--index 09d4391..0ac0d09 100644
+--Binary files a/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png and b/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png differ
+--diff --git a/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png b/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+--index d5f1c8d..ae2320a 100644
+--Binary files a/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png and b/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png differ
+--diff --git a/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png b/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+--index 4d6372e..3bbaba4 100644
+--Binary files a/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png and b/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png
+--deleted file mode 100644
+--index dc9ada4..0000000
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png and /dev/null differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png
+--index 7353c41..121faf7 100644
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png
+--index 797d452..c6e6d5a 100644
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png
+--index 6ed2d93..0e37c2f 100644
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png
+--index 4cd7b00..9898f78 100644
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png
+--index fe73094..d913f65 100644
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png
+--index 321773c..f299d2c 100644
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png
+--index 797d452..c6e6d5a 100644
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png
+--index 502f463..9f84fd1 100644
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png
+--index 0ec3034..3441ade 100644
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png
+--index 0ec3034..3441ade 100644
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png
+--index e9f5fea..f43b59d 100644
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png
+--index 84ac32a..8165776 100644
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png
+--index 8953cba..00d0bf9 100644
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png differ
+--diff --git a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png
+--index 0467bf1..130b123 100644
+--Binary files a/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png and b/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png differ
+--diff --git a/lib/data/dummy_data_model/job_model.dart b/lib/data/dummy_data_model/job_model.dart
+--index 47bc867..7d5bd2a 100644
+----- a/lib/data/dummy_data_model/job_model.dart
+--+++ b/lib/data/dummy_data_model/job_model.dart
+--@@ -1,32 +1,42 @@
+-- class JobModel {
+---  final String documentId;
+---  final String category;
+---  final String companyName;
+---  final String deadLine;
+---  final String description;
+---  final String imgUrl;
+---  final String jobId;
+---  final String jobTitle;
+---  final String link;
+---  final String location;
+---  final String posted;
+---  final String status;
+---  final int totalView;
+--+  final String? documentId;
+--+  final String? category;
+--+  final String? companyName;
+--+  final String? jobDeadLine;
+--+  final String? jobDescription;
+--+  final String? imgUrl;
+--+  final String? jobId;
+--+  final String? jobTitle;
+--+  final String? link;
+--+  final String? location;
+--+  final String? posted;
+--+  final String? status;
+--+  final int? totalView;
+--+  final String? salaryRange;
+--+  final int? vacancy;
+--+  final String? experience;
+--+  final String? officeTime;
+--+  final String? weekend;
+-- 
+--   JobModel({
+---    required this.documentId,
+---    required this.category,
+---    required this.companyName,
+---    required this.deadLine,
+---    required this.description,
+---    required this.imgUrl,
+---    required this.jobId,
+---    required this.jobTitle,
+---    required this.link,
+---    required this.location,
+---    required this.posted,
+---    required this.status,
+---    required this.totalView,
+--+    this.documentId,
+--+    this.category,
+--+    this.companyName,
+--+    this.jobDeadLine,
+--+    this.jobDescription,
+--+    this.imgUrl,
+--+    this.jobId,
+--+    this.jobTitle,
+--+    this.link,
+--+    this.location,
+--+    this.posted,
+--+    this.status,
+--+    this.totalView,
+--+    this.salaryRange,
+--+    this.vacancy,
+--+    this.experience,
+--+    this.officeTime,
+--+    this.weekend,
+--   });
+-- 
+--   factory JobModel.fromJson(Map<String, dynamic> json) {
+--@@ -34,8 +44,8 @@ class JobModel {
+--       documentId: json['documentId'],
+--       category: json['category'],
+--       companyName: json['companyName'],
+---      deadLine: json['deadLine'],
+---      description: json['description'],
+--+      jobDeadLine: json['jobDeadLine'],
+--+      jobDescription: json['jobDescription'],
+--       imgUrl: json['imgUrl'],
+--       jobId: json['jobId'],
+--       jobTitle: json['jobTitle'],
+--@@ -44,6 +54,11 @@ class JobModel {
+--       posted: json['posted'],
+--       status: json['status'],
+--       totalView: json['totalView'],
+--+      salaryRange: json['salaryRange'],
+--+      vacancy: json['vacancy'],
+--+      experience: json['experience'],
+--+      officeTime: json['officeTime'],
+--+      weekend: json['weekend'],
+--     );
+--   }
+-- 
+--@@ -52,8 +67,8 @@ class JobModel {
+--       'documentId': documentId,
+--       'category': category,
+--       'companyName': companyName,
+---      'deadLine': deadLine,
+---      'description': description,
+--+      'jobDeadLine': jobDeadLine,
+--+      'jobDescription': jobDescription,
+--       'imgUrl': imgUrl,
+--       'jobId': jobId,
+--       'jobTitle': jobTitle,
+--@@ -62,6 +77,11 @@ class JobModel {
+--       'posted': posted,
+--       'status': status,
+--       'totalView': totalView,
+--+      'salaryRange': salaryRange,
+--+      'vacancy': vacancy,
+--+      'experience': experience,
+--+      'officeTime': officeTime,
+--+      'weekend': weekend,
+--     };
+--   }
+-- }
+--diff --git a/lib/data/service/get_all_category.dart b/lib/data/service/get_all_category.dart
+--deleted file mode 100644
+--index 8b13789..0000000
+----- a/lib/data/service/get_all_category.dart
+--+++ /dev/null
+--@@ -1 +0,0 @@
+---
+--diff --git a/lib/data/service/get_jobs_by_category.dart b/lib/data/service/get_jobs_by_category.dart
+--deleted file mode 100644
+--index b9cc295..0000000
+----- a/lib/data/service/get_jobs_by_category.dart
+--+++ /dev/null
+--@@ -1,20 +0,0 @@
+---import 'package:cloud_firestore/cloud_firestore.dart';
+---import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
+---
+---class GetJobsByCategory {
+---  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+---
+---  Stream<List<JobModel>> getJobsByCategory(String category) => firestore
+---          .collection('all_jobs') // Replace with your actual collection name
+---          .where('category', isEqualTo: category)
+---          .snapshots()
+---          .map(
+---        (query) {
+---          return query.docs
+---              .map(
+---                (item) => JobModel.fromJson(item.data()),
+---              )
+---              .toList();
+---        },
+---      );
+---}
+--diff --git a/lib/presentation/home/presenter/home_presenter.dart b/lib/presentation/home/presenter/home_presenter.dart
+--index 6b7efdb..917186e 100644
+----- a/lib/presentation/home/presenter/home_presenter.dart
+--+++ b/lib/presentation/home/presenter/home_presenter.dart
+--@@ -1,12 +1,15 @@
+---import 'package:cloud_firestore/cloud_firestore.dart';
+-- import 'package:get/get.dart';
+-- import 'package:jobs_bd/core/base/base_presenter.dart';
+-- import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
+--+import 'package:jobs_bd/data/repository/get_all_jobs_repository.dart';
+--+import 'package:jobs_bd/data/repository/get_jobs_by_category_repository.dart';
+--+import 'package:jobs_bd/data/repository/increment_total_views_repository.dart';
+--+import 'package:jobs_bd/data/service/cache_manager.dart';
+-- import 'package:jobs_bd/presentation/home/presenter/home_ui_state.dart';
+-- 
+-- class HomePresenter extends BasePresenter<HomeUiState> {
+--   final Rx<HomeUiState> uiState = Rx(HomeUiState.empty());
+---  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+--+  final CacheManager _cacheManager = CacheManager();
+-- 
+--   HomeUiState get currentUiState => uiState.value;
+-- 
+--@@ -16,40 +19,66 @@ class HomePresenter extends BasePresenter<HomeUiState> {
+-- 
+--   void _fetchAllJobs() {
+--     toggleLoading(loading: true);
+---    getAllJobs().listen((jobList) {
+---      uiState.value = currentUiState.copyWith(allJobList: jobList);
+---
+--+    if (_cacheManager.cachedAllJobList.isNotEmpty) {
+--+      // Use cached data
+--+      uiState.value =
+--+          currentUiState.copyWith(allJobList: _cacheManager.cachedAllJobList);
+--       toggleLoading(loading: false);
+---    });
+--+    } else {
+--+      // Fetch from Firebase and cache the data
+--+      GetAllJobsRepository().getAllJobs().listen((jobList) {
+--+        _cacheManager.cacheAllJobList(jobList);
+--+        uiState.value = currentUiState.copyWith(allJobList: jobList);
+--+        toggleLoading(loading: false);
+--+      });
+--+    }
+--   }
+-- 
+---  Stream<List<JobModel>> getAllJobs() {
+---    return _firestore.collection('all_jobs').snapshots().map((snapshot) =>
+---        snapshot.docs.map((doc) => JobModel.fromJson(doc.data())).toList());
+---  }
+--+  void fetchJobListByCategory(String category) {
+--+    toggleLoading(loading: true);
+-- 
+---  Stream<List<JobModel>> getFeaturedProducts(String category) {
+---    return _firestore
+---        .collection('all_jobs')
+---        .where('category', isEqualTo: category)
+---        .snapshots()
+---        .map(
+---      (query) {
+---        return query.docs
+---            .map(
+---              (item) => JobModel.fromJson(item.data()),
+---            )
+---            .toList();
+---      },
+---    );
+--+    if (category.isEmpty) {
+--+      // No category selected, show all jobs
+--+      if (_cacheManager.cachedAllJobList.isNotEmpty) {
+--+        uiState.value = currentUiState.copyWith(
+--+          jobListByCategory: _cacheManager.cachedAllJobList,
+--+        );
+--+      } else {
+--+        GetAllJobsRepository().getAllJobs().listen((jobList) {
+--+          _cacheManager.cacheAllJobList(jobList);
+--+          uiState.value = currentUiState.copyWith(
+--+            jobListByCategory: jobList,
+--+          );
+--+          toggleLoading(loading: false);
+--+        });
+--+      }
+--+    } else {
+--+      // Category selected, filter jobs by category
+--+      if (_cacheManager.cachedJobListByCategory.isNotEmpty) {
+--+        uiState.value = currentUiState.copyWith(
+--+          jobListByCategory: _cacheManager.cachedJobListByCategory
+--+              .where(
+--+                (job) => job.category == category,
+--+              )
+--+              .toList(),
+--+        );
+--+        toggleLoading(loading: false);
+--+      } else {
+--+        GetJobsByCategoryRepository()
+--+            .getJobsByCategory(category)
+--+            .listen((jobList) {
+--+          _cacheManager.cacheJobListByCategory(jobList);
+--+          uiState.value = currentUiState.copyWith(
+--+            jobListByCategory: jobList,
+--+          );
+--+          toggleLoading(loading: false);
+--+        });
+--+      }
+--+    }
+--   }
+-- 
+---  void fetchJobListByCategory(String category) {
+---    toggleLoading(loading: true);
+---    getFeaturedProducts(category).listen((jobList) {
+---      uiState.value = currentUiState.copyWith(jobListByCategory: jobList);
+---      toggleLoading(loading: false); // Ensure loading is set to false here
+---    });
+--+  void incrementViews(JobModel id) {
+--+    IncrementTotalViewsRepository().incrementTotalViews(id);
+--   }
+-- 
+--   @override
+--diff --git a/lib/presentation/home/ui/home_page.dart b/lib/presentation/home/ui/home_page.dart
+--index a00f3a6..86993ef 100644
+----- a/lib/presentation/home/ui/home_page.dart
+--+++ b/lib/presentation/home/ui/home_page.dart
+--@@ -88,6 +88,18 @@ class HomePage extends StatelessWidget {
+--                         );
+--                       },
+--                     ),
+--+                    gapH15,
+--+                    Align(
+--+                      alignment: Alignment.centerLeft,
+--+                      child: Text(
+--+                        'Latest Jobs',
+--+                        style: theme.textTheme.bodyMedium!.copyWith(
+--+                          color: theme.primaryColor,
+--+                          fontSize: twentyFourPx,
+--+                          fontWeight: FontWeight.bold,
+--+                        ),
+--+                      ),
+--+                    ),
+--                     gapH10,
+--                     ListView.builder(
+--                       itemCount:
+--@@ -105,7 +117,7 @@ class HomePage extends StatelessWidget {
+--                               index: index,
+--                               onLongPress: () => jobPresentation.deleteJob(
+--                                   homePresenter.currentUiState.allJobList[index]
+---                                      .documentId),
+--+                                      .documentId!),
+--                               jobList: homePresenter.currentUiState.allJobList,
+--                               onTap: () => context.navigatorPush(
+--                                 JobViewPage(
+--diff --git a/lib/presentation/home/widgets/job_list_item.dart b/lib/presentation/home/widgets/job_list_item.dart
+--index 410d5fb..b6aac55 100644
+----- a/lib/presentation/home/widgets/job_list_item.dart
+--+++ b/lib/presentation/home/widgets/job_list_item.dart
+--@@ -39,7 +39,7 @@ class JobListItem extends StatelessWidget {
+--               ClipRRect(
+--                 borderRadius: radius10,
+--                 child: Image.network(
+---                  jobList[index].imgUrl,
+--+                  jobList[index].imgUrl!,
+--                   fit: BoxFit.cover,
+--                   height: JobsScreen.width * 0.17,
+--                   width: JobsScreen.width * 0.17,
+--@@ -53,7 +53,7 @@ class JobListItem extends StatelessWidget {
+--                   LimitedBox(
+--                     maxWidth: JobsScreen.width * 0.6,
+--                     child: Text(
+---                      jobList[index].jobTitle,
+--+                      jobList[index].jobTitle!,
+--                       softWrap: true,
+--                       maxLines: 2,
+--                       overflow: TextOverflow.ellipsis,
+--@@ -65,7 +65,7 @@ class JobListItem extends StatelessWidget {
+--                     ),
+--                   ),
+--                   Text(
+---                    jobList[index].companyName,
+--+                    jobList[index].companyName!,
+--                     style: theme.textTheme.bodyMedium!.copyWith(
+--                       fontSize: fourteenPx,
+--                       fontWeight: FontWeight.w500,
+--diff --git a/lib/presentation/job/presenter/job_presentation.dart b/lib/presentation/job/presenter/job_presentation.dart
+--index 4c8c5a0..5b5c9e9 100644
+----- a/lib/presentation/job/presenter/job_presentation.dart
+--+++ b/lib/presentation/job/presenter/job_presentation.dart
+--@@ -4,15 +4,6 @@ import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
+-- 
+-- class JobPresentation extends GetxController {
+--   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+---  final RxList<JobModel> allJobsList = RxList<JobModel>([]);
+---  final RxList<JobModel> getJobByCategoryName = RxList<JobModel>([]);
+---  int get jobLength => allJobsList.length;
+---
+---  // @override
+---  // onInit() {
+---  //   super.onInit();
+---  //   // allJobsList.bindStream(getAllJObs());
+---  // }
+-- 
+--   Future<int> _getNextJobId() async {
+--     final docRef = firestore.collection('counters').doc('jobIdCounter');
+--@@ -39,8 +30,8 @@ class JobPresentation extends GetxController {
+--       documentId: id,
+--       category: 'Government Jobs',
+--       companyName: 'Passport Office',
+---      deadLine: '2021-10-20',
+---      description: 'grg r erg er',
+--+      jobDeadLine: '2021-10-20',
+--+      jobDescription: 'grg r erg er',
+--       imgUrl:
+--           'https://cdn-images-1.medium.com/max/1200/1*5-aoK8IBmXve5whBQM90GA.png',
+--       jobId: jobId.toString(),
+--diff --git a/lib/presentation/job/ui/job_list_page.dart b/lib/presentation/job/ui/job_list_page.dart
+--index 7d21522..a2d006d 100644
+----- a/lib/presentation/job/ui/job_list_page.dart
+--+++ b/lib/presentation/job/ui/job_list_page.dart
+--@@ -4,7 +4,6 @@ import 'package:jobs_bd/core/config/jobs_screen.dart';
+-- import 'package:jobs_bd/core/static/ui_const.dart';
+-- import 'package:jobs_bd/core/utility/utility.dart';
+-- import 'package:jobs_bd/presentation/home/widgets/job_list_item.dart';
+---import 'package:jobs_bd/presentation/job/presenter/job_presentation.dart';
+-- import 'package:jobs_bd/presentation/job/ui/job_view_page.dart';
+-- import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
+-- 
+--@@ -54,9 +53,12 @@ class JobListPage extends StatelessWidget {
+--                     theme: theme,
+--                     index: index,
+--                     jobList: jobList,
+---                    onTap: () => context.navigatorPush(
+---                      JobViewPage(index: index, jobList: jobList),
+---                    ),
+--+                    onTap: () {
+--+                      homePresenter.incrementViews(jobList[index]);
+--+                      context.navigatorPush(
+--+                        JobViewPage(index: index, jobList: jobList),
+--+                      );
+--+                    },
+--                   ),
+--                   if ((index + 1) % 5 == 0) ...[
+--                     Container(
+--diff --git a/lib/presentation/job/ui/job_view_page.dart b/lib/presentation/job/ui/job_view_page.dart
+--index fa40e02..c2abf98 100644
+----- a/lib/presentation/job/ui/job_view_page.dart
+--+++ b/lib/presentation/job/ui/job_view_page.dart
+--@@ -24,7 +24,7 @@ class JobViewPage extends StatelessWidget {
+--         DateTime(now.year, now.month, now.day); // Set only the date part
+--     final DateTime tomorrow = today.add(const Duration(days: 1));
+--     final DateTime applicationEndDate =
+---        DateFormat('yyyy-MM-dd').parse(jobList[index].posted);
+--+        DateFormat('yyyy-MM-dd').parse(jobList[index].posted ?? '');
+-- 
+--     final bool isEndingSoon = applicationEndDate.isAtSameMomentAs(today) ||
+--         applicationEndDate.isAtSameMomentAs(tomorrow);
+--@@ -32,7 +32,7 @@ class JobViewPage extends StatelessWidget {
+--     return Scaffold(
+--       appBar: AppBar(
+--         titleSpacing: 0,
+---        title: Text(jobList[index].jobTitle),
+--+        title: Text(jobList[index].jobTitle ?? ''),
+--       ),
+--       body: Padding(
+--         padding: padding20,
+--@@ -54,7 +54,7 @@ class JobViewPage extends StatelessWidget {
+--                     ClipRRect(
+--                       borderRadius: radius10,
+--                       child: Image.network(
+---                        jobList[index].imgUrl,
+--+                        jobList[index].imgUrl ?? '',
+--                         fit: BoxFit.cover,
+--                         height: JobsScreen.width * 0.4,
+--                         width: JobsScreen.width * 0.4,
+--@@ -62,7 +62,7 @@ class JobViewPage extends StatelessWidget {
+--                     ),
+--                     gapH10,
+--                     Text(
+---                      jobList[index].jobTitle,
+--+                      jobList[index].jobTitle ?? '',
+--                       maxLines: 2,
+--                       overflow: TextOverflow.ellipsis,
+--                       textAlign: TextAlign.center,
+--@@ -72,7 +72,7 @@ class JobViewPage extends StatelessWidget {
+--                       ),
+--                     ),
+--                     TextWithOpacity(
+---                        title: jobList[index].companyName, theme: theme),
+--+                        title: jobList[index].companyName ?? '', theme: theme),
+--                     // if (jobList[index].jobId != null)
+--                     //   TextWithOpacity(
+--                     //       title: '${jobList[index].vacancies} Vacancies',
+--@@ -85,13 +85,13 @@ class JobViewPage extends StatelessWidget {
+--                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+--                       children: [
+--                         TextWithOpacity(
+---                          title: DateTime.parse(jobList[index].posted)
+--+                          title: DateTime.parse(jobList[index].posted ?? '')
+--                               .toString()
+--                               .substring(0, 10),
+--                           theme: theme,
+--                         ),
+--                         TextWithOpacity(
+---                          title: jobList[index].deadLine,
+--+                          title: jobList[index].jobDeadLine ?? '',
+--                           theme: theme,
+--                           textColor: isEndingSoon
+--                               ? Colors.red
+--@@ -104,7 +104,7 @@ class JobViewPage extends StatelessWidget {
+--               ),
+--               gapH10,
+--               html.Html(
+---                data: htmlData,
+--+                data: jobList[index].jobDescription ?? '',
+--                 style: const {
+--                   // "body": Style(
+--                   //   margin: EdgeInsets.zero,
+--@@ -123,62 +123,3 @@ class JobViewPage extends StatelessWidget {
+--     );
+--   }
+-- }
+---
+---const htmlData = r"""
+---<!DOCTYPE html>
+---<html>
+---<head>
+---    <style>
+---        .bold {
+---            font-weight: bold;
+---        }
+---        .italic {
+---            font-style: italic;
+---        }
+---        .highlight {
+---            background-color: yellow;
+---        }
+---    </style>
+---</head>
+---<body>
+---    <h1><strong>Z-Eight Tech is Looking for Experienced Flutter Developer</strong></h1>
+---    <h2><strong>Requirements:</strong></h2>
+---    <ul>
+---        <li>Development of Android/iOS applications and have deployed them on Google Play/App Store.</li>
+---        <li>Knowledge of mobile app development.</li>
+---        <li>Understanding front-end languages like HTML, CSS3, and JavaScript is a plus.</li>
+---        <li>Knowledge of Python is a plus.</li>
+---        <li>In-depth understanding of Object-Oriented programming languages like Java and C++.</li>
+---        <li>Familiarity with version control tools like Git, Subversion, and IDEs like Android Studio, VS Code, etc.</li>
+---        <li>Understanding of RDMS, SQL, MySQL.</li>
+---        <li>Understanding of the Agile Software Development Life Cycle and being exposed to Scrum projects.</li>
+---        <li>Knowledge of Dart programming language, Rest APIs, and integration of various APIs from third parties.</li>
+---        <li>Comfortable using test cases for debugging code, enhancing performance and reliability.</li>
+---    </ul>
+---    <h2><strong>Additional Requirements:</strong></h2>
+---    <ul>
+---        <li>Age 18 to 28 years.</li>
+---        <li>Salary: Negotiable.</li>
+---    </ul>
+---    <h2><strong>Facilities:</strong></h2>
+---    <ul>
+---        <li><strong>Competitive Salary & regular appraisal.</strong></li>
+---        <li><strong>Training and learning materials to improve skills.</strong></li>
+---        <li><strong>You will learn international marketplace standard coding.</strong></li>
+---        <li><strong>Festival Bonus: 2 (Yearly)</strong></li>
+---        <li><strong>Salary Review: Negotiable.</strong></li>
+---        <li><strong>Lunch: Partially Subsidized.</strong></li>
+---        <li><strong>Breakfast: From Office.</strong></li>
+---        <li><strong>2 Times Tea</strong></li>
+---        <li><strong>Deadline: 30.05.2024</strong></li>
+---    </ul>
+---    <p><strong>Office Time:</strong> 10:00am to 06:00pm. (Saturday to Thursday).</p>
+---    <p><strong>Job Location:</strong> 1332/B, Jahan Mansion, O.R Nizam Road, G.E.C, Chattogram.</p>
+---    <p>If you are interested, send your CV to <a href="mailto:z8techh@gmail.com">z8techh@gmail.com</a></p>
+---    <p><strong>Subject line:</strong> Flutter Developer</p>
+---    <p><strong>Office Location:</strong> 1332/B, Jahan Mansion, O.R Nizam Road, G.E.C, Chattogram, Bangladesh</p>
+---    <p><strong>Note:</strong> Remote job isn't allowed.</p>
+---</body>
+---</html>
+---
+---""";
+--diff --git a/lib/presentation/job/widgets/job_list_item.dart b/lib/presentation/job/widgets/job_list_item.dart
+--index 4d837df..df57986 100644
+----- a/lib/presentation/job/widgets/job_list_item.dart
+--+++ b/lib/presentation/job/widgets/job_list_item.dart
+--@@ -34,7 +34,7 @@ class JobListItem extends StatelessWidget {
+--           child: Row(
+--             children: [
+--               Image.asset(
+---                jobList[index].imgUrl,
+--+                jobList[index].imgUrl!,
+--                 height: JobsScreen.width * 0.17,
+--                 width: JobsScreen.width * 0.17,
+--               ),
+--@@ -44,14 +44,14 @@ class JobListItem extends StatelessWidget {
+--                 mainAxisAlignment: MainAxisAlignment.center,
+--                 children: [
+--                   Text(
+---                    jobList[index].jobTitle,
+--+                    jobList[index].jobTitle!,
+--                     style: theme.textTheme.bodyMedium!.copyWith(
+--                       fontSize: fifteenPx,
+--                       fontWeight: FontWeight.bold,
+--                     ),
+--                   ),
+--                   Text(
+---                    jobList[index].companyName,
+--+                    jobList[index].companyName!,
+--                     style: theme.textTheme.bodyMedium!.copyWith(
+--                       fontSize: fourteenPx,
+--                       fontWeight: FontWeight.w500,
+--
+--================
+--
+--here is my changes...give me git push msg and description of changes with using of proper emoticons...dont give any long boring texts, "STRICTLY i dont need any explanations"
+-diff --git a/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json b/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json
+-index 0bedcf2..00cabce 100644
+---- a/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json
+-+++ b/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json
+-@@ -1,23 +1,23 @@
+- {
+-   "images" : [
+-     {
+--      "idiom" : "universal",
+-       "filename" : "LaunchImage.png",
+-+      "idiom" : "universal",
+-       "scale" : "1x"
+-     },
+-     {
+--      "idiom" : "universal",
+-       "filename" : "LaunchImage@2x.png",
+-+      "idiom" : "universal",
+-       "scale" : "2x"
+-     },
+-     {
+--      "idiom" : "universal",
+-       "filename" : "LaunchImage@3x.png",
+-+      "idiom" : "universal",
+-       "scale" : "3x"
+-     }
+-   ],
+-   "info" : {
+--    "version" : 1,
+--    "author" : "xcode"
+-+    "author" : "xcode",
+-+    "version" : 1
 -   }
 - }
--diff --git a/lib/data/service/get_all_category.dart b/lib/data/service/get_all_category.dart
+-diff --git a/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png b/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png
+-index 9da19ea..68c22bf 100644
+-Binary files a/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png and b/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png differ
+-diff --git a/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png b/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png
+-index 9da19ea..a8e6da8 100644
+-Binary files a/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png and b/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png differ
+-diff --git a/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png b/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png
+-index 9da19ea..6ff6844 100644
+-Binary files a/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png and b/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png differ
+-diff --git a/ios/Runner/Base.lproj/LaunchScreen.storyboard b/ios/Runner/Base.lproj/LaunchScreen.storyboard
+-index f2e259c..5697b88 100644
+---- a/ios/Runner/Base.lproj/LaunchScreen.storyboard
+-+++ b/ios/Runner/Base.lproj/LaunchScreen.storyboard
+-@@ -16,13 +16,19 @@
+-                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+-                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+-                         <subviews>
+--                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4">
+--                            </imageView>
+-+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="LaunchBackground" translatesAutoresizingMaskIntoConstraints="NO" id="tWc-Dq-wcI"/>
+-+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4"></imageView>
+-                         </subviews>
+-                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+-                         <constraints>
+--                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1a2-6s-vTC"/>
+--                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4X2-HB-R7a"/>
+-+                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="3T2-ad-Qdv"/>
+-+                            <constraint firstItem="tWc-Dq-wcI" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="RPx-PI-7Xg"/>
+-+                            <constraint firstItem="tWc-Dq-wcI" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="SdS-ul-q2q"/>
+-+                            <constraint firstAttribute="trailing" secondItem="tWc-Dq-wcI" secondAttribute="trailing" id="Swv-Gf-Rwn"/>
+-+                            <constraint firstAttribute="trailing" secondItem="YRO-k0-Ey4" secondAttribute="trailing" id="TQA-XW-tRk"/>
+-+                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="duK-uY-Gun"/>
+-+                            <constraint firstItem="tWc-Dq-wcI" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="kV7-tw-vXt"/>
+-+                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="xPn-NY-SIU"/>
+-                         </constraints>
+-                     </view>
+-                 </viewController>
+-@@ -32,6 +38,7 @@
+-         </scene>
+-     </scenes>
+-     <resources>
+--        <image name="LaunchImage" width="168" height="185"/>
+-+        <image name="LaunchImage" width="484" height="484"/>
+-+        <image name="LaunchBackground" width="1" height="1"/>
+-     </resources>
+- </document>
+-diff --git a/ios/Runner/Info.plist b/ios/Runner/Info.plist
+-index 196813b..036b822 100644
+---- a/ios/Runner/Info.plist
+-+++ b/ios/Runner/Info.plist
+-@@ -1,49 +1,51 @@
+- <?xml version="1.0" encoding="UTF-8"?>
+- <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+- <plist version="1.0">
+--<dict>
+--	<key>CFBundleDevelopmentRegion</key>
+--	<string>$(DEVELOPMENT_LANGUAGE)</string>
+--	<key>CFBundleDisplayName</key>
+--	<string>Jobs Bd</string>
+--	<key>CFBundleExecutable</key>
+--	<string>$(EXECUTABLE_NAME)</string>
+--	<key>CFBundleIdentifier</key>
+--	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+--	<key>CFBundleInfoDictionaryVersion</key>
+--	<string>6.0</string>
+--	<key>CFBundleName</key>
+--	<string>jobs_bd</string>
+--	<key>CFBundlePackageType</key>
+--	<string>APPL</string>
+--	<key>CFBundleShortVersionString</key>
+--	<string>$(FLUTTER_BUILD_NAME)</string>
+--	<key>CFBundleSignature</key>
+--	<string>????</string>
+--	<key>CFBundleVersion</key>
+--	<string>$(FLUTTER_BUILD_NUMBER)</string>
+--	<key>LSRequiresIPhoneOS</key>
+--	<true/>
+--	<key>UILaunchStoryboardName</key>
+--	<string>LaunchScreen</string>
+--	<key>UIMainStoryboardFile</key>
+--	<string>Main</string>
+--	<key>UISupportedInterfaceOrientations</key>
+--	<array>
+--		<string>UIInterfaceOrientationPortrait</string>
+--		<string>UIInterfaceOrientationLandscapeLeft</string>
+--		<string>UIInterfaceOrientationLandscapeRight</string>
+--	</array>
+--	<key>UISupportedInterfaceOrientations~ipad</key>
+--	<array>
+--		<string>UIInterfaceOrientationPortrait</string>
+--		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+--		<string>UIInterfaceOrientationLandscapeLeft</string>
+--		<string>UIInterfaceOrientationLandscapeRight</string>
+--	</array>
+--	<key>CADisableMinimumFrameDurationOnPhone</key>
+--	<true/>
+--	<key>UIApplicationSupportsIndirectInputEvents</key>
+--	<true/>
+--</dict>
+-+	<dict>
+-+		<key>CFBundleDevelopmentRegion</key>
+-+		<string>$(DEVELOPMENT_LANGUAGE)</string>
+-+		<key>CFBundleDisplayName</key>
+-+		<string>Jobs Bd</string>
+-+		<key>CFBundleExecutable</key>
+-+		<string>$(EXECUTABLE_NAME)</string>
+-+		<key>CFBundleIdentifier</key>
+-+		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+-+		<key>CFBundleInfoDictionaryVersion</key>
+-+		<string>6.0</string>
+-+		<key>CFBundleName</key>
+-+		<string>jobs_bd</string>
+-+		<key>CFBundlePackageType</key>
+-+		<string>APPL</string>
+-+		<key>CFBundleShortVersionString</key>
+-+		<string>$(FLUTTER_BUILD_NAME)</string>
+-+		<key>CFBundleSignature</key>
+-+		<string>????</string>
+-+		<key>CFBundleVersion</key>
+-+		<string>$(FLUTTER_BUILD_NUMBER)</string>
+-+		<key>LSRequiresIPhoneOS</key>
+-+		<true/>
+-+		<key>UILaunchStoryboardName</key>
+-+		<string>LaunchScreen</string>
+-+		<key>UIMainStoryboardFile</key>
+-+		<string>Main</string>
+-+		<key>UISupportedInterfaceOrientations</key>
+-+		<array>
+-+			<string>UIInterfaceOrientationPortrait</string>
+-+			<string>UIInterfaceOrientationLandscapeLeft</string>
+-+			<string>UIInterfaceOrientationLandscapeRight</string>
+-+		</array>
+-+		<key>UISupportedInterfaceOrientations~ipad</key>
+-+		<array>
+-+			<string>UIInterfaceOrientationPortrait</string>
+-+			<string>UIInterfaceOrientationPortraitUpsideDown</string>
+-+			<string>UIInterfaceOrientationLandscapeLeft</string>
+-+			<string>UIInterfaceOrientationLandscapeRight</string>
+-+		</array>
+-+		<key>CADisableMinimumFrameDurationOnPhone</key>
+-+		<true/>
+-+		<key>UIApplicationSupportsIndirectInputEvents</key>
+-+		<true/>
+-+		<key>UIStatusBarHidden</key>
+-+		<false/>
+-+	</dict>
+- </plist>
+-diff --git a/lib/data/dummy_data_model/job_count_model.dart b/lib/data/dummy_data_model/job_count_model.dart
 -deleted file mode 100644
--index 8b13789..0000000
----- a/lib/data/service/get_all_category.dart
+-index 3835a92..0000000
+---- a/lib/data/dummy_data_model/job_count_model.dart
 -+++ /dev/null
--@@ -1 +0,0 @@
+-@@ -1,6 +0,0 @@
+--class JobCountModel {
+--  final String jobTitle;
+--  final int jobCount;
 --
--diff --git a/lib/data/service/get_jobs_by_category.dart b/lib/data/service/get_jobs_by_category.dart
+--  JobCountModel({required this.jobTitle, required this.jobCount});
+--}
+-diff --git a/lib/data/repository/get_today_deadline_jobs_repository.dart b/lib/data/repository/get_today_deadline_jobs_repository.dart
 -deleted file mode 100644
--index b9cc295..0000000
----- a/lib/data/service/get_jobs_by_category.dart
+-index dbada5a..0000000
+---- a/lib/data/repository/get_today_deadline_jobs_repository.dart
 -+++ /dev/null
--@@ -1,20 +0,0 @@
+-@@ -1,15 +0,0 @@
 --import 'package:cloud_firestore/cloud_firestore.dart';
 --import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 --
---class GetJobsByCategory {
---  final FirebaseFirestore firestore = FirebaseFirestore.instance;
---
---  Stream<List<JobModel>> getJobsByCategory(String category) => firestore
---          .collection('all_jobs') // Replace with your actual collection name
---          .where('category', isEqualTo: category)
---          .snapshots()
---          .map(
---        (query) {
---          return query.docs
---              .map(
---                (item) => JobModel.fromJson(item.data()),
---              )
---              .toList();
---        },
---      );
---}
--diff --git a/lib/presentation/home/presenter/home_presenter.dart b/lib/presentation/home/presenter/home_presenter.dart
--index 6b7efdb..917186e 100644
----- a/lib/presentation/home/presenter/home_presenter.dart
--+++ b/lib/presentation/home/presenter/home_presenter.dart
--@@ -1,12 +1,15 @@
---import 'package:cloud_firestore/cloud_firestore.dart';
-- import 'package:get/get.dart';
-- import 'package:jobs_bd/core/base/base_presenter.dart';
-- import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
--+import 'package:jobs_bd/data/repository/get_all_jobs_repository.dart';
--+import 'package:jobs_bd/data/repository/get_jobs_by_category_repository.dart';
--+import 'package:jobs_bd/data/repository/increment_total_views_repository.dart';
--+import 'package:jobs_bd/data/service/cache_manager.dart';
-- import 'package:jobs_bd/presentation/home/presenter/home_ui_state.dart';
-- 
-- class HomePresenter extends BasePresenter<HomeUiState> {
--   final Rx<HomeUiState> uiState = Rx(HomeUiState.empty());
+--class GetTodayDeadlineJobsRepository {
 --  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
--+  final CacheManager _cacheManager = CacheManager();
-- 
--   HomeUiState get currentUiState => uiState.value;
-- 
--@@ -16,40 +19,66 @@ class HomePresenter extends BasePresenter<HomeUiState> {
-- 
--   void _fetchAllJobs() {
--     toggleLoading(loading: true);
---    getAllJobs().listen((jobList) {
---      uiState.value = currentUiState.copyWith(allJobList: jobList);
 --
--+    if (_cacheManager.cachedAllJobList.isNotEmpty) {
--+      // Use cached data
--+      uiState.value =
--+          currentUiState.copyWith(allJobList: _cacheManager.cachedAllJobList);
--       toggleLoading(loading: false);
---    });
--+    } else {
--+      // Fetch from Firebase and cache the data
--+      GetAllJobsRepository().getAllJobs().listen((jobList) {
--+        _cacheManager.cacheAllJobList(jobList);
--+        uiState.value = currentUiState.copyWith(allJobList: jobList);
--+        toggleLoading(loading: false);
--+      });
--+    }
--   }
-- 
---  Stream<List<JobModel>> getAllJobs() {
---    return _firestore.collection('all_jobs').snapshots().map((snapshot) =>
---        snapshot.docs.map((doc) => JobModel.fromJson(doc.data())).toList());
---  }
--+  void fetchJobListByCategory(String category) {
--+    toggleLoading(loading: true);
-- 
---  Stream<List<JobModel>> getFeaturedProducts(String category) {
+--  Stream<List<JobModel>> getTodayDeadlineJobs() {
 --    return _firestore
 --        .collection('all_jobs')
---        .where('category', isEqualTo: category)
+--        .where('jobDeadLine', isGreaterThan: DateTime.now().toString())
 --        .snapshots()
---        .map(
---      (query) {
---        return query.docs
---            .map(
---              (item) => JobModel.fromJson(item.data()),
---            )
---            .toList();
---      },
---    );
--+    if (category.isEmpty) {
--+      // No category selected, show all jobs
--+      if (_cacheManager.cachedAllJobList.isNotEmpty) {
--+        uiState.value = currentUiState.copyWith(
--+          jobListByCategory: _cacheManager.cachedAllJobList,
--+        );
--+      } else {
--+        GetAllJobsRepository().getAllJobs().listen((jobList) {
--+          _cacheManager.cacheAllJobList(jobList);
--+          uiState.value = currentUiState.copyWith(
--+            jobListByCategory: jobList,
--+          );
--+          toggleLoading(loading: false);
--+        });
--+      }
--+    } else {
--+      // Category selected, filter jobs by category
--+      if (_cacheManager.cachedJobListByCategory.isNotEmpty) {
--+        uiState.value = currentUiState.copyWith(
--+          jobListByCategory: _cacheManager.cachedJobListByCategory
--+              .where(
--+                (job) => job.category == category,
--+              )
--+              .toList(),
--+        );
--+        toggleLoading(loading: false);
--+      } else {
--+        GetJobsByCategoryRepository()
--+            .getJobsByCategory(category)
--+            .listen((jobList) {
--+          _cacheManager.cacheJobListByCategory(jobList);
--+          uiState.value = currentUiState.copyWith(
--+            jobListByCategory: jobList,
--+          );
--+          toggleLoading(loading: false);
--+        });
--+      }
--+    }
--   }
-- 
---  void fetchJobListByCategory(String category) {
---    toggleLoading(loading: true);
---    getFeaturedProducts(category).listen((jobList) {
---      uiState.value = currentUiState.copyWith(jobListByCategory: jobList);
---      toggleLoading(loading: false); // Ensure loading is set to false here
---    });
--+  void incrementViews(JobModel id) {
--+    IncrementTotalViewsRepository().incrementTotalViews(id);
--   }
-- 
--   @override
--diff --git a/lib/presentation/home/ui/home_page.dart b/lib/presentation/home/ui/home_page.dart
--index a00f3a6..86993ef 100644
----- a/lib/presentation/home/ui/home_page.dart
--+++ b/lib/presentation/home/ui/home_page.dart
--@@ -88,6 +88,18 @@ class HomePage extends StatelessWidget {
--                         );
--                       },
--                     ),
--+                    gapH15,
--+                    Align(
--+                      alignment: Alignment.centerLeft,
--+                      child: Text(
--+                        'Latest Jobs',
--+                        style: theme.textTheme.bodyMedium!.copyWith(
--+                          color: theme.primaryColor,
--+                          fontSize: twentyFourPx,
--+                          fontWeight: FontWeight.bold,
--+                        ),
--+                      ),
--+                    ),
--                     gapH10,
--                     ListView.builder(
--                       itemCount:
--@@ -105,7 +117,7 @@ class HomePage extends StatelessWidget {
--                               index: index,
--                               onLongPress: () => jobPresentation.deleteJob(
--                                   homePresenter.currentUiState.allJobList[index]
---                                      .documentId),
--+                                      .documentId!),
--                               jobList: homePresenter.currentUiState.allJobList,
--                               onTap: () => context.navigatorPush(
--                                 JobViewPage(
--diff --git a/lib/presentation/home/widgets/job_list_item.dart b/lib/presentation/home/widgets/job_list_item.dart
--index 410d5fb..b6aac55 100644
----- a/lib/presentation/home/widgets/job_list_item.dart
--+++ b/lib/presentation/home/widgets/job_list_item.dart
--@@ -39,7 +39,7 @@ class JobListItem extends StatelessWidget {
--               ClipRRect(
--                 borderRadius: radius10,
--                 child: Image.network(
---                  jobList[index].imgUrl,
--+                  jobList[index].imgUrl!,
--                   fit: BoxFit.cover,
--                   height: JobsScreen.width * 0.17,
--                   width: JobsScreen.width * 0.17,
--@@ -53,7 +53,7 @@ class JobListItem extends StatelessWidget {
--                   LimitedBox(
--                     maxWidth: JobsScreen.width * 0.6,
--                     child: Text(
---                      jobList[index].jobTitle,
--+                      jobList[index].jobTitle!,
--                       softWrap: true,
--                       maxLines: 2,
--                       overflow: TextOverflow.ellipsis,
--@@ -65,7 +65,7 @@ class JobListItem extends StatelessWidget {
--                     ),
--                   ),
--                   Text(
---                    jobList[index].companyName,
--+                    jobList[index].companyName!,
--                     style: theme.textTheme.bodyMedium!.copyWith(
--                       fontSize: fourteenPx,
--                       fontWeight: FontWeight.w500,
--diff --git a/lib/presentation/job/presenter/job_presentation.dart b/lib/presentation/job/presenter/job_presentation.dart
--index 4c8c5a0..5b5c9e9 100644
----- a/lib/presentation/job/presenter/job_presentation.dart
--+++ b/lib/presentation/job/presenter/job_presentation.dart
--@@ -4,15 +4,6 @@ import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
-- 
-- class JobPresentation extends GetxController {
--   final FirebaseFirestore firestore = FirebaseFirestore.instance;
---  final RxList<JobModel> allJobsList = RxList<JobModel>([]);
---  final RxList<JobModel> getJobByCategoryName = RxList<JobModel>([]);
---  int get jobLength => allJobsList.length;
+--        .map((snapshot) =>
+--            snapshot.docs.map((doc) => JobModel.fromJson(doc.data())).toList());
+--  }
+--}
+-diff --git a/lib/data/repository/get_today_post_jobs_repository.dart b/lib/data/repository/get_today_post_jobs_repository.dart
+-deleted file mode 100644
+-index 3fe9f4a..0000000
+---- a/lib/data/repository/get_today_post_jobs_repository.dart
+-+++ /dev/null
+-@@ -1,15 +0,0 @@
+--import 'package:cloud_firestore/cloud_firestore.dart';
+--import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 --
---  // @override
---  // onInit() {
---  //   super.onInit();
---  //   // allJobsList.bindStream(getAllJObs());
---  // }
+--class GetTodayPostJobsRepository {
+--  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+--
+--  Stream<List<JobModel>> getTodayPostJobs() {
+--    return _firestore
+--        .collection('all_jobs')
+--        .where('posted', isLessThan: DateTime.now().toString())
+--        .snapshots()
+--        .map((snapshot) =>
+--            snapshot.docs.map((doc) => JobModel.fromJson(doc.data())).toList());
+--  }
+--}
+-diff --git a/lib/data/repository/get_tomorrow_deadline_jobs_repository.dart b/lib/data/repository/get_tomorrow_deadline_jobs_repository.dart
+-deleted file mode 100644
+-index 1e5fee3..0000000
+---- a/lib/data/repository/get_tomorrow_deadline_jobs_repository.dart
+-+++ /dev/null
+-@@ -1,16 +0,0 @@
+--import 'package:cloud_firestore/cloud_firestore.dart';
+--import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
+--
+--class GetTomorrowDeadlineJobsRepository {
+--  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+--
+--  Stream<List<JobModel>> getTomorrowDeadlineJobs() {
+--    return _firestore
+--        .collection('all_jobs')
+--        .where('jobDeadLine',
+--            isLessThan: DateTime.now().add(const Duration(days: 1)).toString())
+--        .snapshots()
+--        .map((snapshot) =>
+--            snapshot.docs.map((doc) => JobModel.fromJson(doc.data())).toList());
+--  }
+--}
+-diff --git a/lib/main.dart b/lib/main.dart
+-index 624ccf2..30965b3 100644
+---- a/lib/main.dart
+-+++ b/lib/main.dart
+-@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
+- import 'package:flutter/material.dart';
+- import 'package:jobs_bd/firebase_options.dart';
+- import 'package:jobs_bd/presentation/jobs_bd.dart';
+-+import 'package:flutter_native_splash/flutter_native_splash.dart';
 - 
--   Future<int> _getNextJobId() async {
--     final docRef = firestore.collection('counters').doc('jobIdCounter');
--@@ -39,8 +30,8 @@ class JobPresentation extends GetxController {
--       documentId: id,
--       category: 'Government Jobs',
--       companyName: 'Passport Office',
---      deadLine: '2021-10-20',
---      description: 'grg r erg er',
--+      jobDeadLine: '2021-10-20',
--+      jobDescription: 'grg r erg er',
--       imgUrl:
--           'https://cdn-images-1.medium.com/max/1200/1*5-aoK8IBmXve5whBQM90GA.png',
--       jobId: jobId.toString(),
--diff --git a/lib/presentation/job/ui/job_list_page.dart b/lib/presentation/job/ui/job_list_page.dart
--index 7d21522..a2d006d 100644
----- a/lib/presentation/job/ui/job_list_page.dart
--+++ b/lib/presentation/job/ui/job_list_page.dart
--@@ -4,7 +4,6 @@ import 'package:jobs_bd/core/config/jobs_screen.dart';
-- import 'package:jobs_bd/core/static/ui_const.dart';
-- import 'package:jobs_bd/core/utility/utility.dart';
-- import 'package:jobs_bd/presentation/home/widgets/job_list_item.dart';
---import 'package:jobs_bd/presentation/job/presenter/job_presentation.dart';
-- import 'package:jobs_bd/presentation/job/ui/job_view_page.dart';
-- import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
+- void main() async {
+-   await initial();
+-@@ -10,6 +11,7 @@ void main() async {
 - 
--@@ -54,9 +53,12 @@ class JobListPage extends StatelessWidget {
--                     theme: theme,
--                     index: index,
--                     jobList: jobList,
---                    onTap: () => context.navigatorPush(
---                      JobViewPage(index: index, jobList: jobList),
---                    ),
--+                    onTap: () {
--+                      homePresenter.incrementViews(jobList[index]);
--+                      context.navigatorPush(
--+                        JobViewPage(index: index, jobList: jobList),
--+                      );
--+                    },
--                   ),
--                   if ((index + 1) % 5 == 0) ...[
--                     Container(
--diff --git a/lib/presentation/job/ui/job_view_page.dart b/lib/presentation/job/ui/job_view_page.dart
--index fa40e02..c2abf98 100644
----- a/lib/presentation/job/ui/job_view_page.dart
--+++ b/lib/presentation/job/ui/job_view_page.dart
--@@ -24,7 +24,7 @@ class JobViewPage extends StatelessWidget {
--         DateTime(now.year, now.month, now.day); // Set only the date part
--     final DateTime tomorrow = today.add(const Duration(days: 1));
--     final DateTime applicationEndDate =
---        DateFormat('yyyy-MM-dd').parse(jobList[index].posted);
--+        DateFormat('yyyy-MM-dd').parse(jobList[index].posted ?? '');
+- initial() async {
+-   WidgetsFlutterBinding.ensureInitialized();
+-+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+-   await Firebase.initializeApp(
+-     options: DefaultFirebaseOptions.currentPlatform,
+-   );
+-diff --git a/lib/presentation/home/presenter/home_presenter.dart b/lib/presentation/home/presenter/home_presenter.dart
+-index a6bcdf1..8844734 100644
+---- a/lib/presentation/home/presenter/home_presenter.dart
+-+++ b/lib/presentation/home/presenter/home_presenter.dart
+-@@ -1,6 +1,5 @@
+- import 'package:jobs_bd/core/base/base_presenter.dart';
+- import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
+--import 'package:jobs_bd/data/dummy_data_model/job_count_model.dart';
+- import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
+- import 'package:jobs_bd/data/repository/get_all_jobs_repository.dart';
+- import 'package:jobs_bd/data/repository/get_jobs_by_category_repository.dart';
+-@@ -58,10 +57,8 @@ class HomePresenter extends BasePresenter<HomeUiState> {
+-           jobPosted.month == today.month &&
+-           jobPosted.day == today.day;
+-     }).length;
+--    print('today post count: $count');
+--    // uiState.value = currentUiState.copyWith(jobCounts: count);
+--    // uiState.value = currentUiState.copyWith(todayPostsCount: count);
+--    updateJobCountList(JobCountModel(jobTitle: 'Today Posts', jobCount: count));
+-+
+-+    uiState.value = currentUiState.copyWith(todayPostsCount: count);
+-   }
 - 
--     final bool isEndingSoon = applicationEndDate.isAtSameMomentAs(today) ||
--         applicationEndDate.isAtSameMomentAs(tomorrow);
--@@ -32,7 +32,7 @@ class JobViewPage extends StatelessWidget {
--     return Scaffold(
--       appBar: AppBar(
--         titleSpacing: 0,
---        title: Text(jobList[index].jobTitle),
--+        title: Text(jobList[index].jobTitle ?? ''),
--       ),
--       body: Padding(
--         padding: padding20,
--@@ -54,7 +54,7 @@ class JobViewPage extends StatelessWidget {
--                     ClipRRect(
--                       borderRadius: radius10,
--                       child: Image.network(
---                        jobList[index].imgUrl,
--+                        jobList[index].imgUrl ?? '',
--                         fit: BoxFit.cover,
--                         height: JobsScreen.width * 0.4,
--                         width: JobsScreen.width * 0.4,
--@@ -62,7 +62,7 @@ class JobViewPage extends StatelessWidget {
--                     ),
--                     gapH10,
--                     Text(
---                      jobList[index].jobTitle,
--+                      jobList[index].jobTitle ?? '',
--                       maxLines: 2,
--                       overflow: TextOverflow.ellipsis,
--                       textAlign: TextAlign.center,
--@@ -72,7 +72,7 @@ class JobViewPage extends StatelessWidget {
--                       ),
--                     ),
--                     TextWithOpacity(
---                        title: jobList[index].companyName, theme: theme),
--+                        title: jobList[index].companyName ?? '', theme: theme),
--                     // if (jobList[index].jobId != null)
--                     //   TextWithOpacity(
--                     //       title: '${jobList[index].vacancies} Vacancies',
--@@ -85,13 +85,13 @@ class JobViewPage extends StatelessWidget {
--                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
--                       children: [
--                         TextWithOpacity(
---                          title: DateTime.parse(jobList[index].posted)
--+                          title: DateTime.parse(jobList[index].posted ?? '')
--                               .toString()
--                               .substring(0, 10),
--                           theme: theme,
--                         ),
--                         TextWithOpacity(
---                          title: jobList[index].deadLine,
--+                          title: jobList[index].jobDeadLine ?? '',
--                           theme: theme,
--                           textColor: isEndingSoon
--                               ? Colors.red
--@@ -104,7 +104,7 @@ class JobViewPage extends StatelessWidget {
--               ),
--               gapH10,
--               html.Html(
---                data: htmlData,
--+                data: jobList[index].jobDescription ?? '',
--                 style: const {
--                   // "body": Style(
--                   //   margin: EdgeInsets.zero,
--@@ -123,62 +123,3 @@ class JobViewPage extends StatelessWidget {
+-   void fetchTodayDeadlinesCount() {
+-@@ -76,15 +73,12 @@ class HomePresenter extends BasePresenter<HomeUiState> {
+-             deadline.day == today.day;
+-       } catch (e) {
+-         // Handle parsing errors, e.g., invalid date format
+--        print('Error parsing deadline for job ${job.jobId}: $e');
+-+
+-         return false;
+-       }
+-     }).length;
+- 
+--    print('today deadline count: $count');
+--    // uiState.value = currentUiState.copyWith(todayDeadlinesCount: count);
+--    updateJobCountList(
+--        JobCountModel(jobTitle: 'Today Deadlines', jobCount: count));
+-+    uiState.value = currentUiState.copyWith(todayDeadlinesCount: count);
+-   }
+- 
+-   void fetchTomorrowDeadlinesCount() {
+-@@ -99,23 +93,12 @@ class HomePresenter extends BasePresenter<HomeUiState> {
+-             deadline.day == tomorrow.day;
+-       } catch (e) {
+-         // Handle parsing errors, e.g., invalid date format
+--        print('Error parsing deadline for job ${job.jobId}: $e');
+-+
+-         return false;
+-       }
+-     }).length;
+- 
+--    print('tomorrow deadline count: $count');
+--    // uiState.value = currentUiState.copyWith(tomorrowDeadlinesCount: count);
+--    updateJobCountList(
+--        JobCountModel(jobTitle: 'Tomorrow Deadlines', jobCount: count));
+--  }
+--
+--  void updateJobCountList(JobCountModel jobCountModel) {
+--    // Update the job counts list in the UI state
+--    List<JobCountModel> updatedJobCounts = List.from(currentUiState.jobCounts);
+--    updatedJobCounts.add(jobCountModel);
+--    print('updated job counts: ${updatedJobCounts.length}');
+--    uiState.value = currentUiState.copyWith(jobCounts: updatedJobCounts);
+-+    uiState.value = currentUiState.copyWith(tomorrowDeadlinesCount: count);
+-   }
+- 
+-   void fetchJobListByCategory(String category) {
+-diff --git a/lib/presentation/home/presenter/home_ui_state.dart b/lib/presentation/home/presenter/home_ui_state.dart
+-index 85c5efa..ee2c724 100644
+---- a/lib/presentation/home/presenter/home_ui_state.dart
+-+++ b/lib/presentation/home/presenter/home_ui_state.dart
+-@@ -1,6 +1,5 @@
+- import 'package:jobs_bd/core/base/base_ui_state.dart';
+- import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
+--import 'package:jobs_bd/data/dummy_data_model/job_count_model.dart';
+- import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
+- 
+- class HomeUiState extends BaseUiState {
+-@@ -10,7 +9,9 @@ class HomeUiState extends BaseUiState {
+-     required this.categoryList,
+-     required this.jobListByCategory,
+-     required this.allJobList,
+--    required this.jobCounts,
+-+    required this.todayPostsCount,
+-+    required this.todayDeadlinesCount,
+-+    required this.tomorrowDeadlinesCount,
+-   });
+- 
+-   factory HomeUiState.empty() {
+-@@ -20,7 +21,9 @@ class HomeUiState extends BaseUiState {
+-       categoryList: [],
+-       jobListByCategory: [],
+-       allJobList: [],
+--      jobCounts: [],
+-+      todayPostsCount: 0,
+-+      todayDeadlinesCount: 0,
+-+      tomorrowDeadlinesCount: 0,
+-     );
+-   }
+- 
+-@@ -31,13 +34,18 @@ class HomeUiState extends BaseUiState {
+-         categoryList,
+-         jobListByCategory,
+-         allJobList,
+--        jobCounts,
+-+        todayPostsCount,
+-+        todayDeadlinesCount,
+-+        tomorrowDeadlinesCount,
+-       ];
+- 
+-   final List<JobCategoryModel> categoryList;
+-   final List<JobModel> allJobList;
+-   final List<JobModel> jobListByCategory;
+--  final List<JobCountModel> jobCounts;
+-+
+-+  final int todayPostsCount;
+-+  final int todayDeadlinesCount;
+-+  final int tomorrowDeadlinesCount;
+- 
+-   HomeUiState copyWith({
+-     bool? isLoading,
+-@@ -45,7 +53,9 @@ class HomeUiState extends BaseUiState {
+-     List<JobCategoryModel>? categoryList,
+-     List<JobModel>? jobListByCategory,
+-     List<JobModel>? allJobList,
+--    List<JobCountModel>? jobCounts,
+-+    int? todayPostsCount,
+-+    int? todayDeadlinesCount,
+-+    int? tomorrowDeadlinesCount,
+-   }) {
+-     return HomeUiState(
+-       isLoading: isLoading ?? super.isLoading,
+-@@ -53,7 +63,10 @@ class HomeUiState extends BaseUiState {
+-       categoryList: categoryList ?? this.categoryList,
+-       jobListByCategory: jobListByCategory ?? this.jobListByCategory,
+-       allJobList: allJobList ?? this.allJobList,
+--      jobCounts: jobCounts ?? this.jobCounts,
+-+      todayPostsCount: todayPostsCount ?? this.todayPostsCount,
+-+      todayDeadlinesCount: todayDeadlinesCount ?? this.todayDeadlinesCount,
+-+      tomorrowDeadlinesCount:
+-+          tomorrowDeadlinesCount ?? this.tomorrowDeadlinesCount,
 -     );
 -   }
 - }
---
---const htmlData = r"""
+-diff --git a/lib/presentation/home/ui/home_page.dart b/lib/presentation/home/ui/home_page.dart
+-index 22baa8a..612fc6c 100644
+---- a/lib/presentation/home/ui/home_page.dart
+-+++ b/lib/presentation/home/ui/home_page.dart
+-@@ -6,11 +6,11 @@ import 'package:jobs_bd/core/static/ui_const.dart';
+- import 'package:jobs_bd/core/utility/utility.dart';
+- import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
+- import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
+-+import 'package:jobs_bd/presentation/home/widgets/job_count_section.dart';
+- import 'package:jobs_bd/presentation/home/widgets/job_list_item.dart';
+- import 'package:jobs_bd/presentation/job/presenter/job_presentation.dart';
+- import 'package:jobs_bd/presentation/job/ui/job_list_page.dart';
+- import 'package:jobs_bd/presentation/home/widgets/job_category_item.dart';
+--import 'package:jobs_bd/presentation/home/widgets/job_count_item.dart';
+- import 'package:jobs_bd/presentation/job/ui/job_view_page.dart';
+- 
+- class HomePage extends StatelessWidget {
+-@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
+-                         return JobCategoryItem(
+-                           theme: theme,
+-                           index: index,
+--                          onTap: () async {
+-+                          onTap: () {
+-                             homePresenter.fetchJobListByCategory(
+-                                 jobCategoryList[index].jobTitle);
+- 
+-@@ -69,31 +69,7 @@ class HomePage extends StatelessWidget {
+-                         );
+-                       },
+-                     ),
+--                    GridView.builder(
+--                      itemCount: homePresenter.currentUiState.jobCounts.length,
+--                      shrinkWrap: true,
+--                      physics: const NeverScrollableScrollPhysics(),
+--                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+--                        crossAxisCount: 2,
+--                        crossAxisSpacing: tenPx,
+--                        mainAxisSpacing: tenPx,
+--                        childAspectRatio: 1 / .4,
+--                      ),
+--                      itemBuilder: (context, index) {
+--                        return JobCountItem(
+--                          theme: theme,
+--                          index: index,
+--                          onTap: () {
+--                            context.navigatorPush(
+--                              JobListPage(
+--                                title: homePresenter
+--                                    .currentUiState.jobCounts[index].jobTitle,
+--                              ),
+--                            );
+--                          },
+--                        );
+--                      },
+--                    ),
+-+                    JobCountSecion(theme: theme, homePresenter: homePresenter),
+-                     gapH15,
+-                     Align(
+-                       alignment: Alignment.centerLeft,
+-diff --git a/lib/presentation/home/widgets/job_count_item.dart b/lib/presentation/home/widgets/job_count_item.dart
+-index f5c9e11..ca4d97b 100644
+---- a/lib/presentation/home/widgets/job_count_item.dart
+-+++ b/lib/presentation/home/widgets/job_count_item.dart
+-@@ -1,21 +1,20 @@
+- import 'package:flutter/material.dart';
+--import 'package:get/get.dart';
+- import 'package:jobs_bd/core/config/jobs_screen.dart';
+- import 'package:jobs_bd/core/static/ui_const.dart';
+--import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
+- 
+- class JobCountItem extends StatelessWidget {
+--  JobCountItem({
+-+  const JobCountItem({
+-     super.key,
+-     required this.theme,
+--    required this.index,
+-+    required this.jobCount,
+-+    required this.title,
+-     this.onTap,
+-   });
+- 
+-   final ThemeData theme;
+--  final int index;
+-+  final int jobCount;
+-   final VoidCallback? onTap;
+--  final HomePresenter homePresenter = Get.put(HomePresenter());
+-+  final String title;
+- 
+-   @override
+-   Widget build(BuildContext context) {
+-@@ -35,15 +34,16 @@ class JobCountItem extends StatelessWidget {
+-           children: [
+-             ConstrainedBox(
+-               constraints: BoxConstraints(
+--                maxWidth: JobsScreen.width * 0.2,
+-+                maxWidth: JobsScreen.width * 0.22,
+-               ),
+-               child: Text(
+--                homePresenter.currentUiState.jobCounts[index].jobTitle,
+-+                title,
+-+                textAlign: TextAlign.start,
+-                 style: theme.textTheme.bodyMedium!.copyWith(),
+-               ),
+-             ),
+-             Text(
+--              '${homePresenter.currentUiState.jobCounts[index].jobCount}',
+-+              jobCount.toString(),
+-               style: theme.textTheme.bodyMedium!.copyWith(
+-                 fontSize: twentyPx,
+-                 fontWeight: FontWeight.bold,
+-diff --git a/lib/presentation/job/ui/job_list_page.dart b/lib/presentation/job/ui/job_list_page.dart
+-index a2d006d..eb5cae2 100644
+---- a/lib/presentation/job/ui/job_list_page.dart
+-+++ b/lib/presentation/job/ui/job_list_page.dart
+-@@ -10,7 +10,10 @@ import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
+- class JobListPage extends StatelessWidget {
+-   final HomePresenter homePresenter = Get.put(HomePresenter());
+- 
+--  JobListPage({super.key, this.title});
+-+  JobListPage({
+-+    super.key,
+-+    this.title,
+-+  });
+- 
+-   final String? title;
+- 
+-diff --git a/lib/presentation/jobs_bd.dart b/lib/presentation/jobs_bd.dart
+-index 8c8296d..2dd572f 100644
+---- a/lib/presentation/jobs_bd.dart
+-+++ b/lib/presentation/jobs_bd.dart
+-@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
+- import 'package:get/get.dart';
+- import 'package:jobs_bd/core/bindings/allbindings.dart';
+- import 'package:jobs_bd/core/config/themes.dart';
+--import 'package:jobs_bd/presentation/home/ui/home_page.dart';
+-+import 'package:jobs_bd/presentation/splash_screen/ui/splash_screen.dart';
+- 
+- class JobsBd extends StatelessWidget {
+-   const JobsBd({super.key});
+-@@ -17,7 +17,7 @@ class JobsBd extends StatelessWidget {
+-       debugShowCheckedModeBanner: false,
+-       theme: TutorTheme.lightTheme,
+-       title: 'Jobs BD',
+--      home: HomePage(),
+-+      home: SplashScreen(),
+-     );
+-   }
+- }
+-diff --git a/lib/presentation/splash_screen/presenter/splash_screen_presenter.dart b/lib/presentation/splash_screen/presenter/splash_screen_presenter.dart
+-index 62b55d2..8df7269 100644
+---- a/lib/presentation/splash_screen/presenter/splash_screen_presenter.dart
+-+++ b/lib/presentation/splash_screen/presenter/splash_screen_presenter.dart
+-@@ -1,12 +1,48 @@
+- import 'dart:async';
+- 
+- import 'package:get/get.dart';
+-+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+- import 'package:jobs_bd/core/base/base_presenter.dart';
+- import 'package:jobs_bd/presentation/splash_screen/presenter/splash_screen_ui_state.dart';
+- 
+- class SplashScreenPresenter extends BasePresenter<SplashScreenUiState> {
+-   final uiState = SplashScreenUiState.empty().obs;
+-   SplashScreenUiState get currentUiState => uiState.value;
+-+  StreamSubscription? subscription;
+-+
+-+  @override
+-+  void onInit() {
+-+    super.onInit();
+-+    checkInternetConnection();
+-+  }
+-+
+-+  @override
+-+  void dispose() {
+-+    subscription?.cancel();
+-+    super.dispose();
+-+  }
+-+
+-+  void checkInternetConnection() {
+-+    subscription = InternetConnection().onStatusChange.listen((event) {
+-+      switch (event) {
+-+        case InternetStatus.connected:
+-+          uiState.value = currentUiState.copyWith(isInternetConnected: true);
+-+          addUserMessage('Internet Connected');
+-+          toggleLoading(loading: false);
+-+          break;
+-+        case InternetStatus.disconnected:
+-+          uiState.value = currentUiState.copyWith(isInternetConnected: false);
+-+          addUserMessage('No Internet Connection');
+-+          toggleLoading(loading: false);
+-+          break;
+-+        default:
+-+          uiState.value = currentUiState.copyWith(isInternetConnected: false);
+-+          addUserMessage('No Internet Connection');
+-+          toggleLoading(loading: false);
+-+          break;
+-+      }
+-+    });
+-+  }
+- 
+-   @override
+-   Future<void> addUserMessage(String message) async {
+-diff --git a/lib/presentation/splash_screen/presenter/splash_screen_ui_state.dart b/lib/presentation/splash_screen/presenter/splash_screen_ui_state.dart
+-index 84a9a6f..6ade531 100644
+---- a/lib/presentation/splash_screen/presenter/splash_screen_ui_state.dart
+-+++ b/lib/presentation/splash_screen/presenter/splash_screen_ui_state.dart
+-@@ -4,35 +4,35 @@ class SplashScreenUiState extends BaseUiState {
+-   const SplashScreenUiState({
+-     required super.isLoading,
+-     required super.userMessage,
+--    required this.isConnected,
+-+    required this.isInternetConnected,
+-   });
+- 
+-   factory SplashScreenUiState.empty() {
+-     return const SplashScreenUiState(
+-       isLoading: false,
+-       userMessage: '',
+--      isConnected: false,
+-+      isInternetConnected: false,
+-     );
+-   }
+- 
+--  final bool isConnected;
+-+  final bool isInternetConnected;
+- 
+-   @override
+-   List<Object?> get props => [
+-         isLoading,
+-         userMessage,
+--        isConnected,
+-+        isInternetConnected,
+-       ];
+- 
+-   SplashScreenUiState copyWith({
+-     bool? isLoading,
+-     String? message,
+--    bool? isConnected,
+-+    bool? isInternetConnected,
+-   }) {
+-     return SplashScreenUiState(
+-       isLoading: isLoading ?? super.isLoading,
+-       userMessage: message ?? super.userMessage,
+--      isConnected: isConnected ?? this.isConnected,
+-+      isInternetConnected: isInternetConnected ?? this.isInternetConnected,
+-     );
+-   }
+- }
+-diff --git a/lib/presentation/splash_screen/ui/splash_screen.dart b/lib/presentation/splash_screen/ui/splash_screen.dart
+-index 56d9ca4..40ece96 100644
+---- a/lib/presentation/splash_screen/ui/splash_screen.dart
+-+++ b/lib/presentation/splash_screen/ui/splash_screen.dart
+-@@ -1,16 +1,26 @@
+- import 'package:flutter/material.dart';
+- import 'package:get/get.dart';
+-+import 'package:jobs_bd/core/external_libs/presentable_widget_builder.dart';
+-+import 'package:jobs_bd/presentation/home/ui/home_page.dart';
+- import 'package:jobs_bd/presentation/splash_screen/presenter/splash_screen_presenter.dart';
+-+import 'package:jobs_bd/presentation/splash_screen/ui/splash_screen%20copy.dart';
+- 
+- class SplashScreen extends StatelessWidget {
+-   SplashScreen({super.key});
+--  final SplashScreenPresenter controller = Get.put(SplashScreenPresenter());
+-+
+-+  final SplashScreenPresenter sController = Get.put(SplashScreenPresenter());
+- 
+-   @override
+-   Widget build(BuildContext context) {
+--    return const Scaffold(
+--        body: Center(
+--      child: CircularProgressIndicator(),
+--    ));
+-+    return PresentableWidgetBuilder(
+-+        presenter: sController,
+-+        builder: () {
+-+          return Scaffold(
+-+              body: Center(
+-+            child: sController.currentUiState.isInternetConnected
+-+                ? HomePage()
+-+                : NOState(),
+-+          ));
+-+        });
+-   }
+- }
+-diff --git a/pubspec.lock b/pubspec.lock
+-index d673d10..23c067a 100644
+---- a/pubspec.lock
+-+++ b/pubspec.lock
+-@@ -17,6 +17,14 @@ packages:
+-       url: "https://pub.dev"
+-     source: hosted
+-     version: "2.0.2"
+-+  archive:
+-+    dependency: transitive
+-+    description:
+-+      name: archive
+-+      sha256: "6bd38d335f0954f5fad9c79e614604fbf03a0e5b975923dd001b6ea965ef5b4b"
+-+      url: "https://pub.dev"
+-+    source: hosted
+-+    version: "3.6.0"
+-   args:
+-     dependency: transitive
+-     description:
+-@@ -106,7 +114,7 @@ packages:
+-     source: hosted
+-     version: "1.18.0"
+-   connectivity_plus:
+--    dependency: "direct main"
+-+    dependency: transitive
+-     description:
+-       name: connectivity_plus
+-       sha256: db7a4e143dc72cc3cb2044ef9b052a7ebfe729513e6a82943bc3526f784365b8
+-@@ -121,6 +129,14 @@ packages:
+-       url: "https://pub.dev"
+-     source: hosted
+-     version: "2.0.0"
+-+  crypto:
+-+    dependency: transitive
+-+    description:
+-+      name: crypto
+-+      sha256: ff625774173754681d66daaf4a448684fb04b78f902da9cb3d308c19cc5e8bab
+-+      url: "https://pub.dev"
+-+    source: hosted
+-+    version: "3.0.3"
+-   csslib:
+-     dependency: transitive
+-     description:
+-@@ -374,6 +390,14 @@ packages:
+-       url: "https://pub.dev"
+-     source: hosted
+-     version: "0.6.3+1"
+-+  flutter_native_splash:
+-+    dependency: "direct main"
+-+    description:
+-+      name: flutter_native_splash
+-+      sha256: edf39bcf4d74aca1eb2c1e43c3e445fd9f494013df7f0da752fefe72020eedc0
+-+      url: "https://pub.dev"
+-+    source: hosted
+-+    version: "2.4.0"
+-   flutter_svg:
+-     dependency: transitive
+-     description:
+-@@ -432,6 +456,22 @@ packages:
+-       url: "https://pub.dev"
+-     source: hosted
+-     version: "4.0.2"
+-+  image:
+-+    dependency: transitive
+-+    description:
+-+      name: image
+-+      sha256: "2237616a36c0d69aef7549ab439b833fb7f9fb9fc861af2cc9ac3eedddd69ca8"
+-+      url: "https://pub.dev"
+-+    source: hosted
+-+    version: "4.2.0"
+-+  internet_connection_checker_plus:
+-+    dependency: "direct main"
+-+    description:
+-+      name: internet_connection_checker_plus
+-+      sha256: "423480962bda16f10d0a79efe6c4f1b5212d80203f6b8ee921edb0a1d3c17c88"
+-+      url: "https://pub.dev"
+-+    source: hosted
+-+    version: "2.3.0"
+-   intl:
+-     dependency: "direct main"
+-     description:
+-@@ -725,6 +765,14 @@ packages:
+-       url: "https://pub.dev"
+-     source: hosted
+-     version: "1.3.2"
+-+  universal_io:
+-+    dependency: transitive
+-+    description:
+-+      name: universal_io
+-+      sha256: "1722b2dcc462b4b2f3ee7d188dad008b6eb4c40bbd03a3de451d82c78bba9aad"
+-+      url: "https://pub.dev"
+-+    source: hosted
+-+    version: "2.2.2"
+-   vector_math:
+-     dependency: transitive
+-     description:
+-@@ -885,6 +933,14 @@ packages:
+-       url: "https://pub.dev"
+-     source: hosted
+-     version: "6.5.0"
+-+  yaml:
+-+    dependency: transitive
+-+    description:
+-+      name: yaml
+-+      sha256: "75769501ea3489fca56601ff33454fe45507ea3bfb014161abc3b43ae25989d5"
+-+      url: "https://pub.dev"
+-+    source: hosted
+-+    version: "3.1.2"
+- sdks:
+-   dart: ">=3.3.4 <4.0.0"
+-   flutter: ">=3.19.0"
+-diff --git a/pubspec.yaml b/pubspec.yaml
+-index b4d5e19..bdfc21f 100644
+---- a/pubspec.yaml
+-+++ b/pubspec.yaml
+-@@ -48,7 +48,8 @@ dependencies:
+-   flutter_html_all: ^3.0.0-beta.2
+-   equatable: ^2.0.5
+-   fpdart: ^1.1.0
+--  connectivity_plus: ^6.0.3
+-+  internet_connection_checker_plus: 2.3.0
+-+  flutter_native_splash: ^2.4.0
+- 
+- dev_dependencies:
+-   flutter_test:
+-diff --git a/web/index.html b/web/index.html
+-index 8b7f8db..c3862d8 100644
+---- a/web/index.html
+-+++ b/web/index.html
+-@@ -1,6 +1,4 @@
 --<!DOCTYPE html>
 --<html>
 --<head>
---    <style>
---        .bold {
---            font-weight: bold;
---        }
---        .italic {
---            font-style: italic;
---        }
---        .highlight {
---            background-color: yellow;
---        }
---    </style>
---</head>
---<body>
---    <h1><strong>Z-Eight Tech is Looking for Experienced Flutter Developer</strong></h1>
---    <h2><strong>Requirements:</strong></h2>
---    <ul>
---        <li>Development of Android/iOS applications and have deployed them on Google Play/App Store.</li>
---        <li>Knowledge of mobile app development.</li>
---        <li>Understanding front-end languages like HTML, CSS3, and JavaScript is a plus.</li>
---        <li>Knowledge of Python is a plus.</li>
---        <li>In-depth understanding of Object-Oriented programming languages like Java and C++.</li>
---        <li>Familiarity with version control tools like Git, Subversion, and IDEs like Android Studio, VS Code, etc.</li>
---        <li>Understanding of RDMS, SQL, MySQL.</li>
---        <li>Understanding of the Agile Software Development Life Cycle and being exposed to Scrum projects.</li>
---        <li>Knowledge of Dart programming language, Rest APIs, and integration of various APIs from third parties.</li>
---        <li>Comfortable using test cases for debugging code, enhancing performance and reliability.</li>
---    </ul>
---    <h2><strong>Additional Requirements:</strong></h2>
---    <ul>
---        <li>Age 18 to 28 years.</li>
---        <li>Salary: Negotiable.</li>
---    </ul>
---    <h2><strong>Facilities:</strong></h2>
---    <ul>
---        <li><strong>Competitive Salary & regular appraisal.</strong></li>
---        <li><strong>Training and learning materials to improve skills.</strong></li>
---        <li><strong>You will learn international marketplace standard coding.</strong></li>
---        <li><strong>Festival Bonus: 2 (Yearly)</strong></li>
---        <li><strong>Salary Review: Negotiable.</strong></li>
---        <li><strong>Lunch: Partially Subsidized.</strong></li>
---        <li><strong>Breakfast: From Office.</strong></li>
---        <li><strong>2 Times Tea</strong></li>
---        <li><strong>Deadline: 30.05.2024</strong></li>
---    </ul>
---    <p><strong>Office Time:</strong> 10:00am to 06:00pm. (Saturday to Thursday).</p>
---    <p><strong>Job Location:</strong> 1332/B, Jahan Mansion, O.R Nizam Road, G.E.C, Chattogram.</p>
---    <p>If you are interested, send your CV to <a href="mailto:z8techh@gmail.com">z8techh@gmail.com</a></p>
---    <p><strong>Subject line:</strong> Flutter Developer</p>
---    <p><strong>Office Location:</strong> 1332/B, Jahan Mansion, O.R Nizam Road, G.E.C, Chattogram, Bangladesh</p>
---    <p><strong>Note:</strong> Remote job isn't allowed.</p>
+-+<!DOCTYPE html><html><head>
+-   <!--
+-     If you are serving your web app in a path other than the root, change the
+-     href value below to reflect the base path you are serving from.
+-@@ -27,7 +25,7 @@
+-   <link rel="apple-touch-icon" href="icons/Icon-192.png">
+- 
+-   <!-- Favicon -->
+--  <link rel="icon" type="image/png" href="favicon.png"/>
+-+  <link rel="icon" type="image/png" href="favicon.png">
+- 
+-   <title>jobs_bd</title>
+-   <link rel="manifest" href="manifest.json">
+-@@ -37,9 +35,80 @@
+-     const serviceWorkerVersion = null;
+-   </script>
+-   <!-- This script adds the flutter initialization JS code -->
+--  <script src="flutter.js" defer></script>
+-+  <script src="flutter.js" defer=""></script>
+-+  <style id="splash-screen-style">
+-+    html {
+-+      height: 100%
+-+    }
+-+
+-+    body {
+-+      margin: 0;
+-+      min-height: 100%;
+-+      background-color: #BD9979;
+-+          background-size: 100% 100%;
+-+    }
+-+
+-+    .center {
+-+      margin: 0;
+-+      position: absolute;
+-+      top: 50%;
+-+      left: 50%;
+-+      -ms-transform: translate(-50%, -50%);
+-+      transform: translate(-50%, -50%);
+-+    }
+-+
+-+    .contain {
+-+      display:block;
+-+      width:100%; height:100%;
+-+      object-fit: contain;
+-+    }
+-+
+-+    .stretch {
+-+      display:block;
+-+      width:100%; height:100%;
+-+    }
+-+
+-+    .cover {
+-+      display:block;
+-+      width:100%; height:100%;
+-+      object-fit: cover;
+-+    }
+-+
+-+    .bottom {
+-+      position: absolute;
+-+      bottom: 0;
+-+      left: 50%;
+-+      -ms-transform: translate(-50%, 0);
+-+      transform: translate(-50%, 0);
+-+    }
+-+
+-+    .bottomLeft {
+-+      position: absolute;
+-+      bottom: 0;
+-+      left: 0;
+-+    }
+-+
+-+    .bottomRight {
+-+      position: absolute;
+-+      bottom: 0;
+-+      right: 0;
+-+    }
+-+  </style>
+-+  <script id="splash-screen-script">
+-+    function removeSplashFromWeb() {
+-+      document.getElementById("splash")?.remove();
+-+      document.getElementById("splash-branding")?.remove();
+-+      document.body.style.background = "transparent";
+-+    }
+-+  </script>
+-+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+- </head>
+- <body>
+-+  <picture id="splash">
+-+      <source srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x" media="(prefers-color-scheme: light)">
+-+      <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
+-+      <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
+-+  </picture>
+-   <script>
+-     window.addEventListener('load', function(ev) {
+-       // Download main.dart.js
+-@@ -55,5 +124,6 @@
+-       });
+-     });
+-   </script>
 --</body>
 --</html>
---
---""";
--diff --git a/lib/presentation/job/widgets/job_list_item.dart b/lib/presentation/job/widgets/job_list_item.dart
--index 4d837df..df57986 100644
----- a/lib/presentation/job/widgets/job_list_item.dart
--+++ b/lib/presentation/job/widgets/job_list_item.dart
--@@ -34,7 +34,7 @@ class JobListItem extends StatelessWidget {
--           child: Row(
--             children: [
--               Image.asset(
---                jobList[index].imgUrl,
--+                jobList[index].imgUrl!,
--                 height: JobsScreen.width * 0.17,
--                 width: JobsScreen.width * 0.17,
--               ),
--@@ -44,14 +44,14 @@ class JobListItem extends StatelessWidget {
--                 mainAxisAlignment: MainAxisAlignment.center,
--                 children: [
--                   Text(
---                    jobList[index].jobTitle,
--+                    jobList[index].jobTitle!,
--                     style: theme.textTheme.bodyMedium!.copyWith(
--                       fontSize: fifteenPx,
--                       fontWeight: FontWeight.bold,
--                     ),
--                   ),
--                   Text(
---                    jobList[index].companyName,
--+                    jobList[index].companyName!,
--                     style: theme.textTheme.bodyMedium!.copyWith(
--                       fontSize: fourteenPx,
--                       fontWeight: FontWeight.w500,
+-+
+-+
+-+</body></html>
+-\ No newline at end of file
 -
 -================
 -
 -here is my changes...give me git push msg and description of changes with using of proper emoticons...dont give any long boring texts, "STRICTLY i dont need any explanations"
-diff --git a/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json b/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json
-index 0bedcf2..00cabce 100644
---- a/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json
-+++ b/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json
-@@ -1,23 +1,23 @@
- {
-   "images" : [
-     {
--      "idiom" : "universal",
-       "filename" : "LaunchImage.png",
-+      "idiom" : "universal",
-       "scale" : "1x"
-     },
-     {
--      "idiom" : "universal",
-       "filename" : "LaunchImage@2x.png",
-+      "idiom" : "universal",
-       "scale" : "2x"
-     },
-     {
--      "idiom" : "universal",
-       "filename" : "LaunchImage@3x.png",
-+      "idiom" : "universal",
-       "scale" : "3x"
-     }
-   ],
-   "info" : {
--    "version" : 1,
--    "author" : "xcode"
-+    "author" : "xcode",
-+    "version" : 1
-   }
- }
 diff --git a/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png b/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png
-index 9da19ea..68c22bf 100644
+index 68c22bf..bc4c05c 100644
 Binary files a/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png and b/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png differ
 diff --git a/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png b/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png
-index 9da19ea..a8e6da8 100644
+index a8e6da8..7ae06b5 100644
 Binary files a/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png and b/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png differ
 diff --git a/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png b/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png
-index 9da19ea..6ff6844 100644
+index 6ff6844..26f4e25 100644
 Binary files a/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png and b/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png differ
 diff --git a/ios/Runner/Base.lproj/LaunchScreen.storyboard b/ios/Runner/Base.lproj/LaunchScreen.storyboard
-index f2e259c..5697b88 100644
+index 5697b88..5a37630 100644
 --- a/ios/Runner/Base.lproj/LaunchScreen.storyboard
 +++ b/ios/Runner/Base.lproj/LaunchScreen.storyboard
-@@ -16,13 +16,19 @@
-                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                         <subviews>
--                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4">
--                            </imageView>
-+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="LaunchBackground" translatesAutoresizingMaskIntoConstraints="NO" id="tWc-Dq-wcI"/>
-+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4"></imageView>
-                         </subviews>
-                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                         <constraints>
--                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1a2-6s-vTC"/>
--                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4X2-HB-R7a"/>
-+                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="3T2-ad-Qdv"/>
-+                            <constraint firstItem="tWc-Dq-wcI" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="RPx-PI-7Xg"/>
-+                            <constraint firstItem="tWc-Dq-wcI" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="SdS-ul-q2q"/>
-+                            <constraint firstAttribute="trailing" secondItem="tWc-Dq-wcI" secondAttribute="trailing" id="Swv-Gf-Rwn"/>
-+                            <constraint firstAttribute="trailing" secondItem="YRO-k0-Ey4" secondAttribute="trailing" id="TQA-XW-tRk"/>
-+                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="duK-uY-Gun"/>
-+                            <constraint firstItem="tWc-Dq-wcI" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="kV7-tw-vXt"/>
-+                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="xPn-NY-SIU"/>
-                         </constraints>
-                     </view>
-                 </viewController>
-@@ -32,6 +38,7 @@
+@@ -38,7 +38,7 @@
          </scene>
      </scenes>
      <resources>
--        <image name="LaunchImage" width="168" height="185"/>
-+        <image name="LaunchImage" width="484" height="484"/>
-+        <image name="LaunchBackground" width="1" height="1"/>
+-        <image name="LaunchImage" width="484" height="484"/>
++        <image name="LaunchImage" width="1152" height="1152"/>
+         <image name="LaunchBackground" width="1" height="1"/>
      </resources>
  </document>
-diff --git a/ios/Runner/Info.plist b/ios/Runner/Info.plist
-index 196813b..036b822 100644
---- a/ios/Runner/Info.plist
-+++ b/ios/Runner/Info.plist
-@@ -1,49 +1,51 @@
- <?xml version="1.0" encoding="UTF-8"?>
- <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
- <plist version="1.0">
--<dict>
--	<key>CFBundleDevelopmentRegion</key>
--	<string>$(DEVELOPMENT_LANGUAGE)</string>
--	<key>CFBundleDisplayName</key>
--	<string>Jobs Bd</string>
--	<key>CFBundleExecutable</key>
--	<string>$(EXECUTABLE_NAME)</string>
--	<key>CFBundleIdentifier</key>
--	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
--	<key>CFBundleInfoDictionaryVersion</key>
--	<string>6.0</string>
--	<key>CFBundleName</key>
--	<string>jobs_bd</string>
--	<key>CFBundlePackageType</key>
--	<string>APPL</string>
--	<key>CFBundleShortVersionString</key>
--	<string>$(FLUTTER_BUILD_NAME)</string>
--	<key>CFBundleSignature</key>
--	<string>????</string>
--	<key>CFBundleVersion</key>
--	<string>$(FLUTTER_BUILD_NUMBER)</string>
--	<key>LSRequiresIPhoneOS</key>
--	<true/>
--	<key>UILaunchStoryboardName</key>
--	<string>LaunchScreen</string>
--	<key>UIMainStoryboardFile</key>
--	<string>Main</string>
--	<key>UISupportedInterfaceOrientations</key>
--	<array>
--		<string>UIInterfaceOrientationPortrait</string>
--		<string>UIInterfaceOrientationLandscapeLeft</string>
--		<string>UIInterfaceOrientationLandscapeRight</string>
--	</array>
--	<key>UISupportedInterfaceOrientations~ipad</key>
--	<array>
--		<string>UIInterfaceOrientationPortrait</string>
--		<string>UIInterfaceOrientationPortraitUpsideDown</string>
--		<string>UIInterfaceOrientationLandscapeLeft</string>
--		<string>UIInterfaceOrientationLandscapeRight</string>
--	</array>
--	<key>CADisableMinimumFrameDurationOnPhone</key>
--	<true/>
--	<key>UIApplicationSupportsIndirectInputEvents</key>
--	<true/>
--</dict>
-+	<dict>
-+		<key>CFBundleDevelopmentRegion</key>
-+		<string>$(DEVELOPMENT_LANGUAGE)</string>
-+		<key>CFBundleDisplayName</key>
-+		<string>Jobs Bd</string>
-+		<key>CFBundleExecutable</key>
-+		<string>$(EXECUTABLE_NAME)</string>
-+		<key>CFBundleIdentifier</key>
-+		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-+		<key>CFBundleInfoDictionaryVersion</key>
-+		<string>6.0</string>
-+		<key>CFBundleName</key>
-+		<string>jobs_bd</string>
-+		<key>CFBundlePackageType</key>
-+		<string>APPL</string>
-+		<key>CFBundleShortVersionString</key>
-+		<string>$(FLUTTER_BUILD_NAME)</string>
-+		<key>CFBundleSignature</key>
-+		<string>????</string>
-+		<key>CFBundleVersion</key>
-+		<string>$(FLUTTER_BUILD_NUMBER)</string>
-+		<key>LSRequiresIPhoneOS</key>
-+		<true/>
-+		<key>UILaunchStoryboardName</key>
-+		<string>LaunchScreen</string>
-+		<key>UIMainStoryboardFile</key>
-+		<string>Main</string>
-+		<key>UISupportedInterfaceOrientations</key>
-+		<array>
-+			<string>UIInterfaceOrientationPortrait</string>
-+			<string>UIInterfaceOrientationLandscapeLeft</string>
-+			<string>UIInterfaceOrientationLandscapeRight</string>
-+		</array>
-+		<key>UISupportedInterfaceOrientations~ipad</key>
-+		<array>
-+			<string>UIInterfaceOrientationPortrait</string>
-+			<string>UIInterfaceOrientationPortraitUpsideDown</string>
-+			<string>UIInterfaceOrientationLandscapeLeft</string>
-+			<string>UIInterfaceOrientationLandscapeRight</string>
-+		</array>
-+		<key>CADisableMinimumFrameDurationOnPhone</key>
-+		<true/>
-+		<key>UIApplicationSupportsIndirectInputEvents</key>
-+		<true/>
-+		<key>UIStatusBarHidden</key>
-+		<false/>
-+	</dict>
- </plist>
-diff --git a/lib/data/dummy_data_model/job_count_model.dart b/lib/data/dummy_data_model/job_count_model.dart
-deleted file mode 100644
-index 3835a92..0000000
---- a/lib/data/dummy_data_model/job_count_model.dart
-+++ /dev/null
-@@ -1,6 +0,0 @@
--class JobCountModel {
--  final String jobTitle;
--  final int jobCount;
--
--  JobCountModel({required this.jobTitle, required this.jobCount});
--}
-diff --git a/lib/data/repository/get_today_deadline_jobs_repository.dart b/lib/data/repository/get_today_deadline_jobs_repository.dart
-deleted file mode 100644
-index dbada5a..0000000
---- a/lib/data/repository/get_today_deadline_jobs_repository.dart
-+++ /dev/null
-@@ -1,15 +0,0 @@
--import 'package:cloud_firestore/cloud_firestore.dart';
--import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
--
--class GetTodayDeadlineJobsRepository {
--  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
--
--  Stream<List<JobModel>> getTodayDeadlineJobs() {
--    return _firestore
--        .collection('all_jobs')
--        .where('jobDeadLine', isGreaterThan: DateTime.now().toString())
--        .snapshots()
--        .map((snapshot) =>
--            snapshot.docs.map((doc) => JobModel.fromJson(doc.data())).toList());
--  }
--}
-diff --git a/lib/data/repository/get_today_post_jobs_repository.dart b/lib/data/repository/get_today_post_jobs_repository.dart
-deleted file mode 100644
-index 3fe9f4a..0000000
---- a/lib/data/repository/get_today_post_jobs_repository.dart
-+++ /dev/null
-@@ -1,15 +0,0 @@
--import 'package:cloud_firestore/cloud_firestore.dart';
--import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
--
--class GetTodayPostJobsRepository {
--  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
--
--  Stream<List<JobModel>> getTodayPostJobs() {
--    return _firestore
--        .collection('all_jobs')
--        .where('posted', isLessThan: DateTime.now().toString())
--        .snapshots()
--        .map((snapshot) =>
--            snapshot.docs.map((doc) => JobModel.fromJson(doc.data())).toList());
--  }
--}
-diff --git a/lib/data/repository/get_tomorrow_deadline_jobs_repository.dart b/lib/data/repository/get_tomorrow_deadline_jobs_repository.dart
-deleted file mode 100644
-index 1e5fee3..0000000
---- a/lib/data/repository/get_tomorrow_deadline_jobs_repository.dart
-+++ /dev/null
-@@ -1,16 +0,0 @@
--import 'package:cloud_firestore/cloud_firestore.dart';
--import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
--
--class GetTomorrowDeadlineJobsRepository {
--  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
--
--  Stream<List<JobModel>> getTomorrowDeadlineJobs() {
--    return _firestore
--        .collection('all_jobs')
--        .where('jobDeadLine',
--            isLessThan: DateTime.now().add(const Duration(days: 1)).toString())
--        .snapshots()
--        .map((snapshot) =>
--            snapshot.docs.map((doc) => JobModel.fromJson(doc.data())).toList());
--  }
--}
 diff --git a/lib/main.dart b/lib/main.dart
-index 624ccf2..30965b3 100644
+index 30965b3..5760b1c 100644
 --- a/lib/main.dart
 +++ b/lib/main.dart
-@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
+@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
  import 'package:flutter/material.dart';
  import 'package:jobs_bd/firebase_options.dart';
  import 'package:jobs_bd/presentation/jobs_bd.dart';
-+import 'package:flutter_native_splash/flutter_native_splash.dart';
+-import 'package:flutter_native_splash/flutter_native_splash.dart';
  
  void main() async {
    await initial();
-@@ -10,6 +11,7 @@ void main() async {
- 
- initial() async {
-   WidgetsFlutterBinding.ensureInitialized();
-+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-   await Firebase.initializeApp(
-     options: DefaultFirebaseOptions.currentPlatform,
-   );
-diff --git a/lib/presentation/home/presenter/home_presenter.dart b/lib/presentation/home/presenter/home_presenter.dart
-index a6bcdf1..8844734 100644
---- a/lib/presentation/home/presenter/home_presenter.dart
-+++ b/lib/presentation/home/presenter/home_presenter.dart
-@@ -1,6 +1,5 @@
- import 'package:jobs_bd/core/base/base_presenter.dart';
- import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
--import 'package:jobs_bd/data/dummy_data_model/job_count_model.dart';
- import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
- import 'package:jobs_bd/data/repository/get_all_jobs_repository.dart';
- import 'package:jobs_bd/data/repository/get_jobs_by_category_repository.dart';
-@@ -58,10 +57,8 @@ class HomePresenter extends BasePresenter<HomeUiState> {
-           jobPosted.month == today.month &&
-           jobPosted.day == today.day;
-     }).length;
--    print('today post count: $count');
--    // uiState.value = currentUiState.copyWith(jobCounts: count);
--    // uiState.value = currentUiState.copyWith(todayPostsCount: count);
--    updateJobCountList(JobCountModel(jobTitle: 'Today Posts', jobCount: count));
-+
-+    uiState.value = currentUiState.copyWith(todayPostsCount: count);
-   }
- 
-   void fetchTodayDeadlinesCount() {
-@@ -76,15 +73,12 @@ class HomePresenter extends BasePresenter<HomeUiState> {
-             deadline.day == today.day;
-       } catch (e) {
-         // Handle parsing errors, e.g., invalid date format
--        print('Error parsing deadline for job ${job.jobId}: $e');
-+
-         return false;
-       }
-     }).length;
- 
--    print('today deadline count: $count');
--    // uiState.value = currentUiState.copyWith(todayDeadlinesCount: count);
--    updateJobCountList(
--        JobCountModel(jobTitle: 'Today Deadlines', jobCount: count));
-+    uiState.value = currentUiState.copyWith(todayDeadlinesCount: count);
-   }
- 
-   void fetchTomorrowDeadlinesCount() {
-@@ -99,23 +93,12 @@ class HomePresenter extends BasePresenter<HomeUiState> {
-             deadline.day == tomorrow.day;
-       } catch (e) {
-         // Handle parsing errors, e.g., invalid date format
--        print('Error parsing deadline for job ${job.jobId}: $e');
-+
-         return false;
-       }
-     }).length;
- 
--    print('tomorrow deadline count: $count');
--    // uiState.value = currentUiState.copyWith(tomorrowDeadlinesCount: count);
--    updateJobCountList(
--        JobCountModel(jobTitle: 'Tomorrow Deadlines', jobCount: count));
--  }
--
--  void updateJobCountList(JobCountModel jobCountModel) {
--    // Update the job counts list in the UI state
--    List<JobCountModel> updatedJobCounts = List.from(currentUiState.jobCounts);
--    updatedJobCounts.add(jobCountModel);
--    print('updated job counts: ${updatedJobCounts.length}');
--    uiState.value = currentUiState.copyWith(jobCounts: updatedJobCounts);
-+    uiState.value = currentUiState.copyWith(tomorrowDeadlinesCount: count);
-   }
- 
-   void fetchJobListByCategory(String category) {
-diff --git a/lib/presentation/home/presenter/home_ui_state.dart b/lib/presentation/home/presenter/home_ui_state.dart
-index 85c5efa..ee2c724 100644
---- a/lib/presentation/home/presenter/home_ui_state.dart
-+++ b/lib/presentation/home/presenter/home_ui_state.dart
-@@ -1,6 +1,5 @@
- import 'package:jobs_bd/core/base/base_ui_state.dart';
- import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
--import 'package:jobs_bd/data/dummy_data_model/job_count_model.dart';
- import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
- 
- class HomeUiState extends BaseUiState {
-@@ -10,7 +9,9 @@ class HomeUiState extends BaseUiState {
-     required this.categoryList,
-     required this.jobListByCategory,
-     required this.allJobList,
--    required this.jobCounts,
-+    required this.todayPostsCount,
-+    required this.todayDeadlinesCount,
-+    required this.tomorrowDeadlinesCount,
-   });
- 
-   factory HomeUiState.empty() {
-@@ -20,7 +21,9 @@ class HomeUiState extends BaseUiState {
-       categoryList: [],
-       jobListByCategory: [],
-       allJobList: [],
--      jobCounts: [],
-+      todayPostsCount: 0,
-+      todayDeadlinesCount: 0,
-+      tomorrowDeadlinesCount: 0,
-     );
-   }
- 
-@@ -31,13 +34,18 @@ class HomeUiState extends BaseUiState {
-         categoryList,
-         jobListByCategory,
-         allJobList,
--        jobCounts,
-+        todayPostsCount,
-+        todayDeadlinesCount,
-+        tomorrowDeadlinesCount,
-       ];
- 
-   final List<JobCategoryModel> categoryList;
-   final List<JobModel> allJobList;
-   final List<JobModel> jobListByCategory;
--  final List<JobCountModel> jobCounts;
-+
-+  final int todayPostsCount;
-+  final int todayDeadlinesCount;
-+  final int tomorrowDeadlinesCount;
- 
-   HomeUiState copyWith({
-     bool? isLoading,
-@@ -45,7 +53,9 @@ class HomeUiState extends BaseUiState {
-     List<JobCategoryModel>? categoryList,
-     List<JobModel>? jobListByCategory,
-     List<JobModel>? allJobList,
--    List<JobCountModel>? jobCounts,
-+    int? todayPostsCount,
-+    int? todayDeadlinesCount,
-+    int? tomorrowDeadlinesCount,
-   }) {
-     return HomeUiState(
-       isLoading: isLoading ?? super.isLoading,
-@@ -53,7 +63,10 @@ class HomeUiState extends BaseUiState {
-       categoryList: categoryList ?? this.categoryList,
-       jobListByCategory: jobListByCategory ?? this.jobListByCategory,
-       allJobList: allJobList ?? this.allJobList,
--      jobCounts: jobCounts ?? this.jobCounts,
-+      todayPostsCount: todayPostsCount ?? this.todayPostsCount,
-+      todayDeadlinesCount: todayDeadlinesCount ?? this.todayDeadlinesCount,
-+      tomorrowDeadlinesCount:
-+          tomorrowDeadlinesCount ?? this.tomorrowDeadlinesCount,
-     );
-   }
- }
 diff --git a/lib/presentation/home/ui/home_page.dart b/lib/presentation/home/ui/home_page.dart
-index 22baa8a..612fc6c 100644
+index b054111..ba95ab1 100644
 --- a/lib/presentation/home/ui/home_page.dart
 +++ b/lib/presentation/home/ui/home_page.dart
-@@ -6,11 +6,11 @@ import 'package:jobs_bd/core/static/ui_const.dart';
- import 'package:jobs_bd/core/utility/utility.dart';
- import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
- import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
-+import 'package:jobs_bd/presentation/home/widgets/job_count_section.dart';
- import 'package:jobs_bd/presentation/home/widgets/job_list_item.dart';
- import 'package:jobs_bd/presentation/job/presenter/job_presentation.dart';
- import 'package:jobs_bd/presentation/job/ui/job_list_page.dart';
- import 'package:jobs_bd/presentation/home/widgets/job_category_item.dart';
--import 'package:jobs_bd/presentation/home/widgets/job_count_item.dart';
- import 'package:jobs_bd/presentation/job/ui/job_view_page.dart';
- 
- class HomePage extends StatelessWidget {
-@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
-                         return JobCategoryItem(
-                           theme: theme,
-                           index: index,
--                          onTap: () async {
-+                          onTap: () {
-                             homePresenter.fetchJobListByCategory(
-                                 jobCategoryList[index].jobTitle);
- 
-@@ -69,31 +69,7 @@ class HomePage extends StatelessWidget {
-                         );
-                       },
-                     ),
--                    GridView.builder(
--                      itemCount: homePresenter.currentUiState.jobCounts.length,
--                      shrinkWrap: true,
--                      physics: const NeverScrollableScrollPhysics(),
--                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
--                        crossAxisCount: 2,
--                        crossAxisSpacing: tenPx,
--                        mainAxisSpacing: tenPx,
--                        childAspectRatio: 1 / .4,
--                      ),
--                      itemBuilder: (context, index) {
--                        return JobCountItem(
--                          theme: theme,
--                          index: index,
--                          onTap: () {
--                            context.navigatorPush(
--                              JobListPage(
--                                title: homePresenter
--                                    .currentUiState.jobCounts[index].jobTitle,
--                              ),
--                            );
--                          },
--                        );
--                      },
--                    ),
-+                    JobCountSecion(theme: theme, homePresenter: homePresenter),
-                     gapH15,
-                     Align(
-                       alignment: Alignment.centerLeft,
-diff --git a/lib/presentation/home/widgets/job_count_item.dart b/lib/presentation/home/widgets/job_count_item.dart
-index f5c9e11..ca4d97b 100644
---- a/lib/presentation/home/widgets/job_count_item.dart
-+++ b/lib/presentation/home/widgets/job_count_item.dart
-@@ -1,21 +1,20 @@
+@@ -1,5 +1,4 @@
  import 'package:flutter/material.dart';
--import 'package:get/get.dart';
+-import 'package:flutter/widgets.dart';
+ import 'package:get/get.dart';
  import 'package:jobs_bd/core/config/jobs_screen.dart';
- import 'package:jobs_bd/core/static/ui_const.dart';
--import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
+ import 'package:jobs_bd/core/external_libs/presentable_widget_builder.dart';
+diff --git a/native_splash.yaml b/native_splash.yaml
+index 69c75b0..d05dd8a 100644
+--- a/native_splash.yaml
++++ b/native_splash.yaml
+@@ -22,7 +22,7 @@ flutter_native_splash:
  
- class JobCountItem extends StatelessWidget {
--  JobCountItem({
-+  const JobCountItem({
-     super.key,
-     required this.theme,
--    required this.index,
-+    required this.jobCount,
-+    required this.title,
-     this.onTap,
-   });
+   # The image parameter allows you to specify an image used in the splash screen.  It must be a
+   # png file and should be sized for 4x pixel density.
+-  image: assets/images/png/app_logo(1).png
++  image: assets/images/png/app_logo.png
  
-   final ThemeData theme;
--  final int index;
-+  final int jobCount;
-   final VoidCallback? onTap;
--  final HomePresenter homePresenter = Get.put(HomePresenter());
-+  final String title;
+   # The branding property allows you to specify an image used as branding in the splash screen.
+   # It must be a png file. It is supported for Android, iOS and the Web.  For Android 12,
+@@ -58,7 +58,7 @@ flutter_native_splash:
  
-   @override
-   Widget build(BuildContext context) {
-@@ -35,15 +34,16 @@ class JobCountItem extends StatelessWidget {
-           children: [
-             ConstrainedBox(
-               constraints: BoxConstraints(
--                maxWidth: JobsScreen.width * 0.2,
-+                maxWidth: JobsScreen.width * 0.22,
-               ),
-               child: Text(
--                homePresenter.currentUiState.jobCounts[index].jobTitle,
-+                title,
-+                textAlign: TextAlign.start,
-                 style: theme.textTheme.bodyMedium!.copyWith(),
-               ),
-             ),
-             Text(
--              '${homePresenter.currentUiState.jobCounts[index].jobCount}',
-+              jobCount.toString(),
-               style: theme.textTheme.bodyMedium!.copyWith(
-                 fontSize: twentyPx,
-                 fontWeight: FontWeight.bold,
-diff --git a/lib/presentation/job/ui/job_list_page.dart b/lib/presentation/job/ui/job_list_page.dart
-index a2d006d..eb5cae2 100644
---- a/lib/presentation/job/ui/job_list_page.dart
-+++ b/lib/presentation/job/ui/job_list_page.dart
-@@ -10,7 +10,10 @@ import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
- class JobListPage extends StatelessWidget {
-   final HomePresenter homePresenter = Get.put(HomePresenter());
+     # Splash screen background color.
+     color: "#BD9979"
+-    image: assets/images/png/app_logo(1).png
++    image: assets/images/png/app_logo.png
  
--  JobListPage({super.key, this.title});
-+  JobListPage({
-+    super.key,
-+    this.title,
-+  });
+     # App icon background color.
+     #icon_background_color: "#111111"
+@@ -135,7 +135,7 @@ flutter_native_splash:
+   #       To show the notification bar, add the following code to your Flutter app:
+   #       WidgetsFlutterBinding.ensureInitialized();
+   #       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top], );
+-  #fullscreen: true
++  fullscreen: true
  
-   final String? title;
- 
-diff --git a/lib/presentation/jobs_bd.dart b/lib/presentation/jobs_bd.dart
-index 8c8296d..2dd572f 100644
---- a/lib/presentation/jobs_bd.dart
-+++ b/lib/presentation/jobs_bd.dart
-@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
- import 'package:get/get.dart';
- import 'package:jobs_bd/core/bindings/allbindings.dart';
- import 'package:jobs_bd/core/config/themes.dart';
--import 'package:jobs_bd/presentation/home/ui/home_page.dart';
-+import 'package:jobs_bd/presentation/splash_screen/ui/splash_screen.dart';
- 
- class JobsBd extends StatelessWidget {
-   const JobsBd({super.key});
-@@ -17,7 +17,7 @@ class JobsBd extends StatelessWidget {
-       debugShowCheckedModeBanner: false,
-       theme: TutorTheme.lightTheme,
-       title: 'Jobs BD',
--      home: HomePage(),
-+      home: SplashScreen(),
-     );
-   }
- }
-diff --git a/lib/presentation/splash_screen/presenter/splash_screen_presenter.dart b/lib/presentation/splash_screen/presenter/splash_screen_presenter.dart
-index 62b55d2..8df7269 100644
---- a/lib/presentation/splash_screen/presenter/splash_screen_presenter.dart
-+++ b/lib/presentation/splash_screen/presenter/splash_screen_presenter.dart
-@@ -1,12 +1,48 @@
- import 'dart:async';
- 
- import 'package:get/get.dart';
-+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
- import 'package:jobs_bd/core/base/base_presenter.dart';
- import 'package:jobs_bd/presentation/splash_screen/presenter/splash_screen_ui_state.dart';
- 
- class SplashScreenPresenter extends BasePresenter<SplashScreenUiState> {
-   final uiState = SplashScreenUiState.empty().obs;
-   SplashScreenUiState get currentUiState => uiState.value;
-+  StreamSubscription? subscription;
-+
-+  @override
-+  void onInit() {
-+    super.onInit();
-+    checkInternetConnection();
-+  }
-+
-+  @override
-+  void dispose() {
-+    subscription?.cancel();
-+    super.dispose();
-+  }
-+
-+  void checkInternetConnection() {
-+    subscription = InternetConnection().onStatusChange.listen((event) {
-+      switch (event) {
-+        case InternetStatus.connected:
-+          uiState.value = currentUiState.copyWith(isInternetConnected: true);
-+          addUserMessage('Internet Connected');
-+          toggleLoading(loading: false);
-+          break;
-+        case InternetStatus.disconnected:
-+          uiState.value = currentUiState.copyWith(isInternetConnected: false);
-+          addUserMessage('No Internet Connection');
-+          toggleLoading(loading: false);
-+          break;
-+        default:
-+          uiState.value = currentUiState.copyWith(isInternetConnected: false);
-+          addUserMessage('No Internet Connection');
-+          toggleLoading(loading: false);
-+          break;
-+      }
-+    });
-+  }
- 
-   @override
-   Future<void> addUserMessage(String message) async {
-diff --git a/lib/presentation/splash_screen/presenter/splash_screen_ui_state.dart b/lib/presentation/splash_screen/presenter/splash_screen_ui_state.dart
-index 84a9a6f..6ade531 100644
---- a/lib/presentation/splash_screen/presenter/splash_screen_ui_state.dart
-+++ b/lib/presentation/splash_screen/presenter/splash_screen_ui_state.dart
-@@ -4,35 +4,35 @@ class SplashScreenUiState extends BaseUiState {
-   const SplashScreenUiState({
-     required super.isLoading,
-     required super.userMessage,
--    required this.isConnected,
-+    required this.isInternetConnected,
-   });
- 
-   factory SplashScreenUiState.empty() {
-     return const SplashScreenUiState(
-       isLoading: false,
-       userMessage: '',
--      isConnected: false,
-+      isInternetConnected: false,
-     );
-   }
- 
--  final bool isConnected;
-+  final bool isInternetConnected;
- 
-   @override
-   List<Object?> get props => [
-         isLoading,
-         userMessage,
--        isConnected,
-+        isInternetConnected,
-       ];
- 
-   SplashScreenUiState copyWith({
-     bool? isLoading,
-     String? message,
--    bool? isConnected,
-+    bool? isInternetConnected,
-   }) {
-     return SplashScreenUiState(
-       isLoading: isLoading ?? super.isLoading,
-       userMessage: message ?? super.userMessage,
--      isConnected: isConnected ?? this.isConnected,
-+      isInternetConnected: isInternetConnected ?? this.isInternetConnected,
-     );
-   }
- }
-diff --git a/lib/presentation/splash_screen/ui/splash_screen.dart b/lib/presentation/splash_screen/ui/splash_screen.dart
-index 56d9ca4..40ece96 100644
---- a/lib/presentation/splash_screen/ui/splash_screen.dart
-+++ b/lib/presentation/splash_screen/ui/splash_screen.dart
-@@ -1,16 +1,26 @@
- import 'package:flutter/material.dart';
- import 'package:get/get.dart';
-+import 'package:jobs_bd/core/external_libs/presentable_widget_builder.dart';
-+import 'package:jobs_bd/presentation/home/ui/home_page.dart';
- import 'package:jobs_bd/presentation/splash_screen/presenter/splash_screen_presenter.dart';
-+import 'package:jobs_bd/presentation/splash_screen/ui/splash_screen%20copy.dart';
- 
- class SplashScreen extends StatelessWidget {
-   SplashScreen({super.key});
--  final SplashScreenPresenter controller = Get.put(SplashScreenPresenter());
-+
-+  final SplashScreenPresenter sController = Get.put(SplashScreenPresenter());
- 
-   @override
-   Widget build(BuildContext context) {
--    return const Scaffold(
--        body: Center(
--      child: CircularProgressIndicator(),
--    ));
-+    return PresentableWidgetBuilder(
-+        presenter: sController,
-+        builder: () {
-+          return Scaffold(
-+              body: Center(
-+            child: sController.currentUiState.isInternetConnected
-+                ? HomePage()
-+                : NOState(),
-+          ));
-+        });
-   }
- }
-diff --git a/pubspec.lock b/pubspec.lock
-index d673d10..23c067a 100644
---- a/pubspec.lock
-+++ b/pubspec.lock
-@@ -17,6 +17,14 @@ packages:
-       url: "https://pub.dev"
-     source: hosted
-     version: "2.0.2"
-+  archive:
-+    dependency: transitive
-+    description:
-+      name: archive
-+      sha256: "6bd38d335f0954f5fad9c79e614604fbf03a0e5b975923dd001b6ea965ef5b4b"
-+      url: "https://pub.dev"
-+    source: hosted
-+    version: "3.6.0"
-   args:
-     dependency: transitive
-     description:
-@@ -106,7 +114,7 @@ packages:
-     source: hosted
-     version: "1.18.0"
-   connectivity_plus:
--    dependency: "direct main"
-+    dependency: transitive
-     description:
-       name: connectivity_plus
-       sha256: db7a4e143dc72cc3cb2044ef9b052a7ebfe729513e6a82943bc3526f784365b8
-@@ -121,6 +129,14 @@ packages:
-       url: "https://pub.dev"
-     source: hosted
-     version: "2.0.0"
-+  crypto:
-+    dependency: transitive
-+    description:
-+      name: crypto
-+      sha256: ff625774173754681d66daaf4a448684fb04b78f902da9cb3d308c19cc5e8bab
-+      url: "https://pub.dev"
-+    source: hosted
-+    version: "3.0.3"
-   csslib:
-     dependency: transitive
-     description:
-@@ -374,6 +390,14 @@ packages:
-       url: "https://pub.dev"
-     source: hosted
-     version: "0.6.3+1"
-+  flutter_native_splash:
-+    dependency: "direct main"
-+    description:
-+      name: flutter_native_splash
-+      sha256: edf39bcf4d74aca1eb2c1e43c3e445fd9f494013df7f0da752fefe72020eedc0
-+      url: "https://pub.dev"
-+    source: hosted
-+    version: "2.4.0"
-   flutter_svg:
-     dependency: transitive
-     description:
-@@ -432,6 +456,22 @@ packages:
-       url: "https://pub.dev"
-     source: hosted
-     version: "4.0.2"
-+  image:
-+    dependency: transitive
-+    description:
-+      name: image
-+      sha256: "2237616a36c0d69aef7549ab439b833fb7f9fb9fc861af2cc9ac3eedddd69ca8"
-+      url: "https://pub.dev"
-+    source: hosted
-+    version: "4.2.0"
-+  internet_connection_checker_plus:
-+    dependency: "direct main"
-+    description:
-+      name: internet_connection_checker_plus
-+      sha256: "423480962bda16f10d0a79efe6c4f1b5212d80203f6b8ee921edb0a1d3c17c88"
-+      url: "https://pub.dev"
-+    source: hosted
-+    version: "2.3.0"
-   intl:
-     dependency: "direct main"
-     description:
-@@ -725,6 +765,14 @@ packages:
-       url: "https://pub.dev"
-     source: hosted
-     version: "1.3.2"
-+  universal_io:
-+    dependency: transitive
-+    description:
-+      name: universal_io
-+      sha256: "1722b2dcc462b4b2f3ee7d188dad008b6eb4c40bbd03a3de451d82c78bba9aad"
-+      url: "https://pub.dev"
-+    source: hosted
-+    version: "2.2.2"
-   vector_math:
-     dependency: transitive
-     description:
-@@ -885,6 +933,14 @@ packages:
-       url: "https://pub.dev"
-     source: hosted
-     version: "6.5.0"
-+  yaml:
-+    dependency: transitive
-+    description:
-+      name: yaml
-+      sha256: "75769501ea3489fca56601ff33454fe45507ea3bfb014161abc3b43ae25989d5"
-+      url: "https://pub.dev"
-+    source: hosted
-+    version: "3.1.2"
- sdks:
-   dart: ">=3.3.4 <4.0.0"
-   flutter: ">=3.19.0"
-diff --git a/pubspec.yaml b/pubspec.yaml
-index b4d5e19..bdfc21f 100644
---- a/pubspec.yaml
-+++ b/pubspec.yaml
-@@ -48,7 +48,8 @@ dependencies:
-   flutter_html_all: ^3.0.0-beta.2
-   equatable: ^2.0.5
-   fpdart: ^1.1.0
--  connectivity_plus: ^6.0.3
-+  internet_connection_checker_plus: 2.3.0
-+  flutter_native_splash: ^2.4.0
- 
- dev_dependencies:
-   flutter_test:
-diff --git a/web/index.html b/web/index.html
-index 8b7f8db..c3862d8 100644
---- a/web/index.html
-+++ b/web/index.html
-@@ -1,6 +1,4 @@
--<!DOCTYPE html>
--<html>
--<head>
-+<!DOCTYPE html><html><head>
-   <!--
-     If you are serving your web app in a path other than the root, change the
-     href value below to reflect the base path you are serving from.
-@@ -27,7 +25,7 @@
-   <link rel="apple-touch-icon" href="icons/Icon-192.png">
- 
-   <!-- Favicon -->
--  <link rel="icon" type="image/png" href="favicon.png"/>
-+  <link rel="icon" type="image/png" href="favicon.png">
- 
-   <title>jobs_bd</title>
-   <link rel="manifest" href="manifest.json">
-@@ -37,9 +35,80 @@
-     const serviceWorkerVersion = null;
-   </script>
-   <!-- This script adds the flutter initialization JS code -->
--  <script src="flutter.js" defer></script>
-+  <script src="flutter.js" defer=""></script>
-+  <style id="splash-screen-style">
-+    html {
-+      height: 100%
-+    }
-+
-+    body {
-+      margin: 0;
-+      min-height: 100%;
-+      background-color: #BD9979;
-+          background-size: 100% 100%;
-+    }
-+
-+    .center {
-+      margin: 0;
-+      position: absolute;
-+      top: 50%;
-+      left: 50%;
-+      -ms-transform: translate(-50%, -50%);
-+      transform: translate(-50%, -50%);
-+    }
-+
-+    .contain {
-+      display:block;
-+      width:100%; height:100%;
-+      object-fit: contain;
-+    }
-+
-+    .stretch {
-+      display:block;
-+      width:100%; height:100%;
-+    }
-+
-+    .cover {
-+      display:block;
-+      width:100%; height:100%;
-+      object-fit: cover;
-+    }
-+
-+    .bottom {
-+      position: absolute;
-+      bottom: 0;
-+      left: 50%;
-+      -ms-transform: translate(-50%, 0);
-+      transform: translate(-50%, 0);
-+    }
-+
-+    .bottomLeft {
-+      position: absolute;
-+      bottom: 0;
-+      left: 0;
-+    }
-+
-+    .bottomRight {
-+      position: absolute;
-+      bottom: 0;
-+      right: 0;
-+    }
-+  </style>
-+  <script id="splash-screen-script">
-+    function removeSplashFromWeb() {
-+      document.getElementById("splash")?.remove();
-+      document.getElementById("splash-branding")?.remove();
-+      document.body.style.background = "transparent";
-+    }
-+  </script>
-+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
- </head>
- <body>
-+  <picture id="splash">
-+      <source srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x" media="(prefers-color-scheme: light)">
-+      <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
-+      <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
-+  </picture>
-   <script>
-     window.addEventListener('load', function(ev) {
-       // Download main.dart.js
-@@ -55,5 +124,6 @@
-       });
-     });
-   </script>
--</body>
--</html>
-+
-+
-+</body></html>
-\ No newline at end of file
+   # If you have changed the name(s) of your info.plist file(s), you can specify the filename(s)
+   # with the info_plist_files parameter.  Remove only the # characters in the three lines below,
 
 ================
 
