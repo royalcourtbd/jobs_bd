@@ -1,0 +1,77 @@
+#!/bin/bash
+
+function show_loading() {
+  local description=$1
+  local process_id=$2
+  local spinner_index=0
+  local braille_spinner_list='⡿⣟⣯⣷⣾⣽⣻⢿'
+
+  echo -n "$description"
+
+  while ps -p "$process_id" >/dev/null; do
+    printf "\b\033[35m%s\033[0m" "${braille_spinner_list:spinner_index:1}"
+    spinner_index=$(( (spinner_index + 1) % ${#braille_spinner_list} ))
+    sleep 0.025
+  done
+
+  if [ $? -eq 0 ]; then
+    echo -e "\b\033[32m✓\033[0m "
+  else
+    echo -e "\b\033[31m𐄂\033[0m "
+  fi
+}
+
+if [ "$1" == "build" ]; then
+  echo -e "Building APK...\n"
+  (flutter build apk --release --obfuscate --target-platform android-arm64 --split-debug-info=./ && open build/app/outputs/flutter-apk/ >/dev/null 2>&1) &
+  PID=$!
+  show_loading "Building APK...                                            " $PID
+
+elif [ "$1" == "db" ]; then
+  echo -e "Executing build_runner...  \n"
+  (flutter pub run build_runner build --delete-conflicting-outputs >/dev/null 2>&1) &
+  PID=$!
+  show_loading "Running build_runner     " $PID
+
+elif [ "$1" == "cleanup" ]; then
+  echo -e "Cleaning up project...     \n"
+
+  (dart fix --apply >/dev/null 2>&1) &
+  PID=$!
+  show_loading "Fixing code                                           " $PID
+
+  (dart format --fix . >/dev/null 2>&1) &
+  PID=$!
+  show_loading "Following dart guidelines                             " $PID
+
+  (flutter pub run import_path_converter:main >/dev/null 2>&1) &
+  PID=$!
+  show_loading "Converting import paths from relative to absolute     " $PID
+
+  #(flutter pub run import_sorter:main >/dev/null 2>&1) &
+  #PID=$!
+  #show_loading "Organizing imports                                    " $PID
+
+  (flutter pub upgrade --major-versions >/dev/null 2>&1 && flutter pub upgrade >/dev/null 2>&1) &
+  PID=$!
+  show_loading "Upgrading the dependencies                            " $PID
+
+  echo -e "\n\033[32m✓  All cleaning tasks finished.  \033[0m"
+elif [ "$1" == "setup" ]; then
+  echo -e "Setting up project...  \n"
+  (flutter pub get >/dev/null 2>&1 && flutter pub run build_runner build --delete-conflicting-outputs >/dev/null 2>&1) &
+  PID=$!
+  show_loading "Generating build files     " $PID
+  (flutter pub run flutter_native_splash:create >/dev/null 2>&1) &
+  PID=$!
+  show_loading "Generating splash screen     " $PID
+
+elif [ "$1" == "unused" ]; then
+  echo -e "Finding unused files...  \n"
+  (flutter pub run dart_code_metrics:metrics check-unused-code lib && flutter pub run dart_code_metrics:metrics check-unused-files lib)
+
+else
+  echo "Invalid argument: $1"
+  echo "Usage: ./script.sh [build|cleanup|setup|unused]"
+  exit 1
+fi

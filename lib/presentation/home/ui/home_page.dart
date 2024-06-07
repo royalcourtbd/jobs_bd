@@ -121,10 +121,10 @@ class HomePage extends StatelessWidget {
                                     theme: theme,
                                     index: index,
                                     onLongPress: () =>
-                                        jobPresentation.deleteJob(homePresenter
-                                            .currentUiState
-                                            .allJobList[index]
-                                            .documentId!),
+                                        jobPresentation.deleteJob(
+                                      homePresenter.currentUiState
+                                          .allJobList[index].documentId!,
+                                    ),
                                     jobList:
                                         homePresenter.currentUiState.allJobList,
                                     onTap: () => context.navigatorPush(

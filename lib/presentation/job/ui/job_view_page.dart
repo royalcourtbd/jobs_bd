@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart' as html;
 import 'package:intl/intl.dart';
@@ -54,8 +55,16 @@ class JobViewPage extends StatelessWidget {
                   children: [
                     ClipRRect(
                       borderRadius: radius10,
-                      child: Image.network(
-                        jobList[index].imgUrl ?? '',
+                      child: CachedNetworkImage(
+                        imageUrl: jobList[index].imgUrl ?? '',
+                        placeholder: (context, url) => const Icon(
+                          Icons.image,
+                          color: Colors.grey,
+                        ),
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.error,
+                          color: Colors.red,
+                        ),
                         fit: BoxFit.cover,
                         height: JobsScreen.width * 0.4,
                         width: JobsScreen.width * 0.4,

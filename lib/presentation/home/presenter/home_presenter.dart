@@ -1,15 +1,19 @@
 import 'package:jobs_bd/core/base/base_presenter.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
+import 'package:jobs_bd/data/repository/device_info_repository.dart';
 import 'package:jobs_bd/data/repository/get_all_jobs_repository.dart';
 import 'package:jobs_bd/data/repository/get_jobs_by_category_repository.dart';
 import 'package:jobs_bd/data/repository/increment_total_views_repository.dart';
 import 'package:jobs_bd/data/service/cache_manager.dart';
+import 'package:jobs_bd/data/service/device_info_service.dart';
 import 'package:jobs_bd/presentation/home/presenter/home_ui_state.dart';
 
 class HomePresenter extends BasePresenter<HomeUiState> {
   final Obs<HomeUiState> uiState = Obs(HomeUiState.empty());
   final CacheManager _cacheManager = CacheManager();
+  final DeviceInfoService _deviceInfoService = DeviceInfoService();
+  final DeviceInfoRepository _deviceInfoRepository = DeviceInfoRepository();
 
   HomeUiState get currentUiState => uiState.value;
   final List<JobCategoryModel> _categoryList = jobCategoryList;
@@ -19,6 +23,12 @@ class HomePresenter extends BasePresenter<HomeUiState> {
     super.onInit();
     _fetchAllJobs();
     fetchCategoryCount();
+    _storeDeviceInfo();
+  }
+
+  void _storeDeviceInfo() async {
+    final deviceInfo = await _deviceInfoService.getDeviceInfo();
+    await _deviceInfoRepository.saveDeviceInfo(deviceInfo);
   }
 
   void _fetchAllJobs() {
