@@ -18,17 +18,23 @@ class HomeUiState extends BaseUiState {
   });
 
   factory HomeUiState.empty() {
-    return const HomeUiState(
+    return HomeUiState(
       isLoading: false,
       userMessage: '',
-      categoryList: [],
-      jobListByCategory: [],
-      allJobList: [],
+      categoryList: const [],
+      jobListByCategory: const [],
+      allJobList: const [],
       todayPostsCount: 0,
       todayDeadlinesCount: 0,
       tomorrowDeadlinesCount: 0,
       isAdsLoaded: false, // Initialize isAdsLoaded to false
-      adIdsList: [], // Initialize adIdsList to an empty list
+      adIdsList: AdIdsModel(
+        banneradsId1: '',
+        banneradsId2: '',
+        intadsId1: '',
+        intadsId2: '',
+        videoAdsid: '',
+      ), // Initialize adIdsList to empty
     );
   }
 
@@ -49,7 +55,7 @@ class HomeUiState extends BaseUiState {
   final List<JobCategoryModel> categoryList;
   final List<JobModel> allJobList;
   final List<JobModel> jobListByCategory;
-  final List<AdIdsModel> adIdsList; // Add adIdsList property
+  final AdIdsModel adIdsList; // Add adIdsList property
   final int todayPostsCount;
   final int todayDeadlinesCount;
   final int tomorrowDeadlinesCount;
@@ -65,7 +71,7 @@ class HomeUiState extends BaseUiState {
     int? todayDeadlinesCount,
     int? tomorrowDeadlinesCount,
     bool? isAdsLoaded, // Add isAdsLoaded to copyWith method
-    List<AdIdsModel>? adIdsList, // Add adIdsList to copyWith method
+    AdIdsModel? adIdsList, // Add adIdsList to copyWith method
   }) {
     return HomeUiState(
       isLoading: isLoading ?? super.isLoading,

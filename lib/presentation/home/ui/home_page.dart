@@ -141,10 +141,10 @@ class HomePage extends StatelessWidget {
                                     },
                                   ),
                                   if ((index + 1) % 5 == 0) ...[
-                                    Container(
-                                      height: 50,
+                                    SizedBox(
+                                      height: homePresenter.bannerAd.size.height
+                                          .toDouble(),
                                       width: JobsScreen.width,
-                                      color: Colors.redAccent,
                                       child:
                                           AdWidget(ad: homePresenter.bannerAd),
                                     ),

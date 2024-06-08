@@ -2,7 +2,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jobs_bd/core/base/base_presenter.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
-import 'package:jobs_bd/data/repository/ad_ids_repository.dart';
 import 'package:jobs_bd/data/repository/device_info_repository.dart';
 import 'package:jobs_bd/data/repository/get_all_jobs_repository.dart';
 import 'package:jobs_bd/data/repository/get_jobs_by_category_repository.dart';
@@ -16,7 +15,7 @@ class HomePresenter extends BasePresenter<HomeUiState> {
   final CacheManager _cacheManager = CacheManager();
   final DeviceInfoService _deviceInfoService = DeviceInfoService();
   final DeviceInfoRepository _deviceInfoRepository = DeviceInfoRepository();
-  final AdIdsRepository _adIdsRepository = AdIdsRepository();
+
   String? selectedCategory;
 
   late InterstitialAd interstitialAd;
@@ -31,7 +30,7 @@ class HomePresenter extends BasePresenter<HomeUiState> {
     _fetchAllJobs();
     fetchCategoryCount();
     _storeDeviceInfo();
-    _fetchAdIds();
+
     getBannerAds();
   }
 
@@ -43,7 +42,7 @@ class HomePresenter extends BasePresenter<HomeUiState> {
 
   getBannerAds() {
     bannerAd = BannerAd(
-      adUnitId: currentUiState.adIdsList[0].banneradsId1,
+      adUnitId: 'ca-app-pub-3940256099942544/6300978111',
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(
@@ -73,12 +72,6 @@ class HomePresenter extends BasePresenter<HomeUiState> {
     if (!deviceIdExists) {
       await _deviceInfoRepository.saveDeviceInfo(deviceInfo);
     }
-  }
-
-  void _fetchAdIds() async {
-    final adIds = await _adIdsRepository.fetchAdIds();
-    uiState.value = currentUiState.copyWith(adIdsList: [adIds]);
-    print('Ad Ids: ${currentUiState.adIdsList[0].banneradsId1}');
   }
 
   void _fetchAllJobs() {
