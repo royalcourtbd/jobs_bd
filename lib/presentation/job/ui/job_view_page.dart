@@ -31,6 +31,11 @@ class JobViewPage extends StatelessWidget {
         applicationEndDate.isAtSameMomentAs(tomorrow) ||
         applicationEndDate.isBefore(today);
 
+    String formatDateString(String dateTimeString) {
+      DateTime dateTime = DateTime.parse(dateTimeString);
+      return DateFormat('dd MMMM yyyy').format(dateTime);
+    }
+
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
@@ -104,9 +109,8 @@ class JobViewPage extends StatelessWidget {
                               ),
                             ),
                             TextWithOpacity(
-                              title: DateTime.parse(jobList[index].posted ?? '')
-                                  .toString()
-                                  .substring(0, 10),
+                              title:
+                                  formatDateString(jobList[index].posted ?? ''),
                               theme: theme,
                             ),
                           ],
@@ -120,7 +124,9 @@ class JobViewPage extends StatelessWidget {
                               ),
                             ),
                             TextWithOpacity(
-                              title: jobList[index].jobDeadLine ?? '',
+                              title: formatDateString(
+                                  jobList[index].jobDeadLine ?? ''),
+
                               theme: theme,
                               textColor: isEndingSoon
                                   ? Colors.red

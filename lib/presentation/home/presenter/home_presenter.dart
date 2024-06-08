@@ -1,3 +1,5 @@
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:intl/intl.dart';
 import 'package:jobs_bd/core/base/base_presenter.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
@@ -14,6 +16,9 @@ class HomePresenter extends BasePresenter<HomeUiState> {
   final CacheManager _cacheManager = CacheManager();
   final DeviceInfoService _deviceInfoService = DeviceInfoService();
   final DeviceInfoRepository _deviceInfoRepository = DeviceInfoRepository();
+  String? selectedCategory;
+
+  late BannerAd bannerAd;
 
   HomeUiState get currentUiState => uiState.value;
   final List<JobCategoryModel> _categoryList = jobCategoryList;
@@ -26,9 +31,40 @@ class HomePresenter extends BasePresenter<HomeUiState> {
     _storeDeviceInfo();
   }
 
+  @override
+  void dispose() {
+    bannerAd.dispose();
+    super.dispose();
+  }
+
+  BannerAd createBannerAd() {
+    BannerAd bannerAd = BannerAd(
+      size: AdSize.banner,
+      adUnitId:
+          'ca-app-pub-3940256099942544/6300978111', // Replace with your Ad Unit ID
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          uiState.value = currentUiState.copyWith(isAdsLoaded: true);
+        },
+        onAdClicked: (ad) {},
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+      request: const AdRequest(),
+    );
+    bannerAd.load();
+    return bannerAd;
+  }
+
   void _storeDeviceInfo() async {
     final deviceInfo = await _deviceInfoService.getDeviceInfo();
-    await _deviceInfoRepository.saveDeviceInfo(deviceInfo);
+    final deviceIdExists =
+        await _deviceInfoRepository.deviceIdExists(deviceInfo.deviceId!);
+
+    if (!deviceIdExists) {
+      await _deviceInfoRepository.saveDeviceInfo(deviceInfo);
+    }
   }
 
   void _fetchAllJobs() {
@@ -113,10 +149,66 @@ class HomePresenter extends BasePresenter<HomeUiState> {
 
   void fetchJobListByCategory(String category) {
     toggleLoading(loading: true);
-    GetJobsByCategoryRepository().getJobsByCategory(category).listen((jobList) {
-      uiState.value = currentUiState.copyWith(jobListByCategory: jobList);
-      toggleLoading(loading: false); // Ensure loading is set to false here
-    });
+    selectedCategory = category;
+
+    if (category == 'Live Jobs' ||
+        category == 'Today\'s Posts' ||
+        category == 'Today\'s Deadlines' ||
+        category == 'Tomorrow\'s Deadlines') {
+      List<JobModel> filteredJobList;
+
+      switch (category) {
+        case 'Live Jobs':
+          filteredJobList = _cacheManager.cachedAllJobList;
+          break;
+        case 'Today\'s Posts':
+          filteredJobList = _cacheManager.cachedAllJobList.where((job) {
+            final today = DateTime.now();
+            final jobPosted = DateTime.parse(job.posted!);
+            return jobPosted.year == today.year &&
+                jobPosted.month == today.month &&
+                jobPosted.day == today.day;
+          }).toList();
+          break;
+        case 'Today\'s Deadlines':
+          filteredJobList = _cacheManager.cachedAllJobList.where((job) {
+            final today = DateTime.now();
+            final jobDeadLine = DateTime.parse(job.jobDeadLine!);
+            return jobDeadLine.year == today.year &&
+                jobDeadLine.month == today.month &&
+                jobDeadLine.day == today.day;
+          }).toList();
+          break;
+        case 'Tomorrow\'s Deadlines':
+          filteredJobList = _cacheManager.cachedAllJobList.where((job) {
+            final tomorrow = DateTime.now().add(const Duration(days: 1));
+            final jobDeadLine = DateTime.parse(job.jobDeadLine!);
+            return jobDeadLine.year == tomorrow.year &&
+                jobDeadLine.month == tomorrow.month &&
+                jobDeadLine.day == tomorrow.day;
+          }).toList();
+          break;
+        default:
+          filteredJobList = [];
+      }
+
+      uiState.value =
+          currentUiState.copyWith(jobListByCategory: filteredJobList);
+      toggleLoading(loading: false);
+    } else {
+      GetJobsByCategoryRepository()
+          .getJobsByCategory(category)
+          .listen((jobList) {
+        uiState.value = currentUiState.copyWith(jobListByCategory: jobList);
+        toggleLoading(loading: false); // Ensure loading is set to false here
+      });
+    }
+  }
+
+  void refreshJobList() {
+    if (selectedCategory != null) {
+      fetchJobListByCategory(selectedCategory!);
+    }
   }
 
   void fetchCategoryCount() {
@@ -136,6 +228,11 @@ class HomePresenter extends BasePresenter<HomeUiState> {
 
   void incrementViews(JobModel id) {
     IncrementTotalViewsRepository().incrementTotalViews(id);
+  }
+
+  String formatDateString(String dateTimeString) {
+    DateTime dateTime = DateTime.parse(dateTimeString);
+    return DateFormat('dd MMMM yyyy').format(dateTime);
   }
 
   @override

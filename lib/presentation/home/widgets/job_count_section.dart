@@ -32,6 +32,7 @@ class JobCountSecion extends StatelessWidget {
           theme: theme,
           jobCount: homePresenter.currentUiState.allJobList.length,
           onTap: () {
+            homePresenter.fetchJobListByCategory('Live Jobs');
             context.navigatorPush(JobListPage(title: 'Live Jobs'));
           },
         ),
@@ -39,19 +40,28 @@ class JobCountSecion extends StatelessWidget {
           title: 'Today\'s Posts',
           theme: theme,
           jobCount: homePresenter.currentUiState.todayPostsCount,
-          onTap: () {},
+          onTap: () {
+            homePresenter.fetchJobListByCategory('Today\'s Posts');
+            context.navigatorPush(JobListPage(title: 'Today\'s Posts'));
+          },
         ),
         JobCountItem(
           theme: theme,
           jobCount: homePresenter.currentUiState.todayDeadlinesCount,
           title: 'Today\'s Deadlines',
-          onTap: () {},
+          onTap: () {
+            homePresenter.fetchJobListByCategory('Today\'s Deadlines');
+            context.navigatorPush(JobListPage(title: 'Today\'s Deadlines'));
+          },
         ),
         JobCountItem(
           theme: theme,
           title: 'Tomorrow\'s Deadlines',
           jobCount: homePresenter.currentUiState.tomorrowDeadlinesCount,
-          onTap: () {},
+          onTap: () {
+            homePresenter.fetchJobListByCategory('Tomorrow\'s Deadlines');
+            context.navigatorPush(JobListPage(title: 'Tomorrow\'s Deadlines'));
+          },
         ),
       ],
     );

@@ -12,6 +12,7 @@ class HomeUiState extends BaseUiState {
     required this.todayPostsCount,
     required this.todayDeadlinesCount,
     required this.tomorrowDeadlinesCount,
+    required this.isAdsLoaded, // Add isAdsLoaded property
   });
 
   factory HomeUiState.empty() {
@@ -24,6 +25,7 @@ class HomeUiState extends BaseUiState {
       todayPostsCount: 0,
       todayDeadlinesCount: 0,
       tomorrowDeadlinesCount: 0,
+      isAdsLoaded: false, // Initialize isAdsLoaded to false
     );
   }
 
@@ -37,6 +39,7 @@ class HomeUiState extends BaseUiState {
         todayPostsCount,
         todayDeadlinesCount,
         tomorrowDeadlinesCount,
+        isAdsLoaded, // Include isAdsLoaded in props
       ];
 
   final List<JobCategoryModel> categoryList;
@@ -46,6 +49,7 @@ class HomeUiState extends BaseUiState {
   final int todayPostsCount;
   final int todayDeadlinesCount;
   final int tomorrowDeadlinesCount;
+  final bool isAdsLoaded; // Define the isAdsLoaded property
 
   HomeUiState copyWith({
     bool? isLoading,
@@ -56,6 +60,7 @@ class HomeUiState extends BaseUiState {
     int? todayPostsCount,
     int? todayDeadlinesCount,
     int? tomorrowDeadlinesCount,
+    bool? isAdsLoaded, // Add isAdsLoaded to copyWith method
   }) {
     return HomeUiState(
       isLoading: isLoading ?? super.isLoading,
@@ -67,6 +72,8 @@ class HomeUiState extends BaseUiState {
       todayDeadlinesCount: todayDeadlinesCount ?? this.todayDeadlinesCount,
       tomorrowDeadlinesCount:
           tomorrowDeadlinesCount ?? this.tomorrowDeadlinesCount,
+      isAdsLoaded:
+          isAdsLoaded ?? this.isAdsLoaded, // Include isAdsLoaded in copyWith
     );
   }
 }

@@ -127,13 +127,17 @@ class HomePage extends StatelessWidget {
                                     ),
                                     jobList:
                                         homePresenter.currentUiState.allJobList,
-                                    onTap: () => context.navigatorPush(
-                                      JobViewPage(
-                                        index: index,
-                                        jobList: homePresenter
-                                            .currentUiState.allJobList,
-                                      ),
-                                    ),
+                                    onTap: () {
+                                      homePresenter.incrementViews(homePresenter
+                                          .currentUiState.allJobList[index]);
+                                      context.navigatorPush(
+                                        JobViewPage(
+                                          index: index,
+                                          jobList: homePresenter
+                                              .currentUiState.allJobList,
+                                        ),
+                                      );
+                                    },
                                   ),
                                   if ((index + 1) % 5 == 0) ...[
                                     Container(

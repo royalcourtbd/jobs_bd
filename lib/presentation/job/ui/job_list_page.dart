@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobs_bd/core/config/jobs_screen.dart';
+import 'package:jobs_bd/core/static/svg_path.dart';
 import 'package:jobs_bd/core/static/ui_const.dart';
 import 'package:jobs_bd/core/utility/utility.dart';
 import 'package:jobs_bd/presentation/home/widgets/job_list_item.dart';
@@ -40,8 +41,11 @@ class JobListPage extends StatelessWidget {
           final jobList = homePresenter.currentUiState.jobListByCategory;
 
           if (jobList.isEmpty) {
-            return const Center(
-              child: Text('No jobs available'),
+            return Center(
+              child: Image.asset(
+                SvgPath.icNotFount,
+                width: JobsScreen.width * .5,
+              ),
             );
           }
 

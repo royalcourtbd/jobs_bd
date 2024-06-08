@@ -7,4 +7,12 @@ class DeviceInfoRepository {
   Future<void> saveDeviceInfo(DeviceInfoModel deviceInfo) async {
     await _firestore.collection('device_info').add(deviceInfo.toJson());
   }
+
+  Future<bool> deviceIdExists(String deviceId) async {
+    final querySnapshot = await _firestore
+        .collection('device_info')
+        .where('deviceId', isEqualTo: deviceId)
+        .get();
+    return querySnapshot.docs.isNotEmpty;
+  }
 }

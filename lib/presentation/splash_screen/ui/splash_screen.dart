@@ -13,14 +13,16 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PresentableWidgetBuilder(
-        presenter: sController,
-        builder: () {
-          return Scaffold(
-              body: Center(
+      presenter: sController,
+      builder: () {
+        return Scaffold(
+          body: Center(
             child: sController.currentUiState.isInternetConnected
                 ? HomePage()
                 : NOState(),
-          ));
-        });
+          ),
+        );
+      },
+    );
   }
 }
