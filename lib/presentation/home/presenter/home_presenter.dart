@@ -1,8 +1,8 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:intl/intl.dart';
 import 'package:jobs_bd/core/base/base_presenter.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
+import 'package:jobs_bd/data/repository/ad_ids_repository.dart';
 import 'package:jobs_bd/data/repository/device_info_repository.dart';
 import 'package:jobs_bd/data/repository/get_all_jobs_repository.dart';
 import 'package:jobs_bd/data/repository/get_jobs_by_category_repository.dart';
@@ -16,8 +16,10 @@ class HomePresenter extends BasePresenter<HomeUiState> {
   final CacheManager _cacheManager = CacheManager();
   final DeviceInfoService _deviceInfoService = DeviceInfoService();
   final DeviceInfoRepository _deviceInfoRepository = DeviceInfoRepository();
+  final AdIdsRepository _adIdsRepository = AdIdsRepository();
   String? selectedCategory;
 
+  late InterstitialAd interstitialAd;
   late BannerAd bannerAd;
 
   HomeUiState get currentUiState => uiState.value;
@@ -29,6 +31,8 @@ class HomePresenter extends BasePresenter<HomeUiState> {
     _fetchAllJobs();
     fetchCategoryCount();
     _storeDeviceInfo();
+    _fetchAdIds();
+    getBannerAds();
   }
 
   @override
@@ -37,24 +41,28 @@ class HomePresenter extends BasePresenter<HomeUiState> {
     super.dispose();
   }
 
-  BannerAd createBannerAd() {
-    BannerAd bannerAd = BannerAd(
+  getBannerAds() {
+    bannerAd = BannerAd(
+      adUnitId: currentUiState.adIdsList[0].banneradsId1,
       size: AdSize.banner,
-      adUnitId:
-          'ca-app-pub-3940256099942544/6300978111', // Replace with your Ad Unit ID
+      request: const AdRequest(),
       listener: BannerAdListener(
-        onAdLoaded: (ad) {
+        onAdLoaded: (Ad ad) {
+          print('Ad loaded: $ad');
           uiState.value = currentUiState.copyWith(isAdsLoaded: true);
         },
-        onAdClicked: (ad) {},
-        onAdFailedToLoad: (ad, error) {
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          print('Ad failed to load: $error');
           ad.dispose();
+          bannerAd.load();
         },
+        onAdOpened: (Ad ad) => print('Ad opened: $ad'),
+        onAdClosed: (Ad ad) => print('Ad closed: $ad'),
+        onAdImpression: (Ad ad) => print('Ad impression: $ad'),
+        onAdClicked: (Ad ad) => print('Ad clicked: $ad'),
       ),
-      request: const AdRequest(),
     );
     bannerAd.load();
-    return bannerAd;
   }
 
   void _storeDeviceInfo() async {
@@ -65,6 +73,12 @@ class HomePresenter extends BasePresenter<HomeUiState> {
     if (!deviceIdExists) {
       await _deviceInfoRepository.saveDeviceInfo(deviceInfo);
     }
+  }
+
+  void _fetchAdIds() async {
+    final adIds = await _adIdsRepository.fetchAdIds();
+    uiState.value = currentUiState.copyWith(adIdsList: [adIds]);
+    print('Ad Ids: ${currentUiState.adIdsList[0].banneradsId1}');
   }
 
   void _fetchAllJobs() {
@@ -228,11 +242,6 @@ class HomePresenter extends BasePresenter<HomeUiState> {
 
   void incrementViews(JobModel id) {
     IncrementTotalViewsRepository().incrementTotalViews(id);
-  }
-
-  String formatDateString(String dateTimeString) {
-    DateTime dateTime = DateTime.parse(dateTimeString);
-    return DateFormat('dd MMMM yyyy').format(dateTime);
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:jobs_bd/core/base/base_ui_state.dart';
+import 'package:jobs_bd/data/dummy_data_model/ad_ids_model.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 
@@ -13,6 +14,7 @@ class HomeUiState extends BaseUiState {
     required this.todayDeadlinesCount,
     required this.tomorrowDeadlinesCount,
     required this.isAdsLoaded, // Add isAdsLoaded property
+    required this.adIdsList, // Add adIdsList property
   });
 
   factory HomeUiState.empty() {
@@ -26,6 +28,7 @@ class HomeUiState extends BaseUiState {
       todayDeadlinesCount: 0,
       tomorrowDeadlinesCount: 0,
       isAdsLoaded: false, // Initialize isAdsLoaded to false
+      adIdsList: [], // Initialize adIdsList to an empty list
     );
   }
 
@@ -39,13 +42,14 @@ class HomeUiState extends BaseUiState {
         todayPostsCount,
         todayDeadlinesCount,
         tomorrowDeadlinesCount,
+        adIdsList, // Include adIdsList in props
         isAdsLoaded, // Include isAdsLoaded in props
       ];
 
   final List<JobCategoryModel> categoryList;
   final List<JobModel> allJobList;
   final List<JobModel> jobListByCategory;
-
+  final List<AdIdsModel> adIdsList; // Add adIdsList property
   final int todayPostsCount;
   final int todayDeadlinesCount;
   final int tomorrowDeadlinesCount;
@@ -61,6 +65,7 @@ class HomeUiState extends BaseUiState {
     int? todayDeadlinesCount,
     int? tomorrowDeadlinesCount,
     bool? isAdsLoaded, // Add isAdsLoaded to copyWith method
+    List<AdIdsModel>? adIdsList, // Add adIdsList to copyWith method
   }) {
     return HomeUiState(
       isLoading: isLoading ?? super.isLoading,
@@ -74,6 +79,7 @@ class HomeUiState extends BaseUiState {
           tomorrowDeadlinesCount ?? this.tomorrowDeadlinesCount,
       isAdsLoaded:
           isAdsLoaded ?? this.isAdsLoaded, // Include isAdsLoaded in copyWith
+      adIdsList: adIdsList ?? this.adIdsList, // Include adIdsList in copyWith
     );
   }
 }

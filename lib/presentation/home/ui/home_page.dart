@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jobs_bd/core/config/jobs_screen.dart';
 import 'package:jobs_bd/core/external_libs/presentable_widget_builder.dart';
 import 'package:jobs_bd/core/static/ui_const.dart';
@@ -144,6 +145,8 @@ class HomePage extends StatelessWidget {
                                       height: 50,
                                       width: JobsScreen.width,
                                       color: Colors.redAccent,
+                                      child:
+                                          AdWidget(ad: homePresenter.bannerAd),
                                     ),
                                     gapH10,
                                   ],
