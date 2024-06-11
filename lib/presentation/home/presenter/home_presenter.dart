@@ -12,6 +12,7 @@ import 'package:jobs_bd/presentation/home/presenter/home_ui_state.dart';
 
 class HomePresenter extends BasePresenter<HomeUiState> {
   final Obs<HomeUiState> uiState = Obs(HomeUiState.empty());
+  HomeUiState get currentUiState => uiState.value;
   final CacheManager _cacheManager = CacheManager();
   final DeviceInfoService _deviceInfoService = DeviceInfoService();
   final DeviceInfoRepository _deviceInfoRepository = DeviceInfoRepository();
@@ -19,9 +20,8 @@ class HomePresenter extends BasePresenter<HomeUiState> {
   String? selectedCategory;
 
   late InterstitialAd interstitialAd;
-  late BannerAd bannerAd;
-
-  HomeUiState get currentUiState => uiState.value;
+  late BannerAd homeBannerAd;
+  late BannerAd jobBannerAd;
   final List<JobCategoryModel> _categoryList = jobCategoryList;
 
   @override
@@ -30,38 +30,123 @@ class HomePresenter extends BasePresenter<HomeUiState> {
     _fetchAllJobs();
     fetchCategoryCount();
     _storeDeviceInfo();
-
-    getBannerAds();
+    getHomePageBannerAds();
+    getJobListPagebannerAds();
+    interstitialAdLoad();
   }
 
-  @override
-  void dispose() {
-    bannerAd.dispose();
-    super.dispose();
-  }
-
-  getBannerAds() {
-    bannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+  void getHomePageBannerAds() {
+    homeBannerAd = BannerAd(
+      adUnitId: 'ca-app-pub-9046297647605396/3133811980',
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
           print('Ad loaded: $ad');
-          uiState.value = currentUiState.copyWith(isAdsLoaded: true);
+          uiState.value = currentUiState.copyWith(isHomeBannerAdsLoaded: true);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
           print('Ad failed to load: $error');
           ad.dispose();
-          bannerAd.load();
+          getHomePageBannerAds();
+          homeBannerAd.load();
         },
-        onAdOpened: (Ad ad) => print('Ad opened: $ad'),
-        onAdClosed: (Ad ad) => print('Ad closed: $ad'),
-        onAdImpression: (Ad ad) => print('Ad impression: $ad'),
-        onAdClicked: (Ad ad) => print('Ad clicked: $ad'),
+        onAdOpened: (Ad ad) {
+          print('Ad opened: $ad');
+          homeBannerAd.load();
+        },
+        onAdClosed: (Ad ad) {
+          print('Ad closed: $ad');
+          homeBannerAd.load();
+        },
+        onAdImpression: (Ad ad) {
+          print('Ad impression: $ad');
+          homeBannerAd.load();
+        },
+        onAdClicked: (Ad ad) {
+          print('Ad clicked: $ad');
+          homeBannerAd.load();
+        },
       ),
     );
-    bannerAd.load();
+    homeBannerAd.load();
+  }
+
+  void getJobListPagebannerAds() {
+    jobBannerAd = BannerAd(
+      adUnitId: 'ca-app-pub-9046297647605396/4741706423',
+      size: AdSize.banner,
+      request: const AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (Ad ad) {
+          print('Ad loaded: $ad');
+          uiState.value =
+              currentUiState.copyWith(isJobPageBannerAdsLoaded: true);
+        },
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          print('Ad failed to load: $error');
+          ad.dispose();
+          getJobListPagebannerAds();
+          jobBannerAd.load();
+        },
+        onAdOpened: (Ad ad) {
+          print('Ad opened: $ad');
+          jobBannerAd.load();
+        },
+        onAdClosed: (Ad ad) {
+          print('Ad closed: $ad');
+          jobBannerAd.load();
+        },
+        onAdImpression: (Ad ad) {
+          print('Ad impression: $ad');
+          jobBannerAd.load();
+        },
+        onAdClicked: (Ad ad) {
+          print('Ad clicked: $ad');
+          jobBannerAd.load();
+        },
+      ),
+    );
+    jobBannerAd.load();
+  }
+
+  void interstitialAdLoad() {
+    InterstitialAd.load(
+      adUnitId: 'ca-app-pub-9046297647605396/3428624758',
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: onAdLoaded,
+        onAdFailedToLoad: (LoadAdError error) {
+          print('InterstitialAd failed to load: $error');
+          interstitialAdLoad();
+        },
+      ),
+    );
+  }
+
+  void onAdLoaded(InterstitialAd ad) {
+    interstitialAd = ad;
+    uiState.value = currentUiState.copyWith(isInterstitialAdsLoaded: true);
+    interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        interstitialAd.dispose();
+        interstitialAdLoad();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        interstitialAd.dispose();
+        uiState.value = currentUiState.copyWith(isInterstitialAdsLoaded: false);
+        interstitialAdLoad();
+      },
+      onAdShowedFullScreenContent: (
+        InterstitialAd ad,
+      ) {
+        print('$ad onAdShowedFullScreenContent');
+      },
+    );
   }
 
   void _storeDeviceInfo() async {

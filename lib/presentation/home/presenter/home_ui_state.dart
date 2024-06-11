@@ -13,8 +13,10 @@ class HomeUiState extends BaseUiState {
     required this.todayPostsCount,
     required this.todayDeadlinesCount,
     required this.tomorrowDeadlinesCount,
-    required this.isAdsLoaded, // Add isAdsLoaded property
-    required this.adIdsList, // Add adIdsList property
+    required this.isHomeBannerAdsLoaded,
+    required this.isJobPageBannerAdsLoaded,
+    required this.isInterstitialAdsLoaded,
+    required this.adIdsList,
   });
 
   factory HomeUiState.empty() {
@@ -27,14 +29,16 @@ class HomeUiState extends BaseUiState {
       todayPostsCount: 0,
       todayDeadlinesCount: 0,
       tomorrowDeadlinesCount: 0,
-      isAdsLoaded: false, // Initialize isAdsLoaded to false
+      isHomeBannerAdsLoaded: false,
+      isJobPageBannerAdsLoaded: false,
+      isInterstitialAdsLoaded: false,
       adIdsList: AdIdsModel(
         banneradsId1: '',
         banneradsId2: '',
         intadsId1: '',
         intadsId2: '',
         videoAdsid: '',
-      ), // Initialize adIdsList to empty
+      ),
     );
   }
 
@@ -48,18 +52,22 @@ class HomeUiState extends BaseUiState {
         todayPostsCount,
         todayDeadlinesCount,
         tomorrowDeadlinesCount,
-        adIdsList, // Include adIdsList in props
-        isAdsLoaded, // Include isAdsLoaded in props
+        isHomeBannerAdsLoaded,
+        isJobPageBannerAdsLoaded,
+        isInterstitialAdsLoaded,
+        adIdsList,
       ];
 
   final List<JobCategoryModel> categoryList;
   final List<JobModel> allJobList;
   final List<JobModel> jobListByCategory;
-  final AdIdsModel adIdsList; // Add adIdsList property
+  final AdIdsModel adIdsList;
   final int todayPostsCount;
   final int todayDeadlinesCount;
   final int tomorrowDeadlinesCount;
-  final bool isAdsLoaded; // Define the isAdsLoaded property
+  final bool isHomeBannerAdsLoaded;
+  final bool isJobPageBannerAdsLoaded;
+  final bool isInterstitialAdsLoaded;
 
   HomeUiState copyWith({
     bool? isLoading,
@@ -70,8 +78,10 @@ class HomeUiState extends BaseUiState {
     int? todayPostsCount,
     int? todayDeadlinesCount,
     int? tomorrowDeadlinesCount,
-    bool? isAdsLoaded, // Add isAdsLoaded to copyWith method
-    AdIdsModel? adIdsList, // Add adIdsList to copyWith method
+    bool? isHomeBannerAdsLoaded,
+    bool? isJobPageBannerAdsLoaded,
+    bool? isInterstitialAdsLoaded,
+    AdIdsModel? adIdsList,
   }) {
     return HomeUiState(
       isLoading: isLoading ?? super.isLoading,
@@ -83,9 +93,13 @@ class HomeUiState extends BaseUiState {
       todayDeadlinesCount: todayDeadlinesCount ?? this.todayDeadlinesCount,
       tomorrowDeadlinesCount:
           tomorrowDeadlinesCount ?? this.tomorrowDeadlinesCount,
-      isAdsLoaded:
-          isAdsLoaded ?? this.isAdsLoaded, // Include isAdsLoaded in copyWith
-      adIdsList: adIdsList ?? this.adIdsList, // Include adIdsList in copyWith
+      isHomeBannerAdsLoaded:
+          isHomeBannerAdsLoaded ?? this.isHomeBannerAdsLoaded,
+      isJobPageBannerAdsLoaded:
+          isJobPageBannerAdsLoaded ?? this.isJobPageBannerAdsLoaded,
+      isInterstitialAdsLoaded:
+          isInterstitialAdsLoaded ?? this.isInterstitialAdsLoaded,
+      adIdsList: adIdsList ?? this.adIdsList,
     );
   }
 }

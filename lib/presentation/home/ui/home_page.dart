@@ -128,7 +128,7 @@ class HomePage extends StatelessWidget {
                                     ),
                                     jobList:
                                         homePresenter.currentUiState.allJobList,
-                                    onTap: () {
+                                    onTap: () async {
                                       homePresenter.incrementViews(homePresenter
                                           .currentUiState.allJobList[index]);
                                       context.navigatorPush(
@@ -138,15 +138,17 @@ class HomePage extends StatelessWidget {
                                               .currentUiState.allJobList,
                                         ),
                                       );
+                                      await homePresenter.interstitialAd.show();
                                     },
                                   ),
-                                  if ((index + 1) % 5 == 0) ...[
-                                    SizedBox(
-                                      height: homePresenter.bannerAd.size.height
-                                          .toDouble(),
+                                  if ((index + 1) % 6 == 0) ...[
+                                    Container(
+                                      padding: padding10,
                                       width: JobsScreen.width,
-                                      child:
-                                          AdWidget(ad: homePresenter.bannerAd),
+                                      decoration: BoxDecoration(
+                                        color: theme.cardColor,
+                                        borderRadius: radius10,
+                                      ),
                                     ),
                                     gapH10,
                                   ],
@@ -161,6 +163,13 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          bottomNavigationBar: SizedBox(
+            height: homePresenter.homeBannerAd.size.height.toDouble(),
+            width: homePresenter.homeBannerAd.size.width.toDouble(),
+            child: AdWidget(
+              ad: homePresenter.homeBannerAd,
+            ),
           ),
         );
       },
