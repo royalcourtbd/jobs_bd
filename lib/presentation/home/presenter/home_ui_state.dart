@@ -4,20 +4,19 @@ import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 
 class HomeUiState extends BaseUiState {
-  const HomeUiState({
-    required super.isLoading,
-    required super.userMessage,
-    required this.categoryList,
-    required this.jobListByCategory,
-    required this.allJobList,
-    required this.todayPostsCount,
-    required this.todayDeadlinesCount,
-    required this.tomorrowDeadlinesCount,
-    required this.isHomeBannerAdsLoaded,
-    required this.isJobPageBannerAdsLoaded,
-    required this.isInterstitialAdsLoaded,
-    required this.adIdsList,
-  });
+  const HomeUiState(
+      {required super.isLoading,
+      required super.userMessage,
+      required this.categoryList,
+      required this.jobListByCategory,
+      required this.allJobList,
+      required this.todayPostsCount,
+      required this.todayDeadlinesCount,
+      required this.tomorrowDeadlinesCount,
+      required this.isHomeBannerAdsLoaded,
+      required this.isJobPageBannerAdsLoaded,
+      required this.isInterstitialAdsLoaded,
+      required this.googleAdsModel});
 
   factory HomeUiState.empty() {
     return HomeUiState(
@@ -32,13 +31,7 @@ class HomeUiState extends BaseUiState {
       isHomeBannerAdsLoaded: false,
       isJobPageBannerAdsLoaded: false,
       isInterstitialAdsLoaded: false,
-      adIdsList: AdIdsModel(
-        banneradsId1: '',
-        banneradsId2: '',
-        intadsId1: '',
-        intadsId2: '',
-        videoAdsid: '',
-      ),
+      googleAdsModel: GoogleAdsModel(),
     );
   }
 
@@ -55,13 +48,13 @@ class HomeUiState extends BaseUiState {
         isHomeBannerAdsLoaded,
         isJobPageBannerAdsLoaded,
         isInterstitialAdsLoaded,
-        adIdsList,
+        googleAdsModel,
       ];
 
   final List<JobCategoryModel> categoryList;
   final List<JobModel> allJobList;
   final List<JobModel> jobListByCategory;
-  final AdIdsModel adIdsList;
+  final GoogleAdsModel googleAdsModel;
   final int todayPostsCount;
   final int todayDeadlinesCount;
   final int tomorrowDeadlinesCount;
@@ -81,7 +74,7 @@ class HomeUiState extends BaseUiState {
     bool? isHomeBannerAdsLoaded,
     bool? isJobPageBannerAdsLoaded,
     bool? isInterstitialAdsLoaded,
-    AdIdsModel? adIdsList,
+    GoogleAdsModel? googleAdsModel,
   }) {
     return HomeUiState(
       isLoading: isLoading ?? super.isLoading,
@@ -99,7 +92,7 @@ class HomeUiState extends BaseUiState {
           isJobPageBannerAdsLoaded ?? this.isJobPageBannerAdsLoaded,
       isInterstitialAdsLoaded:
           isInterstitialAdsLoaded ?? this.isInterstitialAdsLoaded,
-      adIdsList: adIdsList ?? this.adIdsList,
+      googleAdsModel: googleAdsModel ?? this.googleAdsModel,
     );
   }
 }

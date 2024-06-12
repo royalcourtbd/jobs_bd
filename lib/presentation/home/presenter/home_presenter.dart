@@ -5,6 +5,7 @@ import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 import 'package:jobs_bd/data/repository/device_info_repository.dart';
 import 'package:jobs_bd/data/repository/get_all_jobs_repository.dart';
 import 'package:jobs_bd/data/repository/get_jobs_by_category_repository.dart';
+import 'package:jobs_bd/data/repository/google_ads_repository.dart';
 import 'package:jobs_bd/data/repository/increment_total_views_repository.dart';
 import 'package:jobs_bd/data/service/cache_manager.dart';
 import 'package:jobs_bd/data/service/device_info_service.dart';
@@ -16,6 +17,7 @@ class HomePresenter extends BasePresenter<HomeUiState> {
   final CacheManager _cacheManager = CacheManager();
   final DeviceInfoService _deviceInfoService = DeviceInfoService();
   final DeviceInfoRepository _deviceInfoRepository = DeviceInfoRepository();
+  final GoogleAdsRepository _googleAdsRepository = GoogleAdsRepository();
 
   String? selectedCategory;
 
@@ -33,11 +35,26 @@ class HomePresenter extends BasePresenter<HomeUiState> {
     getHomePageBannerAds();
     getJobListPagebannerAds();
     interstitialAdLoad();
+    listenForAdsUnitIds();
+  }
+
+  void listenForAdsUnitIds() {
+    _googleAdsRepository.fetchAdsUnitIds().listen((googleAdsModel) {
+      uiState.value = currentUiState.copyWith(googleAdsModel: googleAdsModel);
+      getHomePageBannerAds();
+      getJobListPagebannerAds();
+      interstitialAdLoad();
+
+      print('Google Ads Model updated: ${googleAdsModel.toJson()}');
+    }, onError: (e) {
+      print('Error listening for ads unit IDs: $e');
+    });
   }
 
   void getHomePageBannerAds() {
     homeBannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-9046297647605396/3133811980',
+      adUnitId: currentUiState.googleAdsModel.banner1 ??
+          'ca-app-pub-3940256099942544/6300978111',
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(
@@ -74,7 +91,8 @@ class HomePresenter extends BasePresenter<HomeUiState> {
 
   void getJobListPagebannerAds() {
     jobBannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-9046297647605396/4741706423',
+      adUnitId: currentUiState.googleAdsModel.banner2 ??
+          'ca-app-pub-3940256099942544/6300978111',
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(
@@ -112,7 +130,8 @@ class HomePresenter extends BasePresenter<HomeUiState> {
 
   void interstitialAdLoad() {
     InterstitialAd.load(
-      adUnitId: 'ca-app-pub-9046297647605396/3428624758',
+      adUnitId: currentUiState.googleAdsModel.interstitial1 ??
+          'ca-app-pub-3940256099942544/1033173712',
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: onAdLoaded,

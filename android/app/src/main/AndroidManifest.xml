@@ -37,13 +37,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
-        <service
-            android:name=".MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
+       
 
         <!-- Add the metadata for the default icon -->
         <meta-data
