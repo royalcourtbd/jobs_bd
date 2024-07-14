@@ -44,44 +44,33 @@ class HomePresenter extends BasePresenter<HomeUiState> {
       getHomePageBannerAds();
       getJobListPagebannerAds();
       interstitialAdLoad();
-
-      print('Google Ads Model updated: ${googleAdsModel.toJson()}');
-    }, onError: (e) {
-      print('Error listening for ads unit IDs: $e');
-    });
+    }, onError: (e) {});
   }
 
   void getHomePageBannerAds() {
     homeBannerAd = BannerAd(
-      adUnitId: currentUiState.googleAdsModel.banner1 ??
-          'ca-app-pub-3940256099942544/6300978111',
+      adUnitId: currentUiState.googleAdsModel.banner1 ?? '',
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
-          print('Ad loaded: $ad');
           uiState.value = currentUiState.copyWith(isHomeBannerAdsLoaded: true);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          print('Ad failed to load: $error');
           ad.dispose();
           getHomePageBannerAds();
           homeBannerAd.load();
         },
         onAdOpened: (Ad ad) {
-          print('Ad opened: $ad');
-          homeBannerAd.load();
+          // homeBannerAd.load();
         },
         onAdClosed: (Ad ad) {
-          print('Ad closed: $ad');
           homeBannerAd.load();
         },
         onAdImpression: (Ad ad) {
-          print('Ad impression: $ad');
-          homeBannerAd.load();
+          // homeBannerAd.load();
         },
         onAdClicked: (Ad ad) {
-          print('Ad clicked: $ad');
           homeBannerAd.load();
         },
       ),
@@ -91,36 +80,29 @@ class HomePresenter extends BasePresenter<HomeUiState> {
 
   void getJobListPagebannerAds() {
     jobBannerAd = BannerAd(
-      adUnitId: currentUiState.googleAdsModel.banner2 ??
-          'ca-app-pub-3940256099942544/6300978111',
+      adUnitId: currentUiState.googleAdsModel.banner2 ?? '',
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
-          print('Ad loaded: $ad');
           uiState.value =
               currentUiState.copyWith(isJobPageBannerAdsLoaded: true);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          print('Ad failed to load: $error');
           ad.dispose();
           getJobListPagebannerAds();
           jobBannerAd.load();
         },
         onAdOpened: (Ad ad) {
-          print('Ad opened: $ad');
-          jobBannerAd.load();
+          // jobBannerAd.load();
         },
         onAdClosed: (Ad ad) {
-          print('Ad closed: $ad');
           jobBannerAd.load();
         },
         onAdImpression: (Ad ad) {
-          print('Ad impression: $ad');
-          jobBannerAd.load();
+          // jobBannerAd.load();
         },
         onAdClicked: (Ad ad) {
-          print('Ad clicked: $ad');
           jobBannerAd.load();
         },
       ),
@@ -130,13 +112,11 @@ class HomePresenter extends BasePresenter<HomeUiState> {
 
   void interstitialAdLoad() {
     InterstitialAd.load(
-      adUnitId: currentUiState.googleAdsModel.interstitial1 ??
-          'ca-app-pub-3940256099942544/1033173712',
+      adUnitId: currentUiState.googleAdsModel.interstitial1 ?? '',
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: onAdLoaded,
         onAdFailedToLoad: (LoadAdError error) {
-          print('InterstitialAd failed to load: $error');
           interstitialAdLoad();
         },
       ),
@@ -148,21 +128,17 @@ class HomePresenter extends BasePresenter<HomeUiState> {
     uiState.value = currentUiState.copyWith(isInterstitialAdsLoaded: true);
     interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
-        print('$ad onAdDismissedFullScreenContent.');
         ad.dispose();
         interstitialAd.dispose();
         interstitialAdLoad();
       },
       onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-        print('$ad onAdFailedToShowFullScreenContent: $error');
         ad.dispose();
         interstitialAd.dispose();
         uiState.value = currentUiState.copyWith(isInterstitialAdsLoaded: false);
         interstitialAdLoad();
       },
-      onAdShowedFullScreenContent: (
-        InterstitialAd ad,
-      ) {
+      onAdShowedFullScreenContent: (InterstitialAd ad) {
         print('$ad onAdShowedFullScreenContent');
       },
     );

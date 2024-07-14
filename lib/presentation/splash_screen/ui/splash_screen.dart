@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:jobs_bd/core/external_libs/presentable_widget_builder.dart';
 import 'package:jobs_bd/presentation/home/ui/home_page.dart';
 import 'package:jobs_bd/presentation/splash_screen/presenter/splash_screen_presenter.dart';
-import 'package:jobs_bd/presentation/splash_screen/ui/splash_screen%20copy.dart';
+import 'package:jobs_bd/presentation/splash_screen/ui/no_internet_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   SplashScreen({super.key});
@@ -19,7 +19,7 @@ class SplashScreen extends StatelessWidget {
             body: Center(
               child: sController.currentUiState.isInternetConnected
                   ? HomePage()
-                  : NOState(),
+                  : NoInternetScreen(),
             ),
           );
         });

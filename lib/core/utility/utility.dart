@@ -1,3 +1,4 @@
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jobs_bd/core/config/jobs_screen.dart';
 import 'package:jobs_bd/core/utility/logger_utility.dart';
 import 'package:flutter/cupertino.dart';
@@ -72,6 +73,20 @@ extension ContextExtensions on BuildContext {
     if (!mounted) return;
     Navigator.pop(this, result);
   }
+}
+
+Future<void> showMessage({
+  required String? message,
+  BuildContext? context,
+}) async {
+  if (message == null || message.isEmpty) return;
+  await Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
+    textColor: Colors.white,
+    fontSize: sixteenPx,
+  );
 }
 
 // final ThemeService themeService = locate();

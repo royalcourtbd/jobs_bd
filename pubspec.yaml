@@ -54,6 +54,9 @@ dependencies:
   cached_network_image: ^3.3.1
   device_info_plus: ^10.1.0
   flutter_local_notifications: ^17.1.2
+  facebook_audience_network: ^1.0.1
+  fluttertoast: ^8.2.4
+  flutter_html: ^3.0.0-beta.2
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +83,7 @@ flutter:
   assets:
     - assets/images/png/
     - assets/images/svg/
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -2,6 +2,7 @@ plugins {
     id "com.android.application"
     // START: FlutterFire Configuration
     id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics' // Corrected line
     // END: FlutterFire Configuration
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
@@ -72,6 +73,15 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation platform('com.google.firebase:firebase-bom:31.2.0') // Check for the latest version
     implementation 'com.google.firebase:firebase-messaging:23.0.0'
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.3'
+    implementation 'androidx.annotation:annotation:1.0.0'
+    implementation 'com.facebook.android:audience-network-sdk:6.+'
+    implementation("com.google.android.gms:play-services-ads:23.2.0")
+    implementation("com.google.ads.mediation:facebook:6.17.0.0")
+
+    
     
 
 }
+
+apply plugin: 'com.google.gms.google-services' // Apply at the bottom if using other Firebase services

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
+import 'package:jobs_bd/presentation/splash_screen/presenter/splash_screen_presenter.dart';
 
 // makes sure that the splash screen is not shown when app opened from
 // minimized state
@@ -25,6 +26,7 @@ class SplashScreen {
   static Future<void> show() async {
     if (_appAlreadyOpen) return;
     final HomePresenter homePresenter = Get.put(HomePresenter());
+    final SplashScreenPresenter sController = Get.put(SplashScreenPresenter());
     final WidgetsBinding widgetsBinding =
         WidgetsFlutterBinding.ensureInitialized();
     _toggleStatusBarFullScreen();
@@ -34,7 +36,7 @@ class SplashScreen {
 
   static Future<void> hide({BuildContext? context}) async {
     _toggleStatusBarFullScreen(makeFullScreen: false, context: context);
-    print('Hiding splash screen');
+
     FlutterNativeSplash.remove();
   }
 

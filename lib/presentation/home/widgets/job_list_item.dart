@@ -81,7 +81,7 @@ class JobListItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Total Views ${jobList[index].totalView}',
+                    '👁 ${jobList[index].totalView}',
                     style: theme.textTheme.bodyMedium!.copyWith(
                       fontSize: elevenPx,
                       fontWeight: FontWeight.w400,
