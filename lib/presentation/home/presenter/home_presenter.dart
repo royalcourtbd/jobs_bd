@@ -41,15 +41,18 @@ class HomePresenter extends BasePresenter<HomeUiState> {
   void listenForAdsUnitIds() {
     _googleAdsRepository.fetchAdsUnitIds().listen((googleAdsModel) {
       uiState.value = currentUiState.copyWith(googleAdsModel: googleAdsModel);
-      getHomePageBannerAds();
-      getJobListPagebannerAds();
-      interstitialAdLoad();
+      if (googleAdsModel.isValid()) {
+        getHomePageBannerAds();
+        getJobListPagebannerAds();
+        interstitialAdLoad();
+      }
     }, onError: (e) {});
   }
 
   void getHomePageBannerAds() {
+    if (currentUiState.googleAdsModel.banner1?.isNotEmpty != true) return;
     homeBannerAd = BannerAd(
-      adUnitId: currentUiState.googleAdsModel.banner1 ?? '',
+      adUnitId: currentUiState.googleAdsModel.banner1!,
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(
@@ -79,8 +82,9 @@ class HomePresenter extends BasePresenter<HomeUiState> {
   }
 
   void getJobListPagebannerAds() {
+    if (currentUiState.googleAdsModel.banner2?.isNotEmpty != true) return;
     jobBannerAd = BannerAd(
-      adUnitId: currentUiState.googleAdsModel.banner2 ?? '',
+      adUnitId: currentUiState.googleAdsModel.banner2!,
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(
@@ -111,8 +115,9 @@ class HomePresenter extends BasePresenter<HomeUiState> {
   }
 
   void interstitialAdLoad() {
+    if (currentUiState.googleAdsModel.interstitial1?.isNotEmpty != true) return;
     InterstitialAd.load(
-      adUnitId: currentUiState.googleAdsModel.interstitial1 ?? '',
+      adUnitId: currentUiState.googleAdsModel.interstitial1!,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: onAdLoaded,

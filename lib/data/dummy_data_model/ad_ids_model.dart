@@ -24,4 +24,13 @@ class GoogleAdsModel {
         "interstitial1": interstitial1,
         "interstitial2": interstitial2,
       };
+
+  bool isValid() {
+    return banner1 != null &&
+        banner1!.isNotEmpty &&
+        banner2 != null &&
+        banner2!.isNotEmpty &&
+        interstitial1 != null &&
+        interstitial1!.isNotEmpty;
+  }
 }

@@ -67,7 +67,13 @@ class JobListPage extends StatelessWidget {
                         context.navigatorPush(
                           JobViewPage(index: index, jobList: jobList),
                         );
-                        await homePresenter.interstitialAd.show();
+                        if (homePresenter
+                                .currentUiState.isInterstitialAdsLoaded &&
+                            homePresenter.currentUiState.googleAdsModel
+                                    .interstitial1?.isNotEmpty ==
+                                true) {
+                          await homePresenter.interstitialAd.show();
+                        }
                       },
                     ),
                     if ((index + 1) % 5 == 0) ...[
@@ -88,12 +94,23 @@ class JobListPage extends StatelessWidget {
           },
         ),
       ),
-      bottomNavigationBar: SizedBox(
-        height: homePresenter.homeBannerAd.size.height.toDouble(),
-        width: homePresenter.homeBannerAd.size.width.toDouble(),
-        child: AdWidget(
-          ad: homePresenter.jobBannerAd,
-        ),
+      bottomNavigationBar: Obx(
+        () {
+          if (homePresenter.currentUiState.isJobPageBannerAdsLoaded &&
+              homePresenter.currentUiState.googleAdsModel.banner2?.isNotEmpty ==
+                  true) {
+            return SizedBox(
+              height: homePresenter.jobBannerAd.size.height.toDouble(),
+              width: homePresenter.jobBannerAd.size.width.toDouble(),
+              child: AdWidget(
+                ad: homePresenter.jobBannerAd,
+              ),
+            );
+          } else {
+            return const SizedBox
+                .shrink(); // Return an empty widget if conditions are not met
+          }
+        },
       ),
     );
   }

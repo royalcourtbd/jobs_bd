@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jobs_bd/core/utility/utility.dart';
 
 class DoubleBackToExitApp extends StatefulWidget {
   final Widget child;
@@ -31,15 +32,10 @@ class DoubleBackToExitAppState extends State<DoubleBackToExitApp> {
     final now = DateTime.now();
     if (now.difference(_lastPressedAt) > const Duration(seconds: 2)) {
       _lastPressedAt = now;
+
       showMessage(context: context, message: 'Press back again to exit');
     } else {
       SystemNavigator.pop();
     }
-  }
-
-  void showMessage({required BuildContext context, required String message}) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
   }
 }

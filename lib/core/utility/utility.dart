@@ -4,6 +4,7 @@ import 'package:jobs_bd/core/utility/logger_utility.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobs_bd/presentation/jobs_bd.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart' as rs;
 
@@ -82,6 +83,7 @@ Future<void> showMessage({
   if (message == null || message.isEmpty) return;
   await Fluttertoast.showToast(
     msg: message,
+    backgroundColor: Theme.of(JobsBd.globalContext).primaryColor,
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.BOTTOM,
     textColor: Colors.white,

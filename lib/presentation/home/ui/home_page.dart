@@ -35,16 +35,17 @@ class HomePage extends StatelessWidget {
                 title: const Text(
                   'Jobs BD',
                 ),
-                actions: const [
-                  // TextButton(
-                  //   onPressed: () {
-                  //     Get.find<JobPresentation>().job();
-                  //   },
-                  //   child: const Icon(
-                  //     Icons.add,
-                  //     color: Colors.white,
-                  //   ),
-                  // )
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      // Get.find<JobPresentation>().job();
+                      showMessage(message: 'Coming soon');
+                    },
+                    child: const Icon(
+                      Icons.notifications,
+                      color: Colors.white,
+                    ),
+                  )
                 ],
               ),
               drawer: MiniSettingsDrawer(theme: theme),
@@ -129,11 +130,11 @@ class HomePage extends StatelessWidget {
                                       JobListItem(
                                         theme: theme,
                                         index: index,
-                                        onLongPress: () =>
-                                            jobPresentation.deleteJob(
-                                          homePresenter.currentUiState
-                                              .allJobList[index].documentId!,
-                                        ),
+                                        // onLongPress: () =>
+                                        //     jobPresentation.deleteJob(
+                                        //   homePresenter.currentUiState
+                                        //       .allJobList[index].documentId!,
+                                        // ),
                                         jobList: homePresenter
                                             .currentUiState.allJobList,
                                         onTap: () async {
@@ -174,12 +175,23 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              bottomNavigationBar: SizedBox(
-                height: homePresenter.homeBannerAd.size.height.toDouble(),
-                width: homePresenter.homeBannerAd.size.width.toDouble(),
-                child: AdWidget(
-                  ad: homePresenter.homeBannerAd,
-                ),
+              bottomNavigationBar: Obx(
+                () {
+                  if (homePresenter.currentUiState.isHomeBannerAdsLoaded &&
+                      homePresenter.currentUiState.googleAdsModel.banner1
+                              ?.isNotEmpty ==
+                          true) {
+                    return SizedBox(
+                      height: homePresenter.homeBannerAd.size.height.toDouble(),
+                      width: homePresenter.homeBannerAd.size.width.toDouble(),
+                      child: AdWidget(
+                        ad: homePresenter.homeBannerAd,
+                      ),
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+                },
               ),
             ),
           );

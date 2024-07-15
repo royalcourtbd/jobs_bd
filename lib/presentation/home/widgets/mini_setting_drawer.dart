@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobs_bd/core/static/svg_path.dart';
 import 'package:jobs_bd/presentation/common/privacy_policy.dart';
 
 class MiniSettingsDrawer extends StatelessWidget {
@@ -16,8 +17,9 @@ class MiniSettingsDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               color: theme.primaryColor,
             ),
-            child: const Center(
-                child: Text('Jobs BD', style: TextStyle(color: Colors.white))),
+            child: Center(
+              child: Image.asset(SvgPath.imgAppLogo),
+            ),
           ),
           ListTile(
             leading: const Icon(Icons.privacy_tip),

@@ -1,0 +1,281 @@
+diff --git a/lib/core/static/svg_path.dart b/lib/core/static/svg_path.dart
+index e213c1d..821a26f 100644
+--- a/lib/core/static/svg_path.dart
++++ b/lib/core/static/svg_path.dart
+@@ -1,6 +1,7 @@
+ class SvgPath {
+   SvgPath._();
+   static const String icGovtLogo = 'assets/images/png/ic_govt_logo.png';
++  static const String imgAppLogo = 'assets/images/png/app_logo.png';
+   static const String icItJobLogo = 'assets/images/png/it.jpg';
+   static const String imgNoInternet = 'assets/images/png/internet.png';
+   static const String icNotFount = 'assets/images/png/ic_not_found.png';
+diff --git a/lib/core/utility/utility.dart b/lib/core/utility/utility.dart
+index b172e70..422f5a7 100644
+--- a/lib/core/utility/utility.dart
++++ b/lib/core/utility/utility.dart
+@@ -4,6 +4,7 @@ import 'package:jobs_bd/core/utility/logger_utility.dart';
+ import 'package:flutter/cupertino.dart';
+ import 'package:flutter/material.dart';
+ import 'package:get/get.dart';
++import 'package:jobs_bd/presentation/jobs_bd.dart';
+ 
+ import 'package:responsive_sizer/responsive_sizer.dart' as rs;
+ 
+@@ -82,6 +83,7 @@ Future<void> showMessage({
+   if (message == null || message.isEmpty) return;
+   await Fluttertoast.showToast(
+     msg: message,
++    backgroundColor: Theme.of(JobsBd.globalContext).primaryColor,
+     toastLength: Toast.LENGTH_SHORT,
+     gravity: ToastGravity.BOTTOM,
+     textColor: Colors.white,
+diff --git a/lib/data/dummy_data_model/ad_ids_model.dart b/lib/data/dummy_data_model/ad_ids_model.dart
+index 20042ee..7086c74 100644
+--- a/lib/data/dummy_data_model/ad_ids_model.dart
++++ b/lib/data/dummy_data_model/ad_ids_model.dart
+@@ -24,4 +24,13 @@ class GoogleAdsModel {
+         "interstitial1": interstitial1,
+         "interstitial2": interstitial2,
+       };
++
++  bool isValid() {
++    return banner1 != null &&
++        banner1!.isNotEmpty &&
++        banner2 != null &&
++        banner2!.isNotEmpty &&
++        interstitial1 != null &&
++        interstitial1!.isNotEmpty;
++  }
+ }
+diff --git a/lib/presentation/home/presenter/home_presenter.dart b/lib/presentation/home/presenter/home_presenter.dart
+index 3d12808..7640537 100644
+--- a/lib/presentation/home/presenter/home_presenter.dart
++++ b/lib/presentation/home/presenter/home_presenter.dart
+@@ -41,15 +41,18 @@ class HomePresenter extends BasePresenter<HomeUiState> {
+   void listenForAdsUnitIds() {
+     _googleAdsRepository.fetchAdsUnitIds().listen((googleAdsModel) {
+       uiState.value = currentUiState.copyWith(googleAdsModel: googleAdsModel);
+-      getHomePageBannerAds();
+-      getJobListPagebannerAds();
+-      interstitialAdLoad();
++      if (googleAdsModel.isValid()) {
++        getHomePageBannerAds();
++        getJobListPagebannerAds();
++        interstitialAdLoad();
++      }
+     }, onError: (e) {});
+   }
+ 
+   void getHomePageBannerAds() {
++    if (currentUiState.googleAdsModel.banner1?.isNotEmpty != true) return;
+     homeBannerAd = BannerAd(
+-      adUnitId: currentUiState.googleAdsModel.banner1 ?? '',
++      adUnitId: currentUiState.googleAdsModel.banner1!,
+       size: AdSize.banner,
+       request: const AdRequest(),
+       listener: BannerAdListener(
+@@ -79,8 +82,9 @@ class HomePresenter extends BasePresenter<HomeUiState> {
+   }
+ 
+   void getJobListPagebannerAds() {
++    if (currentUiState.googleAdsModel.banner2?.isNotEmpty != true) return;
+     jobBannerAd = BannerAd(
+-      adUnitId: currentUiState.googleAdsModel.banner2 ?? '',
++      adUnitId: currentUiState.googleAdsModel.banner2!,
+       size: AdSize.banner,
+       request: const AdRequest(),
+       listener: BannerAdListener(
+@@ -111,8 +115,9 @@ class HomePresenter extends BasePresenter<HomeUiState> {
+   }
+ 
+   void interstitialAdLoad() {
++    if (currentUiState.googleAdsModel.interstitial1?.isNotEmpty != true) return;
+     InterstitialAd.load(
+-      adUnitId: currentUiState.googleAdsModel.interstitial1 ?? '',
++      adUnitId: currentUiState.googleAdsModel.interstitial1!,
+       request: const AdRequest(),
+       adLoadCallback: InterstitialAdLoadCallback(
+         onAdLoaded: onAdLoaded,
+diff --git a/lib/presentation/home/ui/home_page.dart b/lib/presentation/home/ui/home_page.dart
+index e1c867c..5e8fdb5 100644
+--- a/lib/presentation/home/ui/home_page.dart
++++ b/lib/presentation/home/ui/home_page.dart
+@@ -35,16 +35,17 @@ class HomePage extends StatelessWidget {
+                 title: const Text(
+                   'Jobs BD',
+                 ),
+-                actions: const [
+-                  // TextButton(
+-                  //   onPressed: () {
+-                  //     Get.find<JobPresentation>().job();
+-                  //   },
+-                  //   child: const Icon(
+-                  //     Icons.add,
+-                  //     color: Colors.white,
+-                  //   ),
+-                  // )
++                actions: [
++                  TextButton(
++                    onPressed: () {
++                      // Get.find<JobPresentation>().job();
++                      showMessage(message: 'Coming soon');
++                    },
++                    child: const Icon(
++                      Icons.notifications,
++                      color: Colors.white,
++                    ),
++                  )
+                 ],
+               ),
+               drawer: MiniSettingsDrawer(theme: theme),
+@@ -129,11 +130,11 @@ class HomePage extends StatelessWidget {
+                                       JobListItem(
+                                         theme: theme,
+                                         index: index,
+-                                        onLongPress: () =>
+-                                            jobPresentation.deleteJob(
+-                                          homePresenter.currentUiState
+-                                              .allJobList[index].documentId!,
+-                                        ),
++                                        // onLongPress: () =>
++                                        //     jobPresentation.deleteJob(
++                                        //   homePresenter.currentUiState
++                                        //       .allJobList[index].documentId!,
++                                        // ),
+                                         jobList: homePresenter
+                                             .currentUiState.allJobList,
+                                         onTap: () async {
+@@ -174,12 +175,23 @@ class HomePage extends StatelessWidget {
+                   ),
+                 ],
+               ),
+-              bottomNavigationBar: SizedBox(
+-                height: homePresenter.homeBannerAd.size.height.toDouble(),
+-                width: homePresenter.homeBannerAd.size.width.toDouble(),
+-                child: AdWidget(
+-                  ad: homePresenter.homeBannerAd,
+-                ),
++              bottomNavigationBar: Obx(
++                () {
++                  if (homePresenter.currentUiState.isHomeBannerAdsLoaded &&
++                      homePresenter.currentUiState.googleAdsModel.banner1
++                              ?.isNotEmpty ==
++                          true) {
++                    return SizedBox(
++                      height: homePresenter.homeBannerAd.size.height.toDouble(),
++                      width: homePresenter.homeBannerAd.size.width.toDouble(),
++                      child: AdWidget(
++                        ad: homePresenter.homeBannerAd,
++                      ),
++                    );
++                  } else {
++                    return const SizedBox();
++                  }
++                },
+               ),
+             ),
+           );
+diff --git a/lib/presentation/home/widgets/double_back_to_exit_app.dart b/lib/presentation/home/widgets/double_back_to_exit_app.dart
+index 1d4f1c1..1c6cb2b 100644
+--- a/lib/presentation/home/widgets/double_back_to_exit_app.dart
++++ b/lib/presentation/home/widgets/double_back_to_exit_app.dart
+@@ -1,5 +1,6 @@
+ import 'package:flutter/material.dart';
+ import 'package:flutter/services.dart';
++import 'package:jobs_bd/core/utility/utility.dart';
+ 
+ class DoubleBackToExitApp extends StatefulWidget {
+   final Widget child;
+@@ -31,15 +32,10 @@ class DoubleBackToExitAppState extends State<DoubleBackToExitApp> {
+     final now = DateTime.now();
+     if (now.difference(_lastPressedAt) > const Duration(seconds: 2)) {
+       _lastPressedAt = now;
++
+       showMessage(context: context, message: 'Press back again to exit');
+     } else {
+       SystemNavigator.pop();
+     }
+   }
+-
+-  void showMessage({required BuildContext context, required String message}) {
+-    ScaffoldMessenger.of(context).showSnackBar(
+-      SnackBar(content: Text(message)),
+-    );
+-  }
+ }
+diff --git a/lib/presentation/home/widgets/mini_setting_drawer.dart b/lib/presentation/home/widgets/mini_setting_drawer.dart
+index 483eab1..18e79d2 100644
+--- a/lib/presentation/home/widgets/mini_setting_drawer.dart
++++ b/lib/presentation/home/widgets/mini_setting_drawer.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:jobs_bd/core/static/svg_path.dart';
+ import 'package:jobs_bd/presentation/common/privacy_policy.dart';
+ 
+ class MiniSettingsDrawer extends StatelessWidget {
+@@ -16,8 +17,9 @@ class MiniSettingsDrawer extends StatelessWidget {
+             decoration: BoxDecoration(
+               color: theme.primaryColor,
+             ),
+-            child: const Center(
+-                child: Text('Jobs BD', style: TextStyle(color: Colors.white))),
++            child: Center(
++              child: Image.asset(SvgPath.imgAppLogo),
++            ),
+           ),
+           ListTile(
+             leading: const Icon(Icons.privacy_tip),
+diff --git a/lib/presentation/job/ui/job_list_page.dart b/lib/presentation/job/ui/job_list_page.dart
+index 53edbf6..eec16ac 100644
+--- a/lib/presentation/job/ui/job_list_page.dart
++++ b/lib/presentation/job/ui/job_list_page.dart
+@@ -67,7 +67,13 @@ class JobListPage extends StatelessWidget {
+                         context.navigatorPush(
+                           JobViewPage(index: index, jobList: jobList),
+                         );
+-                        await homePresenter.interstitialAd.show();
++                        if (homePresenter
++                                .currentUiState.isInterstitialAdsLoaded &&
++                            homePresenter.currentUiState.googleAdsModel
++                                    .interstitial1?.isNotEmpty ==
++                                true) {
++                          await homePresenter.interstitialAd.show();
++                        }
+                       },
+                     ),
+                     if ((index + 1) % 5 == 0) ...[
+@@ -88,12 +94,23 @@ class JobListPage extends StatelessWidget {
+           },
+         ),
+       ),
+-      bottomNavigationBar: SizedBox(
+-        height: homePresenter.homeBannerAd.size.height.toDouble(),
+-        width: homePresenter.homeBannerAd.size.width.toDouble(),
+-        child: AdWidget(
+-          ad: homePresenter.jobBannerAd,
+-        ),
++      bottomNavigationBar: Obx(
++        () {
++          if (homePresenter.currentUiState.isJobPageBannerAdsLoaded &&
++              homePresenter.currentUiState.googleAdsModel.banner2?.isNotEmpty ==
++                  true) {
++            return SizedBox(
++              height: homePresenter.jobBannerAd.size.height.toDouble(),
++              width: homePresenter.jobBannerAd.size.width.toDouble(),
++              child: AdWidget(
++                ad: homePresenter.jobBannerAd,
++              ),
++            );
++          } else {
++            return const SizedBox
++                .shrink(); // Return an empty widget if conditions are not met
++          }
++        },
+       ),
+     );
+   }
+
+================
+
+here is my changes...give me git push msg and description of changes with using of proper emoticons...dont give any long boring texts, "STRICTLY i dont need any explanations"
