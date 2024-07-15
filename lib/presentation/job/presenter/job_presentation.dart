@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:jobs_bd/core/static/urls.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 
 class JobPresentation extends GetxController {
@@ -21,8 +22,8 @@ class JobPresentation extends GetxController {
   }
 
   job() async {
-    final id = firestore.collection('all_jobs').doc().id;
-    final docRef = firestore.collection('all_jobs').doc(id);
+    final id = firestore.collection(Urls.allJobs).doc().id;
+    final docRef = firestore.collection(Urls.allJobs).doc(id);
 
     final jobId = await _getNextJobId();
 
@@ -47,7 +48,7 @@ class JobPresentation extends GetxController {
   }
 
   deleteJob(String id) async {
-    await firestore.collection('all_jobs').doc(id).delete();
+    await firestore.collection(Urls.allJobs).doc(id).delete();
     print('Job Deleted Successfully $id');
   }
 }

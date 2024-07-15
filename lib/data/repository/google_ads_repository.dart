@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:jobs_bd/core/static/urls.dart';
 import 'package:jobs_bd/data/dummy_data_model/ad_ids_model.dart';
 
 class GoogleAdsRepository {
@@ -6,7 +7,7 @@ class GoogleAdsRepository {
 
   Stream<GoogleAdsModel> fetchAdsUnitIds() {
     return _firestore
-        .collection('ads_id')
+        .collection(Urls.adsId)
         .doc('adsUnitId')
         .snapshots()
         .map((snapshot) {
