@@ -143,9 +143,7 @@ class HomePresenter extends BasePresenter<HomeUiState> {
         uiState.value = currentUiState.copyWith(isInterstitialAdsLoaded: false);
         interstitialAdLoad();
       },
-      onAdShowedFullScreenContent: (InterstitialAd ad) {
-        print('$ad onAdShowedFullScreenContent');
-      },
+      onAdShowedFullScreenContent: (InterstitialAd ad) {},
     );
   }
 

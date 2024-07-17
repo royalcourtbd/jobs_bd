@@ -49,7 +49,6 @@ class JobPresentation extends GetxController {
 
   deleteJob(String id) async {
     await firestore.collection(Urls.allJobs).doc(id).delete();
-    print('Job Deleted Successfully $id');
   }
 }
 
