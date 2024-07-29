@@ -40,6 +40,7 @@ class HomePage extends StatelessWidget {
                     onPressed: () {
                       // Get.find<JobPresentation>().job();
                       showMessage(message: 'Coming soon');
+                      homePresenter.fetchServerKey();
                     },
                     child: const Icon(
                       Icons.notifications,

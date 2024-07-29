@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jobs_bd/core/external_libs/splash/splash_screen.dart';
@@ -15,7 +16,12 @@ void main() async {
 
 initial() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  try {
+    await dotenv.load(fileName: '.env');
+    print("Env file loaded successfully");
+  } catch (e) {
+    print("Error loading .env file: $e");
+  }
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

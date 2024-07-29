@@ -9,7 +9,7 @@ import 'package:jobs_bd/data/repository/google_ads_repository.dart';
 import 'package:jobs_bd/data/repository/increment_total_views_repository.dart';
 import 'package:jobs_bd/data/service/cache_manager.dart';
 import 'package:jobs_bd/data/service/device_info_service.dart';
-
+import 'package:jobs_bd/data/service/get_server_key.dart';
 import 'package:jobs_bd/presentation/home/presenter/home_ui_state.dart';
 
 class HomePresenter extends BasePresenter<HomeUiState> {
@@ -19,6 +19,12 @@ class HomePresenter extends BasePresenter<HomeUiState> {
   final DeviceInfoService _deviceInfoService = DeviceInfoService();
   final DeviceInfoRepository _deviceInfoRepository = DeviceInfoRepository();
   final GoogleAdsRepository _googleAdsRepository = GoogleAdsRepository();
+  final GetServerKey _getServerKey = GetServerKey();
+
+  void fetchServerKey() async {
+    final serverKey = await _getServerKey.getServerKeyToken();
+    print(serverKey);
+  }
 
   String? selectedCategory;
 
