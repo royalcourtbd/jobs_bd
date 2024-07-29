@@ -29,6 +29,12 @@ switch ($args[0]) {
         Start-Process -NoNewWindow -FilePath "flutter" -ArgumentList "pub", "get" -PassThru | ForEach-Object {
             Show-Loading "Getting dependencies...                                " $_.Id
         }
+
+        start-Process -NoNewWindow -FilePath "flutter" -ArgumentList "pub", "run", "build_runner", "build", "--delete-conflicting-outputs" -PassThru | ForEach-Object {
+            Show-Loading "Generating build files...                                    " $_.Id
+        }
+
+       
     
         Start-Process -NoNewWindow -FilePath "flutter" -ArgumentList "build", "apk", "--release", "--obfuscate", "--target-platform", "android-arm64", "--split-debug-info=./" -PassThru | ForEach-Object {
             Show-Loading "Building APK...                                        " $_.Id
@@ -44,6 +50,9 @@ switch ($args[0]) {
         }
         Start-Process -NoNewWindow -FilePath "flutter" -ArgumentList "pub", "get" -PassThru | ForEach-Object {
             Show-Loading "Getting dependencies...                                  " $_.Id
+        }
+        start-Process -NoNewWindow -FilePath "flutter" -ArgumentList "pub", "run", "build_runner", "build", "--delete-conflicting-outputs" -PassThru | ForEach-Object {
+            Show-Loading "Generating build files...                                    " $_.Id
         }
         Start-Process -NoNewWindow -FilePath "flutter" -ArgumentList "build", "appbundle", "--release" -PassThru | ForEach-Object {
             Show-Loading "Building AAB...                                          " $_.Id
