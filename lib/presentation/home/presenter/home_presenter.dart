@@ -9,6 +9,7 @@ import 'package:jobs_bd/data/repository/google_ads_repository.dart';
 import 'package:jobs_bd/data/repository/increment_total_views_repository.dart';
 import 'package:jobs_bd/data/service/cache_manager.dart';
 import 'package:jobs_bd/data/service/device_info_service.dart';
+
 import 'package:jobs_bd/presentation/home/presenter/home_ui_state.dart';
 
 class HomePresenter extends BasePresenter<HomeUiState> {

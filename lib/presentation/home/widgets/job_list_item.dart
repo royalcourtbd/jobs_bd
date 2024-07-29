@@ -73,11 +73,17 @@ class JobListItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Text(
-                    jobList[index].companyName!,
-                    style: theme.textTheme.bodyMedium!.copyWith(
-                      fontSize: fourteenPx,
-                      fontWeight: FontWeight.w500,
+                  LimitedBox(
+                    maxWidth: JobsScreen.width * 0.6,
+                    child: Text(
+                      jobList[index].companyName!,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.start,
+                      style: theme.textTheme.bodyMedium!.copyWith(
+                        fontSize: fourteenPx,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   Text(
