@@ -23,7 +23,7 @@ migrate_working_dir/
 
 # Environment variables file
 .env
-/diff_output.txt
+diff_output.txt
 
 
 # Flutter/Dart/Pub related
