@@ -5,6 +5,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jobs_bd/core/external_libs/splash/splash_screen.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:jobs_bd/data/service/fcm_service.dart';
+import 'package:jobs_bd/data/service/get_server_key.dart';
+import 'package:jobs_bd/data/service/notification_service.dart';
 import 'package:jobs_bd/firebase_options.dart';
 import 'package:jobs_bd/presentation/jobs_bd.dart';
 
@@ -17,6 +20,7 @@ Future<void> initializeApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _loadEnv();
   await _initializeFirebase();
+  await initializeNotification();
   await _initializeAds();
   await _showSplashScreen();
 }
@@ -41,6 +45,15 @@ Future<void> _initializeFirebase() async {
 
 Future<void> _initializeAds() async {
   await MobileAds.instance.initialize();
+}
+
+Future<void> initializeNotification() async {
+  NotificationService notificationService = NotificationService();
+  GetServerKey getServerKey = GetServerKey();
+  FcmService.firebaseInit();
+  await getServerKey.getServerKeyToken();
+  notificationService.requestNotificationPermission();
+  // notificationService.getNotificationToken();
 }
 
 Future<void> _showSplashScreen() async {

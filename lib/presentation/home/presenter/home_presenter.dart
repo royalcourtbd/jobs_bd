@@ -9,9 +9,6 @@ import 'package:jobs_bd/data/repository/google_ads_repository.dart';
 import 'package:jobs_bd/data/repository/increment_total_views_repository.dart';
 import 'package:jobs_bd/data/service/cache_manager.dart';
 import 'package:jobs_bd/data/service/device_info_service.dart';
-import 'package:jobs_bd/data/service/fcm_service.dart';
-import 'package:jobs_bd/data/service/get_server_key.dart';
-import 'package:jobs_bd/data/service/notification_service.dart';
 import 'package:jobs_bd/presentation/home/presenter/home_ui_state.dart';
 
 class HomePresenter extends BasePresenter<HomeUiState> {
@@ -21,8 +18,6 @@ class HomePresenter extends BasePresenter<HomeUiState> {
   final DeviceInfoService _deviceInfoService = DeviceInfoService();
   final DeviceInfoRepository _deviceInfoRepository = DeviceInfoRepository();
   final GoogleAdsRepository _googleAdsRepository = GoogleAdsRepository();
-  final GetServerKey _getServerKey = GetServerKey();
-  final NotificationService _notificationService = NotificationService();
 
   String? selectedCategory;
 
@@ -41,9 +36,6 @@ class HomePresenter extends BasePresenter<HomeUiState> {
     getJobListPagebannerAds();
     interstitialAdLoad();
     listenForAdsUnitIds();
-    FcmService.firebaseInit();
-    _notificationService.requestNotificationPermission();
-    _notificationService.getNotificationToken();
   }
 
   void listenForAdsUnitIds() {
@@ -157,12 +149,7 @@ class HomePresenter extends BasePresenter<HomeUiState> {
 
   void _storeDeviceInfo() async {
     final deviceInfo = await _deviceInfoService.getDeviceInfo();
-    final deviceIdExists =
-        await _deviceInfoRepository.deviceIdExists(deviceInfo.deviceId!);
-
-    if (!deviceIdExists) {
-      await _deviceInfoRepository.saveDeviceInfo(deviceInfo);
-    }
+    await _deviceInfoRepository.saveDeviceInfo(deviceInfo);
   }
 
   void _fetchAllJobs() {
@@ -326,11 +313,6 @@ class HomePresenter extends BasePresenter<HomeUiState> {
 
   void incrementViews(JobModel id) {
     IncrementTotalViewsRepository().incrementTotalViews(id);
-  }
-
-  void fetchServerKey() async {
-    final serverKey = await _getServerKey.getServerKeyToken();
-    print(serverKey);
   }
 
   @override

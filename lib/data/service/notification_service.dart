@@ -1,5 +1,7 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:jobs_bd/core/utility/utility.dart';
 
 class NotificationService {
@@ -29,9 +31,41 @@ class NotificationService {
     }
   }
 
-  //get token
-  void getNotificationToken() async {
-    String? token = await _firebaseMessaging.getToken();
-    print('Token: $token');
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  Future<void> showNotification(RemoteMessage message) async {
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@drawable/notification_icon');
+
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+      android: initializationSettingsAndroid,
+    );
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      'channel_id',
+      'channel_name',
+      channelDescription: 'channel description',
+      icon: '@drawable/notification_icon',
+      color: Color(0xFF614730),
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: 'ticker',
+    );
+    int notificationId = 1;
+    NotificationDetails notificationDetails = const NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+    );
+
+    await flutterLocalNotificationsPlugin.show(
+      notificationId,
+      message.notification!.title,
+      message.notification!.body,
+      notificationDetails,
+      payload: 'item x',
+    );
   }
 }

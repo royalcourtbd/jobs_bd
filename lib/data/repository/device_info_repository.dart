@@ -6,14 +6,22 @@ class DeviceInfoRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> saveDeviceInfo(DeviceInfoModel deviceInfo) async {
-    await _firestore.collection(Urls.deviceInfo).add(deviceInfo.toJson());
-  }
-
-  Future<bool> deviceIdExists(String deviceId) async {
     final querySnapshot = await _firestore
         .collection(Urls.deviceInfo)
-        .where('deviceId', isEqualTo: deviceId)
+        .where('deviceId', isEqualTo: deviceInfo.deviceId)
         .get();
-    return querySnapshot.docs.isNotEmpty;
+
+    if (querySnapshot.docs.isEmpty) {
+      // If device does not exist, add it
+      await _firestore.collection(Urls.deviceInfo).add(deviceInfo.toJson());
+    } else {
+      // If device exists, update the token
+      for (var doc in querySnapshot.docs) {
+        await _firestore
+            .collection(Urls.deviceInfo)
+            .doc(doc.id)
+            .update({'deviceToken': deviceInfo.deviceToken});
+      }
+    }
   }
 }

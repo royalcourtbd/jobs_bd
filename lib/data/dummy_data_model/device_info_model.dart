@@ -5,6 +5,7 @@ class DeviceInfoModel {
   final String? manufacturer;
   final String? model;
   final String? platform;
+  final String? deviceToken; // Add this line
 
   DeviceInfoModel({
     this.deviceId,
@@ -13,6 +14,7 @@ class DeviceInfoModel {
     this.manufacturer,
     this.model,
     this.platform,
+    this.deviceToken, // Add this line
   });
 
   factory DeviceInfoModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class DeviceInfoModel {
       manufacturer: json['manufacturer'],
       model: json['model'],
       platform: json['platform'],
+      deviceToken: json['deviceToken'], // Add this line
     );
   }
 
@@ -34,6 +37,7 @@ class DeviceInfoModel {
       'manufacturer': manufacturer,
       'model': model,
       'platform': platform,
+      'deviceToken': deviceToken, // Add this line
     };
   }
 }
