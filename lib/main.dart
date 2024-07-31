@@ -53,7 +53,7 @@ Future<void> initializeNotification() async {
   FcmService.firebaseInit();
   await getServerKey.getServerKeyToken();
   notificationService.requestNotificationPermission();
-  // notificationService.getNotificationToken();
+  notificationService.initNotificationClickListener();
 }
 
 Future<void> _showSplashScreen() async {

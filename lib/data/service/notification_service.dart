@@ -1,11 +1,13 @@
-import 'package:app_settings/app_settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:jobs_bd/core/utility/utility.dart';
+import 'package:get/get.dart';
+import 'package:jobs_bd/test.dart';
 
 class NotificationService {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   void requestNotificationPermission() async {
     NotificationSettings settings = await _firebaseMessaging.requestPermission(
@@ -24,26 +26,11 @@ class NotificationService {
         AuthorizationStatus.provisional) {
       print('User granted provisional permission');
     } else {
-      showMessage(message: 'User declined or has not accepted permission');
-      Future.delayed(const Duration(seconds: 2), () {
-        AppSettings.openAppSettings(type: AppSettingsType.notification);
-      });
+      print('User declined or has not accepted permission');
     }
   }
 
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-
   Future<void> showNotification(RemoteMessage message) async {
-    const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@drawable/notification_icon');
-
-    const InitializationSettings initializationSettings =
-        InitializationSettings(
-      android: initializationSettingsAndroid,
-    );
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
       'channel_id',
@@ -55,17 +42,48 @@ class NotificationService {
       priority: Priority.high,
       ticker: 'ticker',
     );
-    int notificationId = 1;
-    NotificationDetails notificationDetails = const NotificationDetails(
-      android: androidPlatformChannelSpecifics,
-    );
+
+    const NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    String? jobId = message.data['jobId'];
 
     await flutterLocalNotificationsPlugin.show(
-      notificationId,
+      0,
       message.notification!.title,
       message.notification!.body,
-      notificationDetails,
-      payload: 'item x',
+      platformChannelSpecifics,
+      payload: jobId,
     );
+  }
+
+  void initNotificationClickListener() {
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@drawable/notification_icon');
+
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+      android: initializationSettingsAndroid,
+    );
+    flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (NotificationResponse response) {
+        String? jobId = response.payload;
+        if (jobId != null) {
+          navigateToJobViewPage(jobId);
+        }
+      },
+      onDidReceiveBackgroundNotificationResponse:
+          (NotificationResponse response) {
+        String? jobId = response.payload;
+        if (jobId != null) {
+          navigateToJobViewPage(jobId);
+        }
+      },
+    );
+  }
+
+  void navigateToJobViewPage(String jobId) {
+    Get.to(() => TestPage(jobId: jobId));
   }
 }
