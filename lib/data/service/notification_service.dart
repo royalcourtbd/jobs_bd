@@ -2,12 +2,32 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:jobs_bd/core/utility/utility.dart';
+import 'package:jobs_bd/data/database/db_helper.dart';
+import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
+import 'package:jobs_bd/data/repository/get_job_by_id_repository.dart';
+import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
 import 'package:jobs_bd/test.dart';
+import 'package:drift/drift.dart' as drift;
 
 class NotificationService {
+  final AppDatabase appDatabase = AppDatabase();
+
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+
+  Future<void> saveNotification(RemoteMessage message) async {
+    final notification = NotificationModelCompanion(
+      jobId: drift.Value(message.data['jobId']),
+      title: drift.Value(message.notification?.title ?? ''),
+      body: drift.Value(message.notification?.body ?? ''),
+      imageUrl: drift.Value(message.notification?.android?.imageUrl ?? ''),
+      timestamp: drift.Value(DateTime.now()),
+    );
+
+    await appDatabase.insertNotification(notification);
+  }
 
   void requestNotificationPermission() async {
     NotificationSettings settings = await _firebaseMessaging.requestPermission(
@@ -70,20 +90,30 @@ class NotificationService {
       onDidReceiveNotificationResponse: (NotificationResponse response) {
         String? jobId = response.payload;
         if (jobId != null) {
-          navigateToJobViewPage(jobId);
+          handleNotificationClick(jobId);
         }
       },
       onDidReceiveBackgroundNotificationResponse:
           (NotificationResponse response) {
         String? jobId = response.payload;
         if (jobId != null) {
-          navigateToJobViewPage(jobId);
+          handleNotificationClick(jobId);
         }
       },
     );
   }
 
-  void navigateToJobViewPage(String jobId) {
-    Get.to(() => TestPage(jobId: jobId));
+  final HomePresenter homePresenter = Get.put(HomePresenter());
+
+  void handleNotificationClick(String jobId) async {
+    try {
+      JobModel job = await GetJobByIdRepository().getJobById(jobId);
+
+      Get.to(() => TestPage(job: job));
+      homePresenter.incrementViews(job);
+    } catch (e) {
+      // Handle any errors, such as job not found
+      showMessage(message: 'Job not found');
+    }
   }
 }

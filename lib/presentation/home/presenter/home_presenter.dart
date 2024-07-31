@@ -1,5 +1,6 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jobs_bd/core/base/base_presenter.dart';
+import 'package:jobs_bd/data/database/db_helper.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_category_model.dart';
 import 'package:jobs_bd/data/dummy_data_model/job_model.dart';
 import 'package:jobs_bd/data/repository/device_info_repository.dart';
@@ -18,6 +19,7 @@ class HomePresenter extends BasePresenter<HomeUiState> {
   final DeviceInfoService _deviceInfoService = DeviceInfoService();
   final DeviceInfoRepository _deviceInfoRepository = DeviceInfoRepository();
   final GoogleAdsRepository _googleAdsRepository = GoogleAdsRepository();
+  final AppDatabase database = AppDatabase();
 
   String? selectedCategory;
 

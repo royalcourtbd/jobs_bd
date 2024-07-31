@@ -15,6 +15,7 @@ import 'package:jobs_bd/presentation/job/presenter/job_presentation.dart';
 import 'package:jobs_bd/presentation/job/ui/job_list_page.dart';
 import 'package:jobs_bd/presentation/home/widgets/job_category_item.dart';
 import 'package:jobs_bd/presentation/job/ui/job_view_page.dart';
+import 'package:jobs_bd/presentation/notification/ui/notification_page.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -40,6 +41,11 @@ class HomePage extends StatelessWidget {
                     onPressed: () {
                       Get.find<JobPresentation>().job();
                       showMessage(message: 'Coming soon');
+                      Future.delayed(const Duration(seconds: 2), () {
+                        context.navigatorPush(NotificationListScreen(
+                          homePresenter.database,
+                        ));
+                      });
                     },
                     child: const Icon(
                       Icons.notifications,
@@ -130,11 +136,11 @@ class HomePage extends StatelessWidget {
                                       JobListItem(
                                         theme: theme,
                                         index: index,
-                                        // onLongPress: () =>
-                                        //     jobPresentation.deleteJob(
-                                        //   homePresenter.currentUiState
-                                        //       .allJobList[index].documentId!,
-                                        // ),
+                                        onLongPress: () =>
+                                            jobPresentation.deleteJob(
+                                          homePresenter.currentUiState
+                                              .allJobList[index].documentId!,
+                                        ),
                                         jobList: homePresenter
                                             .currentUiState.allJobList,
                                         onTap: () async {

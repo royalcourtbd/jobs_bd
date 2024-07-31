@@ -6,11 +6,13 @@ import 'package:jobs_bd/core/static/svg_path.dart';
 import 'package:jobs_bd/core/static/ui_const.dart';
 import 'package:jobs_bd/core/utility/utility.dart';
 import 'package:jobs_bd/presentation/home/widgets/job_list_item.dart';
+import 'package:jobs_bd/presentation/job/presenter/job_presentation.dart';
 import 'package:jobs_bd/presentation/job/ui/job_view_page.dart';
 import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
 
 class JobListPage extends StatelessWidget {
   final HomePresenter homePresenter = Get.put(HomePresenter());
+  final JobPresentation jobPresentation = Get.put(JobPresentation());
 
   JobListPage({
     super.key,
@@ -62,6 +64,12 @@ class JobListPage extends StatelessWidget {
                       theme: theme,
                       index: index,
                       jobList: jobList,
+                      onLongPress: () {
+                        jobPresentation.deleteJob(
+                          homePresenter
+                              .currentUiState.allJobList[index].documentId!,
+                        );
+                      },
                       onTap: () async {
                         homePresenter.incrementViews(jobList[index]);
                         context.navigatorPush(
