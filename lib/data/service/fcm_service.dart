@@ -8,6 +8,7 @@ class FcmService {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       NotificationService notificationService = NotificationService();
       notificationService.showNotification(message);
+      notificationService.saveNotification(message);
 
       if (message.notification != null) {
         debugPrint(
@@ -19,6 +20,11 @@ class FcmService {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       debugPrint("onMessageOpenedApp: $message");
       // Handle the message when the app is opened from a notification
+      if (message.data.containsKey('jobId')) {
+        String jobId = message.data['jobId'];
+        NotificationService().handleNotificationClick(jobId);
+        debugPrint('Job ID: ${message.data['jobId']}');
+      }
     });
   }
 
