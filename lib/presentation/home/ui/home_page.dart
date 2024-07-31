@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
                 actions: [
                   TextButton(
                     onPressed: () {
-                      // Get.find<JobPresentation>().job();
+                      Get.find<JobPresentation>().job();
                       showMessage(message: 'Coming soon');
                     },
                     child: const Icon(

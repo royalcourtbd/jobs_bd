@@ -41,7 +41,12 @@ class JobPresentation extends GetxController {
       location: 'Dhaka, Bangladesh',
       posted: DateTime.now().toString(),
       status: 'live',
-      totalView: 54,
+      totalView: 0,
+      experience: '2+ years',
+      officeTime: '10:00 - 19:00',
+      salaryRange: 'up to 75k BDT',
+      vacancy: 5,
+      weekend: 'Friday & Saturday',
     );
 
     await docRef.set(newJob.toJson());
