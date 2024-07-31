@@ -7,15 +7,15 @@ import 'package:jobs_bd/presentation/home/presenter/home_presenter.dart';
 class NotificationListScreen extends StatefulWidget {
   final AppDatabase db;
 
-  NotificationListScreen(this.db, {super.key});
+  const NotificationListScreen(this.db, {super.key});
 
   @override
-  _NotificationListScreenState createState() => _NotificationListScreenState();
+  NotificationListScreenState createState() => NotificationListScreenState();
 }
 
-class _NotificationListScreenState extends State<NotificationListScreen> {
+class NotificationListScreenState extends State<NotificationListScreen> {
   late NotificationService notificationService;
-  final HomePresenter homePresenter =Get.put(HomePresenter());
+  final HomePresenter homePresenter = Get.put(HomePresenter());
 
   @override
   void initState() {
@@ -57,7 +57,6 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
                 onTap: () {
                   notificationService
                       .handleNotificationClick(notification.jobId);
-                      
                 },
               );
             },
