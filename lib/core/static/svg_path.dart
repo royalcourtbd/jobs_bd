@@ -7,4 +7,5 @@ class SvgPath {
   static const String icNotFount = 'assets/images/png/ic_not_found.png';
   static const String icPrivateJobLogo =
       'assets/images/png/private_job_logo.jpg';
+  static const String icNotification = 'assets/images/svg/ic_notification.svg';
 }
