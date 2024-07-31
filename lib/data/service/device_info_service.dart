@@ -1,5 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/platform/platform.dart';
 import 'package:jobs_bd/data/dummy_data_model/device_info_model.dart';
 
@@ -10,7 +11,7 @@ class DeviceInfoService {
   Future<DeviceInfoModel> getDeviceInfo() async {
     var deviceData = <String, dynamic>{};
     String? deviceToken = await _firebaseMessaging.getToken();
-    print('Device Token: $deviceToken');
+    debugPrint('Device Token: $deviceToken');
 
     if (GetPlatform.isAndroid) {
       var androidInfo = await _deviceInfoPlugin.androidInfo;
